@@ -1,4 +1,3 @@
-import ButtonDesign from '@/components/ButtonDesign';
 import { useIntl } from '@umijs/max';
 import { Row, Typography } from 'antd';
 import classNames from 'classnames';
@@ -45,7 +44,7 @@ const TextExpand: FC<TextExpandProps> = ({
         {text ?? '--'}
       </Paragraph>
       <Row justify={justify}>
-        <ButtonDesign
+        {/* <ButtonDesign
           {...props}
           className={classNames(style.ReadMoreButton)}
           onClick={() => {
@@ -56,7 +55,7 @@ const TextExpand: FC<TextExpandProps> = ({
               ? intl.formatMessage({ id: 'common.textExpand.readMore' })
               : intl.formatMessage({ id: 'common.textExpand.showLess' })
           }
-        />
+        /> */}
       </Row>
     </>
   );

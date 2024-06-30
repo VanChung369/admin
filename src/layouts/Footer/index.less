@@ -1,0 +1,26 @@
+@import '@/styles/variables.less';
+
+.container {
+  position: absolute;
+  margin-top: 15px;
+  top: 100%;
+  left: 35%;
+
+  :global {
+    .ant-pro-global-footer {
+      .ant-pro-global-footer-list-link {
+        color: @text-color-white;
+        font-weight: 200;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      .ant-pro-global-footer-copyright {
+        color: @text-color-white;
+        font-weight: 150;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}

@@ -9,16 +9,19 @@
  *
  * @doc https://umijs.org/docs/guides/proxy
  */
+
+const { UMI_APP_API_URL } = process.env;
+
 export default {
   dev: {
     '/api/': {
-      target: 'https://proapi.azurewebsites.net',
+      target: UMI_APP_API_URL,
       changeOrigin: true,
     },
   },
   test: {
     '/api/': {
-      target: '',
+      target: 'https://proapi.azurewebsites.net',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

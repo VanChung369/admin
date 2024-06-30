@@ -1,0 +1,47 @@
+@import '@/styles/variables.less';
+
+.button {
+  &__content {
+    display: inline-flex;
+    justify-content: start;
+    align-items: center;
+    background: @background-button-gray;
+    height: 65px;
+    width: 320px;
+    border-radius: 10px;
+    border: 1px solid @color-violet;
+  }
+
+  &__icon {
+    margin-left: 20px;
+    margin-right: 12px;
+  }
+
+  &__text {
+    font-weight: 450;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: @text-color-white;
+  }
+
+  :global {
+    .ant-btn {
+      &.ant-btn-default {
+        &:hover {
+          color: @text-color-white;
+          border: 1px solid @color-violet;
+          background: none;
+          opacity: 0.8;
+        }
+
+        &:disabled {
+          border-color: #d9d9d9;
+          color: rgba(0, 0, 0, 0.25);
+          background: rgba(0, 0, 0, 0.04);
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

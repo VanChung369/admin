@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useModel, useRequest } from 'umi';
 
-import { getNotices } from '@/services/api/api';
+import { getNotices } from '@/services/api/notification';
 import styles from './index.less';
 import NoticeIcon from './NoticeIcon';
 

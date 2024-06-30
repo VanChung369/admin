@@ -2,7 +2,7 @@ import formatMessage from '@/components/FormatMessage';
 import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
-import { isUndefined } from './utils';
+import { checkSusscessRequest, isUndefined } from './utils';
 
 type CodeMessage = {
   [key: number]: string;
@@ -53,6 +53,7 @@ export const errorConfig: RequestConfig = {
     errorThrower: (res) => {
       const { success, data, errorCode, errorMessage, showType } =
         res as unknown as ResponseStructure;
+
       if (!success) {
         const error: any = new Error(errorMessage);
         error.name = 'BizError';
@@ -118,7 +119,7 @@ export const errorConfig: RequestConfig = {
   },
 
   requestInterceptors: [
-    (config: RequestOptions) => {
+    async (config: RequestOptions) => {
       const url = config?.url?.concat('');
       return { ...config, url };
     },
@@ -128,10 +129,24 @@ export const errorConfig: RequestConfig = {
     (response) => {
       const { data } = response as unknown as ResponseStructure;
 
-      if (data?.success === false) {
+      if (!checkSusscessRequest(response)) {
         message.error('Request failed!');
       }
       return response;
     },
+    // async (error) => {
+    //   const originalRequest = error.config;
+
+    //   if (error?.status === 403) {
+    //     // const resp = await refreshToken();
+    //     // const access_token = resp.response.accessToken;
+    //     // addTokenToLocalStorage(access_token);
+    //     // customFetch.defaults.headers.common[
+    //     //   "Authorization"
+    //     // ] = `Bearer ${access_token}`;
+    //     // return customFetch(originalRequest);
+    //   }
+    //   return Promise.reject(error);
+    // },
   ],
 };
