@@ -1,19 +1,23 @@
 import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/layouts';
-import { currentUser as queryCurrentUser } from '@/services/api/api';
-import { LinkOutlined } from '@ant-design/icons';
+import { currentUser as queryCurrentUser } from '@/services/api/user';
 import { PageLoading, SettingDrawer, Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
+import { history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { default as Page403 } from './pages/exception/403';
 import { default as Page404 } from './pages/exception/404';
-import { persistor, store } from './redux/store';
 import { errorConfig } from './utils/requestErrorConfig';
+import AppProvider from './components/AppProvider';
+import { HEADERS } from './constants/api';
+import LocalStore from './utils/store';
+import ROUTES_PATH from './constants/routesPath';
+import React from 'react';
 
 const isDev = process.env.NODE_ENV === 'development';
-const loginPath = '/user/login';
+const localStoreAuth: any = LocalStore.getValue('persist:root');
+const authenticationToken = localStoreAuth?.AuthenticationSlice
+  ? JSON.parse(localStoreAuth.AuthenticationSlice)?.authenticationToken
+  : '';
 
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
@@ -22,19 +26,29 @@ export async function getInitialState(): Promise<{
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
+    const headers = authenticationToken
+      ? { ...HEADERS, Authorization: `Bearer ${authenticationToken} ` }
+      : { ...HEADERS };
+
     try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
-      return msg.data;
+      const data = await queryCurrentUser(
+        {
+          skipErrorHandler: true,
+        },
+        {
+          ...headers,
+        },
+      );
+
+      return data;
     } catch (error) {
-      history.push(loginPath);
+      history.push(ROUTES_PATH.LOGIN);
     }
     return undefined;
   };
 
   const { location } = history;
-  if (location.pathname !== loginPath) {
+  if (location.pathname !== ROUTES_PATH.LOGIN) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -49,17 +63,12 @@ export async function getInitialState(): Promise<{
 }
 
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
-  const onBeforeLift: any = (store: any) => () => {
-    const state = store.getState();
-    console.log(state);
-  };
-
   return {
     actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     unAccessible: <Page403 />,
     noFound: <Page404 />,
     avatarProps: {
-      src: initialState?.currentUser?.avatar,
+      src: initialState?.currentUser?.avatar ? initialState.currentUser.avatar : '',
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
@@ -71,8 +80,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
+      if (!initialState?.currentUser && location.pathname !== ROUTES_PATH.LOGIN) {
+        history.push(ROUTES_PATH.LOGIN);
       }
     },
     layoutBgImgList: [
@@ -95,26 +104,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         width: '331px',
       },
     ],
-    links: isDev
-      ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI</span>
-          </Link>,
-        ]
-      : [],
     menuHeaderRender: undefined,
 
     childrenRender: (children) => {
       if (initialState?.loading) return <PageLoading />;
 
       return (
-        <>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift(store)}>
-              {children}
-            </PersistGate>
-          </Provider>
+        <AppProvider>
+          {children}
+
           {isDev && (
             <SettingDrawer
               disableUrlParams
@@ -128,7 +126,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               }}
             />
           )}
-        </>
+        </AppProvider>
       );
     },
     ...initialState?.settings,

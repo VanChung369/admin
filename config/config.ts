@@ -18,10 +18,10 @@ export default defineConfig({
    * @name Enable reactQuery
    * @description using reactQuery.
    */
-  reactQuery: {
-    devtool: true,
-    queryClient: true,
-  },
+  // reactQuery: {
+  //   devtool: true,
+  //   queryClient: true,
+  // },
 
   /**
    * @name Enable dva
@@ -162,18 +162,18 @@ export default defineConfig({
    * @description Generate serve and mock based on the openapi specification, which can reduce a lot of boilerplate code
    * @doc https://pro.ant.design/zh-cn/docs/openapi/
    */
-  openAPI: [
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: join(__dirname, 'oneapi.json'),
-      mock: false,
-    },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
-  ],
+  // openAPI: [
+  //   {
+  //     requestLibPath: "import { request } from '@umijs/max'",
+  //     schemaPath: join(__dirname, 'oneapi.json'),
+  //     mock: false,
+  //   },
+  //   {
+  //     requestLibPath: "import { request } from '@umijs/max'",
+  //     schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
+  //     projectName: 'swagger',
+  //   },
+  // ],
   mfsu: {
     strategy: 'normal',
   },

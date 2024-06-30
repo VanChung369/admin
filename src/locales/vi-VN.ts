@@ -8,12 +8,15 @@ import pages from './vi-VN/pages';
 import pwa from './vi-VN/pwa';
 import settingDrawer from './vi-VN/settingDrawer';
 import settings from './vi-VN/settings';
+import login from './vi-VN/login';
+
 export default {
   'navBar.lang': 'ngôn ngữ',
   'layout.user.link.help': 'giúp đỡ',
   'layout.user.link.privacy': 'sự riêng tư',
   'layout.user.link.terms': 'điều kiện',
-  'app.copyright.produced': 'copyright',
+  'app.name': 'NFTTreasure',
+  'app.copyright.produced': 'Copyright NFTTreasure',
   'app.preview.down.block': 'Tải trang này xuống một dự án địa phương',
   'app.welcome.link.fetch-blocks': 'lấy tất cả các khối',
   'app.welcome.link.block-list':
@@ -28,4 +31,5 @@ export default {
   ...common,
   ...statusResponse,
   ...codeMessage,
+  ...login,
 };

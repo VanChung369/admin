@@ -1,4 +1,4 @@
-import { outLogin } from '@/services/api/api';
+import { outLogin } from '@/services/api/auth';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { history, useModel } from '@umijs/max';
@@ -8,6 +8,7 @@ import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
+import ROUTES_PATH from '@/constants/routesPath';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -17,18 +18,20 @@ export type GlobalHeaderRightProps = {
 export const AvatarName = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
-  return <span className="anticon">{currentUser?.name}</span>;
+  return <span className="anticon">{currentUser?.address}</span>;
 };
 
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, children }) => {
+  const { initialState, setInitialState } = useModel('@@initialState');
+
   const loginOut = async () => {
-    await outLogin();
+    await outLogin({}, initialState?.currentUser?.address);
     const { search, pathname } = window.location;
     const urlParams = new URL(window.location.href).searchParams;
     const redirect = urlParams.get('redirect');
-    if (window.location.pathname !== '/user/login' && !redirect) {
+    if (window.location.pathname !== ROUTES_PATH.LOGIN && !redirect) {
       history.replace({
-        pathname: '/user/login',
+        pathname: ROUTES_PATH.LOGIN,
         search: stringify({
           redirect: pathname + search,
         }),
@@ -50,7 +53,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
       },
     };
   });
-  const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
@@ -85,7 +87,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  if (!currentUser || !currentUser.address) {
     return loading;
   }
 

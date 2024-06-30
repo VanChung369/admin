@@ -2,6 +2,7 @@ import { FUNCTION, NUMBER, OBJECT, STRING, UNDEFINED } from '@/constants/type';
 import { parse } from 'querystring';
 import { DEFAULT_UNIT_PRESETS, IS_WINDOW, OPEN_CLOSED_CHARACTERS, TINY_NUM } from './consts';
 import { FlattedElement, IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from './typings';
+import HTTP_STATUS_CONTSTANTS from '@/constants/httpStatus';
 
 /* eslint-disable */
 const reg =
@@ -586,3 +587,7 @@ export function flattenObject(obj: any, objPath = '', flatObject: any = {}) {
   });
   return flatObject;
 }
+
+export const checkSusscessRequest = (response: any) => {
+  return response?.status < HTTP_STATUS_CONTSTANTS.ERROR;
+};

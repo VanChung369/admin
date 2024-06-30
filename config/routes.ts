@@ -14,6 +14,7 @@ export default [
   {
     path: '/user',
     layout: false,
+    component: '@/layouts/public',
     routes: [
       {
         name: 'login',

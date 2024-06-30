@@ -1,5 +1,5 @@
 import { BellOutlined } from '@ant-design/icons';
-import { Badge, Spin, Tabs } from 'antd';
+import { Badge, DropdownProps, Spin, Tabs } from 'antd';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/es/hooks/useMergedState';
 import React from 'react';
@@ -85,10 +85,13 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
 
   const { className, count, bell } = props;
 
-  const [visible, setVisible] = useMergedState<boolean>(false, {
-    value: props.popupVisible,
-    onChange: props.onPopupVisibleChange,
-  });
+  const [visible, setVisible] = useMergedState<boolean>(false);
+
+  const handleOpenChange: DropdownProps['onOpenChange'] = (nextOpen, info) => {
+    if (info.source === 'trigger' || nextOpen) {
+      setVisible(nextOpen);
+    }
+  };
   const noticeButtonClass = classNames(className, styles.noticeButton);
   const notificationBox = getNotificationBox();
   const NoticeBellIcon = bell || <BellOutlined className={styles.icon} />;
@@ -110,7 +113,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
       overlayClassName={styles.popover}
       trigger={['click']}
       open={visible}
-      onOpenChange={setVisible}
+      onOpenChange={handleOpenChange}
     >
       {trigger}
     </HeaderDropdown>

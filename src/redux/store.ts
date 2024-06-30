@@ -6,10 +6,13 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
+import { namespace as AddressNamespace } from './address/slice';
+import { namespace as AuthenticationNamespace } from './authentication/slice';
+
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: [],
+  whitelist: [AddressNamespace, AuthenticationNamespace],
   blacklist: [],
 };
 
