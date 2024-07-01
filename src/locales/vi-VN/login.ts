@@ -5,4 +5,11 @@ export default {
   'login.metamask': 'Metamask',
   'login.walletconnect': 'Wallet Connect',
   'login.coinbase': 'Coinbase',
+  'login.connect.metamask': 'Kết nối Metamask',
+  'login.connect.metamask.subtitle':
+    'ví của bạn đang được kết nối với hệ thống.\n Vui lòng đợi trong giây lát.',
+  'login.metamask.not.found': 'không tìm thấy Metamask',
+  'login.metamask.not.found.subtitle':
+    'Có vẻ như bạn chưa cài đặt ví Metamask. \nHãy cài đặt ngay bây giờ.',
+  'login.metamask.install': 'Cài đặt Metamask',
 };

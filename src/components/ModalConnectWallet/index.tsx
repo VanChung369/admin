@@ -1,22 +1,26 @@
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useConnectWallet } from '@/hooks/hook-customs/useConnectWallet';
 import selectedConnection from '@/redux/connection/selector';
-import { handleSetConnectModal } from '@/redux/connection/slice';
-import { Typography, Spin, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { handleSetConnectModal, handleSetLoadingMetamask } from '@/redux/connection/slice';
+import { useIntl } from '@umijs/max';
+import { Typography, Modal, Image } from 'antd';
+import { useEffect } from 'react';
+import LoadingIcon from '@/resources/images/loading.gif';
+import NotFoundMetamaskIcon from '@/resources/images/not_found_metamask.png';
+import style from './index.less';
+import { METAMASK_DOWLOAD } from '@/constants';
 
 declare let window: any;
 
 const { Paragraph } = Typography;
 
 const ModalConnectWallet = () => {
+  const intl = useIntl();
   const dispatch = useAppDispatch();
   const { isConnectingWallet } = useAppSelector(selectedConnection.getConnection);
   const { handleConnect } = useConnectWallet();
-
-  const [isShowMetaMask, setIsShowMetaMask] = useState(false);
-
   const handleHideModalConnectWallet = () => dispatch(handleSetConnectModal(false));
+  const handleLoadingMetamask = () => dispatch(handleSetLoadingMetamask(false));
 
   const isEthereum = typeof window !== 'undefined' && !!window?.ethereum?.isMetaMask;
 
@@ -35,19 +39,59 @@ const ModalConnectWallet = () => {
   }, [isConnectingWallet]);
 
   const renderNoMetamask = () => (
-    <div className="popup_metamask">
+    <div className={style.connect}>
       {isEthereum ? (
-        <div className="loading-metamask-modal">
-          <Paragraph className="title">connect metamask</Paragraph>
+        <div className={style.connect__loading}>
+          <Paragraph className={style.connect__loading_title}>
+            {intl.formatMessage({
+              id: 'login.connect.metamask',
+            })}
+          </Paragraph>
+          <div className={style.connect__loading_image}>
+            <Image
+              className={style.connect__loading_icon}
+              preview={false}
+              height={150}
+              width={150}
+              src={LoadingIcon}
+              alt="loading"
+            />
+          </div>
+          <Paragraph className={style.connect__loading_subtitle}>
+            {intl.formatMessage({
+              id: 'login.connect.metamask.subtitle',
+            })}
+          </Paragraph>
         </div>
       ) : (
-        <div className="metamask-notfound-modal">
-          <Paragraph className="title">metamask not found</Paragraph>
-          <Paragraph className="sub-title">metamask not found</Paragraph>
+        <div className={style.connect__not_found}>
+          <Paragraph className={style.connect__not_found_title}>
+            {intl.formatMessage({
+              id: 'login.metamask.not.found',
+            })}
+          </Paragraph>
 
-          <div className="footer">
-            <a target="_blank" href={''} className="link" rel="noreferrer">
-              dowload
+          <div className={style.connect__not_found_image}>
+            <Image
+              className={style.connect__not_found_icon}
+              preview={false}
+              height={150}
+              width={150}
+              src={NotFoundMetamaskIcon}
+              alt="metamask not found"
+            />
+          </div>
+          <Paragraph className={style.connect__not_found_subtitle}>
+            {intl.formatMessage({
+              id: 'login.metamask.not.found.subtitle',
+            })}
+          </Paragraph>
+
+          <div className={style.connect__not_found_download}>
+            <a target="_blank" href={METAMASK_DOWLOAD} className="link" rel="noreferrer">
+              {intl.formatMessage({
+                id: 'login.metamask.install',
+              })}
             </a>
           </div>
         </div>
@@ -55,7 +99,17 @@ const ModalConnectWallet = () => {
     </div>
   );
 
-  return <Modal open={isConnectingWallet}>{renderNoMetamask()}</Modal>;
+  return (
+    <Modal
+      className={style.container}
+      onCancel={handleLoadingMetamask}
+      footer={false}
+      width={400}
+      open={isConnectingWallet}
+    >
+      {renderNoMetamask()}
+    </Modal>
+  );
 };
 
 export default ModalConnectWallet;
