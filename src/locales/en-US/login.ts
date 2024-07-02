@@ -12,4 +12,10 @@ export default {
   'login.metamask.not.found.subtitle':
     'It seems that you have not installed Metamask wallet service. \nPlease install now.',
   'login.metamask.install': 'Install Metamask',
+  'login.wrong.network': 'You are in wrong network',
+  'login.wrong.network.title': 'This page is located for Polygon Smart Chain.',
+  'login.wrong.network.subtitle': 'You are under now, please switch the network to continue.',
+  'login.wrong.network.switch': 'Switch network to continue.',
+  'login.wrong.network.switch.polygon': 'Switch to Polygon Smart Chain',
+  'login.disconnect.wallet': 'Disconnect wallet',
 };
