@@ -12,4 +12,11 @@ export default {
   'login.metamask.not.found.subtitle':
     'Có vẻ như bạn chưa cài đặt ví Metamask. \nHãy cài đặt ngay bây giờ.',
   'login.metamask.install': 'Cài đặt Metamask',
+  'login.wrong.network': 'Bạn vào nhầm mạng',
+  'login.wrong.network.title': 'Trang này được đặt cho Polygon Smart Chain.',
+  'login.wrong.network.subtitle':
+    'Bạn đang không ở mạng Polygon, vui lòng chuyển mạng để tiếp tục.',
+  'login.wrong.network.switch': 'Chuyển mạng để tiếp tục.',
+  'login.wrong.network.switch.polygon': 'Chuyển sang Polygon Smart Chain',
+  'login.disconnect.wallet': 'Ngắt kết nối ví',
 };
