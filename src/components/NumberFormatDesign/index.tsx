@@ -1,5 +1,5 @@
 import { NumberFormatDesignProps } from '@/components/NumberFormatDesign/typings';
-import { DECIMAL_SCALE } from '@/constants/fomatNumber';
+import { DECIMAL_SCALE } from '@/constants/number';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { NumericFormat } from 'react-number-format';

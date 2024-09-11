@@ -3,7 +3,11 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useConnectWallet } from '@/hooks/hook-customs/useConnectWallet';
 import { useGetAppConfig } from '@/hooks/hook-customs/useGetAppConfig';
 import selectedAddress from '@/redux/address/selector';
-import { handleAddAddressNetWork, handleSetAddressNetwork } from '@/redux/address/slice';
+import {
+  handleAddAddressNetWork,
+  handleRemoveAddressNetwork,
+  handleSetAddressNetwork,
+} from '@/redux/address/slice';
 import selectAuthentication from '@/redux/authentication/selector';
 import { handleSetAuthenticationToken } from '@/redux/authentication/slice';
 import { handleSetLoadingMetamask, handleSetWrongNetwork } from '@/redux/connection/slice';
@@ -24,6 +28,7 @@ import ModalConnectWallet from '../ModalConnectWallet';
 import { useModel, history } from '@umijs/max';
 import { flushSync } from 'react-dom';
 import ROUTES_PATH from '@/constants/routesPath';
+import selectedConnection from '@/redux/connection/selector';
 
 const ConnectWalletWrapper: FC<{
   children: any;
@@ -40,6 +45,7 @@ const ConnectWalletWrapper: FC<{
 
   const { address, listAddress } = useAppSelector(selectedAddress.getAddress);
   const { authenticationToken } = useAppSelector(selectAuthentication.getAuthenticationToken);
+  const { isConnectingWallet } = useAppSelector(selectedConnection.getConnection);
 
   useGetAppConfig();
 
@@ -106,10 +112,10 @@ const ConnectWalletWrapper: FC<{
 
   const handleDisconnect = () => {
     disconnectWallet();
+    dispatch(handleRemoveAddressNetwork({ account }));
     dispatch(handleSetAddressNetwork({}));
     dispatch(handleSetAuthenticationToken({}));
     setTokenCallApi('');
-
     history.push(ROUTES_PATH.LOGIN);
   };
 

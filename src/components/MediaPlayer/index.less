@@ -1,0 +1,163 @@
+.audioPlayer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.controller {
+  background: #00000080;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 32px;
+  bottom: 2px;
+  width: 300px;
+}
+
+.video {
+  width: 100%;
+  min-width: 300px;
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.playPause {
+  width: 20px;
+  height: 20px;
+  margin: 0 26px 0 22px;
+}
+
+.mute {
+  width: 24px;
+  height: 24px;
+  margin: 0 26px 0 24px;
+}
+
+.full-screen {
+  width: 20px;
+  height: 20px;
+  margin: 0 22px 0 0;
+}
+
+.play {
+  width: 100%;
+  height: 100%;
+}
+
+.duration {
+  margin-left: 24px;
+  width: 50px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.015em;
+  color: #fff;
+}
+
+.currentTime {
+  margin-left: 25px;
+}
+
+.progress-wrap {
+  flex: 1;
+}
+
+.progressBar {
+  --bar-bg: #e6e8ec;
+  --seek-before-width: 0;
+  --seek-before-color: #fff;
+  --knobby: none;
+  --selectedKnobby: none;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 8px;
+  outline: none;
+}
+
+/* progress bar - safari */
+.progressBar::-webkit-slider-runnable-track {
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 8px;
+  outline: none;
+}
+
+.progressBar::-moz-range-track {
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 8px;
+  outline: none;
+}
+
+.progressBar::-moz-focus-outer {
+  border: 0;
+}
+
+.progressBar::before {
+  content: '';
+  height: 8px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.progressBar::-moz-range-progress {
+  background-color: var(--seek-before-color);
+  border-radius: 10px;
+  height: 8px;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 8px;
+  width: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -2px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+.progressBar::-moz-range-thumb {
+  height: 8px;
+  width: 15px;
+  border-radius: 10px;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.progressBar:active::-moz-range-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}

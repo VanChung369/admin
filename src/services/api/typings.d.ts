@@ -57,6 +57,10 @@ declare namespace API {
     address: string;
   };
 
+  type RefreshTokenParams = {
+    refreshToken: string;
+  };
+
   type ErrorResponse = {
     errorCode: string;
     errorMessage?: string;
@@ -92,5 +96,20 @@ declare namespace API {
     isMaintenance: boolean;
     mintingQuantityMax: number;
     userMintingQuantityMax: number;
+  };
+
+  type CreateNFT = {
+    file?: any;
+    filePreview?: any;
+    name?: string;
+    royaltyFee?: number;
+    totalSupply?: number;
+    description?: string;
+    isPutOnSale?: boolean;
+    quantity?: number;
+    unitPrice?: number;
+    currency?: any;
+    imageMedium?: any;
+    imageSmall?: any;
   };
 }

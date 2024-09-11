@@ -1,0 +1,58 @@
+export default {
+  'NFT.content': 'NFT Content *',
+  'NFT.file.support':
+    'Upload Image, Video, Audio, or 3D Model. File types supported: \nJPG, PNG, GIF, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB',
+  'NFT.file.upload': 'Drag and Drop file or upload from your device',
+  'NFT.file.preview': 'Preview Image',
+  'NFT.file.previwe.desc':
+    'Because you’ve included multimedia, you’ll need to provide an image \n(JPG, PNG, or GIF) to display preview of your item. Max size: 2 MB',
+
+  // nft create
+  'NFT.create': 'Create NFT',
+  'NFT.create.type': 'Type',
+  'NFT.create.tye.placeholder': 'Select type',
+  'NFT.create.mythology': 'Mythology',
+  'NFT.create.mythology.placeholder': 'Select ',
+  'NFT.create.god': 'God',
+  'NFT.create.god.placeholder': 'Enter Content',
+  'NFT.create.level': 'Level',
+  'NFT.create.level.placeholder': 'Select',
+  'NFT.create.class': 'Class',
+  'NFT.create.class.placeholder': 'Select',
+  'NFT.create.name': 'Name',
+  'NFT.create.name.placeholder': 'Enter Name',
+  'NFT.create.royalties': 'Royalties',
+  'NFT.create.royalties.placeholder': 'Enter Royalties',
+  'NFT.create.supply': 'Total Supply',
+  'NFT.create.supply.placeholder': 'Enter Edition Quantity',
+  'NFT.create.description': 'Description',
+  'NFT.create.sub.description':
+    "The description will be included on the item's detail page underneath its image.",
+  'NFT.create.description.placeholder': 'Provide a detailed description of your NFT',
+  'NFT.create.button.discard': 'Discard',
+  'NFT.create.button.create': 'Create Item',
+  'NFT.create.button.save': 'Save Changes',
+  'NFT.create.preview': 'Preview',
+  'NFT.create.preview.placeholder': 'Preview of your NFT',
+  'NFT.create.price': 'Price',
+  'NFT.create.quantity': 'Quantity',
+
+  //nft validation
+
+  'NFT.file.error.required': 'File is required',
+  'NFT.file.preview.error.required': 'File preview is required',
+  'NFT.name.error.required': 'Name is required',
+  'NFT.type.error.required': 'Type is required',
+  'NFT.total.supply.error.required': 'Total supply is required',
+  'NFT.total.supply.error.min': 'Total supply must be at least {min}',
+  'NFT.total.supply.error.max': 'Total supply cannot exceed {max}',
+  'NFT.royalty.fee.error.required': 'Royalty fee is required',
+  'NFT.royalty.fee.error.positive': 'Royalty fee must be positive',
+  'NFT.royalty.fee.error.max': 'Royalty fee cannot exceed {max}',
+  'NFT.decription.error.required': 'Description fee is required',
+  'NFT.decription.error.max': 'Description cannot exceed {max} characters',
+  'NFT.mythology.error.required': 'Mythology is required',
+  'NFT.god.error.required': 'God is required',
+  'NFT.class.error.required': 'Level is required',
+  'NFT.level.error.required': 'Class is required',
+};

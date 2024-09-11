@@ -2,10 +2,9 @@ import { ProLayoutProps } from '@ant-design/pro-components';
 
 const Settings: ProLayoutProps & {
   pwa?: boolean;
-  logo?: string;
 } = {
-  navTheme: undefined,
-  colorPrimary: '#1890ff',
+  navTheme: 'realDark',
+  colorPrimary: '#A259FF',
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
@@ -13,7 +12,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: 'NFT Treasure',
   pwa: true,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: `${process.env.UMI_APP_PUBLIC_DOMAIN}/logo.png`,
   iconfontUrl: '',
 };
 

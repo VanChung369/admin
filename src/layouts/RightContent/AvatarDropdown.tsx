@@ -9,6 +9,7 @@ import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
 import ROUTES_PATH from '@/constants/routesPath';
+import ShortenAddress from '@/components/ShortenAddress';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -18,7 +19,11 @@ export type GlobalHeaderRightProps = {
 export const AvatarName = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
-  return <span className="anticon">{currentUser?.address}</span>;
+  return (
+    <span className="anticon">
+      <ShortenAddress address={currentUser?.address} extraShort={true} />
+    </span>
+  );
 };
 
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, children }) => {
