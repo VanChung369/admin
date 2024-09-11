@@ -100,7 +100,7 @@ export default defineConfig({
    * @name layout plugin
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design',
+  title: 'NFT Treasure',
   layout: {
     locale: true,
     siderWidth: 208,

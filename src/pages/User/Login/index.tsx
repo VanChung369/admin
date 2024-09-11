@@ -10,7 +10,7 @@ import style from './index.less';
 import BackgroundLogin from '../../../resources/images/background_login.png';
 import { Typography } from 'antd';
 import AddToWallet from '@/components/AddToWallet';
-import WALLET_TYPE from '@/constants/walletType';
+import { WALLET_TYPE } from '@/constants/wallet';
 
 const { Text } = Typography;
 

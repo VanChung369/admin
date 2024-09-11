@@ -1,5 +1,3 @@
-import InputDesign from '@/components/InputDesign';
-import { testSchema } from '@/utils/schema';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { Button } from 'antd';
@@ -15,7 +13,6 @@ const Admin: React.FC = () => {
   const initialValues = {
     name: '',
   };
-  const testVaildate = testSchema();
   const [params, setParams] = useState(initialValues);
 
   const formikRef = useRef<any>(null);
@@ -35,15 +32,6 @@ const Admin: React.FC = () => {
       >
         {({ setFieldValue, values }) => (
           <Form autoComplete="off">
-            <InputDesign
-              addonBefore="http://"
-              addonAfter=".com"
-              values="mysite"
-              name="name"
-              size="large"
-              placeholder="请输入名称"
-            />
-
             <Button htmlType="submit">Submit</Button>
           </Form>
         )}

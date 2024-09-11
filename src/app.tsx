@@ -1,4 +1,4 @@
-import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/layouts';
+import { AvatarDropdown, AvatarName, Question, SelectLang } from '@/layouts';
 import { currentUser as queryCurrentUser } from '@/services/api/user';
 import { PageLoading, SettingDrawer, Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
@@ -68,7 +68,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     unAccessible: <Page403 />,
     noFound: <Page404 />,
     avatarProps: {
-      src: initialState?.currentUser?.avatar ? initialState.currentUser.avatar : '',
+      src: initialState?.currentUser?.avatar
+        ? initialState.currentUser.avatar
+        : `${process.env.UMI_APP_PUBLIC_DOMAIN}/images/no-profile-md.png`,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
@@ -77,33 +79,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     waterMarkProps: {
       content: '',
     },
-    footerRender: () => <Footer />,
+    footerRender: false,
+    className: 'app',
     onPageChange: () => {
       const { location } = history;
       if (!initialState?.currentUser && location.pathname !== ROUTES_PATH.LOGIN) {
         history.push(ROUTES_PATH.LOGIN);
       }
     },
-    layoutBgImgList: [
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
-        left: 85,
-        bottom: 100,
-        height: '303px',
-      },
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr',
-        bottom: -68,
-        right: -45,
-        height: '303px',
-      },
-      {
-        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr',
-        bottom: 0,
-        left: 0,
-        width: '331px',
-      },
-    ],
+    layoutBgImgList: [],
     menuHeaderRender: undefined,
 
     childrenRender: (children) => {
@@ -113,7 +97,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         <AppProvider>
           {children}
 
-          {isDev && (
+          {!isDev && (
             <SettingDrawer
               disableUrlParams
               enableDarkTheme

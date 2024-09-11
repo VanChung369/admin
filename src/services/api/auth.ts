@@ -19,3 +19,11 @@ export async function outLogin(
     options: options,
   });
 }
+
+export async function refreshToken(body: API.RefreshTokenParams, options?: { [key: string]: any }) {
+  return api.post<API.LoginResult>({
+    endpoint: '/api/auth/refresh',
+    body: body,
+    options: options,
+  });
+}

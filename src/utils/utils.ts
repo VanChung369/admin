@@ -2,7 +2,11 @@ import { FUNCTION, NUMBER, OBJECT, STRING, UNDEFINED } from '@/constants/type';
 import { parse } from 'querystring';
 import { DEFAULT_UNIT_PRESETS, IS_WINDOW, OPEN_CLOSED_CHARACTERS, TINY_NUM } from './consts';
 import { FlattedElement, IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from './typings';
-import HTTP_STATUS_CONTSTANTS from '@/constants/httpStatus';
+import HTTP_STATUS_CONTSTANTS from '@/constants/status';
+import { EXTENSION_3D_SUPPORT_ARRAY, IMAGE_TYPE, MEDIA } from '@/constants/file';
+import { MAX_LENGTH_PRICE } from '@/constants/input';
+import { EMPTY_TEXT, MAX_CODE_LENGTH } from '@/constants';
+import { shortenIfAddress } from '@thirdweb-dev/react';
 
 /* eslint-disable */
 const reg =
@@ -15,6 +19,59 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 export function isUndefined(value: any): value is undefined {
   return typeof value === UNDEFINED;
 }
+
+export const clearRequestParams = (params?: any) => {
+  const newParams = {} as any;
+  const cloneParams = { ...params };
+  for (const field in cloneParams) {
+    if (cloneParams?.[field] || cloneParams?.[field] === 0 || cloneParams?.[field] === false) {
+      newParams[field] = cloneParams?.[field];
+    }
+  }
+  return newParams;
+};
+
+export const get3DFileType = (fileName: string) => {
+  const extension = fileName?.slice(fileName?.lastIndexOf('.') + 1)?.toLowerCase() || '';
+  const type = `3d/${extension}`;
+  if (EXTENSION_3D_SUPPORT_ARRAY.includes(type)) {
+    return type;
+  }
+  return '';
+};
+
+export const getFullFormatedFile = (value: any) => {
+  return value?.fileList?.[0]?.type || get3DFileType(value?.fileList?.[0]?.name) || IMAGE_TYPE;
+};
+
+export const getFormatedFile = (value: any) => {
+  const fullFormat = getFullFormatedFile(value);
+  return fullFormat?.split('/')[0] || MEDIA.IMAGE;
+};
+
+export const formatAddress = (value: any) => {
+  if (!value) {
+    return EMPTY_TEXT;
+  }
+  return value.length > MAX_CODE_LENGTH ? shortenIfAddress(value, true) : value;
+};
+
+export const limitPercentage = (inputObj: any) => {
+  const MAX_PERCENT = 100;
+  const { value } = inputObj;
+  if (Number(value) > MAX_PERCENT) {
+    return false;
+  }
+  return true;
+};
+
+export const limitMaxlengNumber =
+  (maxLength: number = MAX_LENGTH_PRICE) =>
+  (inputObj: any) => {
+    const { value } = inputObj;
+    const integerPath = (value || '').split('.')[0];
+    return integerPath.length <= maxLength;
+  };
 
 export function throttle(num: number, unit?: number) {
   if (!unit) {

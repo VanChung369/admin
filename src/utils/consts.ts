@@ -9,11 +9,6 @@ export { doc as document };
 
 const prefixes: string[] = ['webkit', 'ms', 'moz', 'o'];
 
-/**
-console.log(getCrossBrowserProperty("transform")); // "transform", "-ms-transform", "-webkit-transform"
-console.log(getCrossBrowserProperty("filter")); // "filter", "-webkit-filter"
-*/
-
 export const getCrossBrowserProperty = (property: string) => {
   if (!doc) {
     return '';

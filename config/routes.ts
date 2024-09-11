@@ -10,6 +10,9 @@
  * @param icon Configure the icon of the route
  * @doc https://umijs.org/docs/guides/routes
  */
+
+import ROUTES_PATH from '../src/constants/routesPath';
+
 export default [
   {
     path: '/user',
@@ -18,43 +21,85 @@ export default [
     routes: [
       {
         name: 'login',
-        path: '/user/login',
+        path: ROUTES_PATH.LOGIN,
         component: './User/Login',
       },
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
+    path: ROUTES_PATH.DASHBOARD,
+    name: 'dashboard',
+    icon: 'dashboard',
+    component: './Home',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
-      },
-    ],
+    path: ROUTES_PATH.NFT,
+    name: 'nft',
+    icon: 'appstore',
+    component: './Home',
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: `${ROUTES_PATH.NFT_DETAIL}/:id`,
+    component: './Home',
   },
+  {
+    path: `${ROUTES_PATH.NFT_EDITION}/:id`,
+    component: './Home',
+  },
+  {
+    path: ROUTES_PATH.NFT_CREATION,
+    component: './nft/creation',
+  },
+  {
+    path: ROUTES_PATH.SALE,
+    name: 'sale',
+    icon: 'fund',
+    component: './Home',
+  },
+  {
+    path: `${ROUTES_PATH.SALE_DETAIL}/:id`,
+    component: './Home',
+  },
+  {
+    path: `${ROUTES_PATH.SALE_EDITION}/:id`,
+    component: './Home',
+  },
+  {
+    path: ROUTES_PATH.SALE_CREATION,
+    component: './Home',
+  },
+  {
+    path: ROUTES_PATH.REVENUE,
+    name: 'revenue',
+    icon: 'wallet',
+    component: './Home',
+  },
+  // {
+  //   path: '/admin',
+  //   name: 'admin',
+  //   icon: 'crown',
+  //   access: 'canAdmin',
+  //   routes: [
+  //     {
+  //       path: '/admin',
+  //       redirect: '/admin/sub-page',
+  //     },
+  //     {
+  //       path: '/admin/sub-page',
+  //       name: 'sub-page',
+  //       component: './Admin',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: ROUTES_PATH.DASHBOARD,
   },
   {
     path: '*',

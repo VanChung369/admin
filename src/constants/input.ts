@@ -1,1 +1,44 @@
 export const MAX_LENGTH = 256;
+
+export const TYPE_INPUT = {
+  TEXT: 'TEXT',
+  TEXTAREA: 'TEXTAREA',
+  DATE: 'DATE',
+  PASSWORD: 'PASSWORD',
+  SELECT: 'SELECT',
+  CHECKBOX: 'CHECKBOX',
+  CHECKBOXGROUP: 'CHECKBOXGROUP',
+  NUMBER: 'NUMBER',
+  SEARCH: 'SEARCH',
+  SWITCH: 'SWITCH',
+  RADIO: 'RADIO',
+  AUTOCOMPLETE: 'AUTOCOMPLETE',
+  RANGE: 'RANGE',
+  SEARCH_DEBOUNCE: 'SEARCH_DEBOUNCE',
+};
+
+export const ZERO_VALUE = 0;
+export const DOLLAR_TEXT = '$';
+export const PAD_START_TEXT = '0';
+export const PAD_START_MAX_LENGTH = 4;
+export const MAX_NFT_CODE_LENGTH = 10;
+export const EMPTY_DEFAULT_TEXT = '--';
+export const FORMAT_TIME_PICKER = 'HH:mm:ss';
+export const FORMAT_DATE_PICKER = 'DD/MM/YYYY';
+export const DEFAULT_SEARCH_DATE_FORMAT = 'DD/MM/YYYY';
+export const DEFAULT_SEARCH_DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm:ss';
+
+export const SECOND_NUMBER = 60;
+
+export const PERCENTAGE_NUMBER = 100;
+
+export const MIN_VALUE_TOTAL_COPIES = 1;
+export const MAX_VALUE_TOTAL_COPIES = 1000000;
+export const MAX_LENGTH_DESCRIPTION = 3000;
+export const MAX_VALUE_ROYALTY_FEE = 50;
+export const MAX_LENGTH_PRICE = 12;
+export const MAX_LENGTH_TOTAL_SUPPLY = 7;
+export const NFT_POSITIVE_SCALE = 0;
+export const NFT_DECIMAL_SCALE = 2;
+export const NFT_DECIMAL_SCALE_PRICE = 18;
+export const NFT_USD_DECIMAL_SCALE = 8;

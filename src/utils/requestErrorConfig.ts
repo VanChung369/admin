@@ -1,8 +1,10 @@
 import formatMessage from '@/components/FormatMessage';
 import type { RequestOptions } from '@@/plugin-request/request';
-import type { RequestConfig } from '@umijs/max';
+import { type RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
 import { checkSusscessRequest, isUndefined } from './utils';
+import LocalStore from './store';
+import _ from 'lodash';
 
 type CodeMessage = {
   [key: number]: string;
@@ -48,6 +50,11 @@ interface ResponseStructure {
  * The error handling of pro comes with it can make your own changes here
  * @doc https://umijs.org/docs/max/request#配置
  */
+const localStoreAuth: any = LocalStore.getValue('persist:root');
+const authenticationTokenRefesh = localStoreAuth?.AuthenticationSlice
+  ? JSON.parse(localStoreAuth.AuthenticationSlice)?.authenticationTokenRefesh
+  : '';
+
 export const errorConfig: RequestConfig = {
   errorConfig: {
     errorThrower: (res) => {
@@ -127,26 +134,19 @@ export const errorConfig: RequestConfig = {
 
   responseInterceptors: [
     (response) => {
-      const { data } = response as unknown as ResponseStructure;
-
+      const { data = {} as any, config } = response;
       if (!checkSusscessRequest(response)) {
         message.error('Request failed!');
       }
       return response;
     },
-    // async (error) => {
-    //   const originalRequest = error.config;
-
-    //   if (error?.status === 403) {
-    //     // const resp = await refreshToken();
-    //     // const access_token = resp.response.accessToken;
-    //     // addTokenToLocalStorage(access_token);
-    //     // customFetch.defaults.headers.common[
-    //     //   "Authorization"
-    //     // ] = `Bearer ${access_token}`;
-    //     // return customFetch(originalRequest);
-    //   }
-    //   return Promise.reject(error);
-    // },
+    [
+      (response) => {
+        return response;
+      },
+      async (error: any) => {
+        return Promise.reject(error);
+      },
+    ],
   ],
 };

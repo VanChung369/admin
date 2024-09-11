@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import MetaMaskLogo from '@/resources/svg/Metamask.svg';
 import WalletConnectLogo from '@/resources/svg/WalletConnect.svg';
 import CoinBaseLogo from '@/resources/svg/Coinbase.svg';
-import WALLET_TYPE from '@/constants/walletType';
+import { WALLET_TYPE } from '@/constants/wallet';
 
 const AddToWallet: FC<AddToWalletProps> = ({
   afterIcon,

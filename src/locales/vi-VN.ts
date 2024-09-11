@@ -9,6 +9,8 @@ import pwa from './vi-VN/pwa';
 import settingDrawer from './vi-VN/settingDrawer';
 import settings from './vi-VN/settings';
 import login from './vi-VN/login';
+import nft from './vi-VN//NFT';
+import password from './vi-VN/password';
 
 export default {
   'navBar.lang': 'ngôn ngữ',
@@ -32,4 +34,6 @@ export default {
   ...statusResponse,
   ...codeMessage,
   ...login,
+  ...nft,
+  ...password,
 };
