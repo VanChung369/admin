@@ -1,3 +1,4 @@
+import { Key, SortOrder } from 'antd/lib/table/interface';
 export namespace API {
   /** GET /api/currentUser */
   export type GET_API_CURRENT_USER_QUERY = {
@@ -117,4 +118,9 @@ export namespace API {
     /** example: admin */
     currentAuthority: string;
   };
+}
+
+export interface SORT_TABLE {
+  order?: SortOrder;
+  field?: Key | readonly Key[];
 }

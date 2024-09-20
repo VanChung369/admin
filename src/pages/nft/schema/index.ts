@@ -95,9 +95,12 @@ export const nftSchema = (intl: any) => {
     [DESCRIPTION]: string()
       .max(
         MAX_LENGTH_DESCRIPTION,
-        intl.formatMessage({
-          id: 'NFT.decription.error.max',
-        }),
+        intl.formatMessage(
+          {
+            id: 'NFT.decription.error.max',
+          },
+          { max: MAX_LENGTH_DESCRIPTION },
+        ),
       )
       .required(
         intl.formatMessage({

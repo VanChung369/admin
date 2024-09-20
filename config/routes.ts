@@ -36,11 +36,11 @@ export default [
     path: ROUTES_PATH.NFT,
     name: 'nft',
     icon: 'appstore',
-    component: './Home',
+    component: './nft/management',
   },
   {
     path: `${ROUTES_PATH.NFT_DETAIL}/:id`,
-    component: './Home',
+    component: './nft/detail',
   },
   {
     path: `${ROUTES_PATH.NFT_EDITION}/:id`,

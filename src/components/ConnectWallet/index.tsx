@@ -91,10 +91,10 @@ const ConnectWalletWrapper: FC<{
       }
     };
 
-    if (account !== address) {
+    if (account !== address || !address) {
       setUpAddress();
     }
-  }, [account]);
+  }, [account, connectionStatus]);
 
   const handleCheckIsAdmin = async (wallet: MetamaskService) => {
     const isAdmin = await wallet.isAdmin(account as string);
