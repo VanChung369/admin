@@ -1,3 +1,4 @@
+import { columns } from './../../pages/nft/management/components/ListTable/columns';
 export default {
   'NFT.content': 'NFT Content *',
   'NFT.file.support':
@@ -55,4 +56,32 @@ export default {
   'NFT.god.error.required': 'God is required',
   'NFT.class.error.required': 'Level is required',
   'NFT.level.error.required': 'Class is required',
+
+  // nft management
+
+  'NFT.management.ERC-721': 'ERC-721',
+  'NFT.management.ERC-1155': 'ERC-1155',
+  'NFT.management.Total': 'Total NFTs:',
+  'NFT.management.create.date': 'Created Date',
+  'NFT.management.id': 'NFT ID',
+  'NFT.management.name': 'NFT Name',
+  'NFT.management.copies': 'Total Copies',
+  'NFT.management.supply': 'Total Supply',
+  'NFT.management.quantity': 'On Sale Quantity',
+  'NFT.management.minted': 'Total Minted',
+  'NFT.management.status': 'Status',
+  'NFT.management.status.placeholder': 'Select status',
+  'NFT.management.action': 'Action',
+  'NFT.management.no': 'No',
+  'NFT.management.search': 'Search',
+  'NFT.management.search.placeholder': 'Search by NFT name, ID',
+  'NFT.management.reset': 'Reset',
+  'NFT.management.off.sale': 'Off Sale',
+  'NFT.management.on.sale': 'on Sale',
+  'NFT.management.sold.out': 'sold Out',
+  'NFT.management.detail': 'View Detail',
+  'NFT.management.column.setting': 'Column Setting',
+  'NFT.management.columns.selected': 'Columns Selected',
+  'NFT.management.columns.apply': 'Apply',
+  'NFT.management.columns.warning': 'You can select up to {column} columns',
 };

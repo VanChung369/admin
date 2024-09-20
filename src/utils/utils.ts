@@ -4,9 +4,11 @@ import { DEFAULT_UNIT_PRESETS, IS_WINDOW, OPEN_CLOSED_CHARACTERS, TINY_NUM } fro
 import { FlattedElement, IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from './typings';
 import HTTP_STATUS_CONTSTANTS from '@/constants/status';
 import { EXTENSION_3D_SUPPORT_ARRAY, IMAGE_TYPE, MEDIA } from '@/constants/file';
-import { MAX_LENGTH_PRICE } from '@/constants/input';
+import { EMPTY_DEFAULT_TEXT, MAX_LENGTH_PRICE, MAX_NFT_CODE_LENGTH } from '@/constants/input';
 import { EMPTY_TEXT, MAX_CODE_LENGTH } from '@/constants';
 import { shortenIfAddress } from '@thirdweb-dev/react';
+import moment from 'moment';
+import { DATE_FORMAT } from '@/constants/date';
 
 /* eslint-disable */
 const reg =
@@ -95,6 +97,22 @@ export function findIndex<T>(
   }
   return defaultIndex;
 }
+
+export const shortenText = (text: string, number = -4) => {
+  if (text) {
+    const first = text.slice(0, 6);
+    const last = text.slice(number);
+    return `${first}...${last}`;
+  }
+  return EMPTY_DEFAULT_TEXT;
+};
+
+export const formatText = (value: any) => {
+  if (!value) {
+    return EMPTY_DEFAULT_TEXT;
+  }
+  return value.length > MAX_NFT_CODE_LENGTH ? shortenText(value) : value;
+};
 
 /**
     find([{a: 1}, {a: 2}, {a: 3}, {a: 4}], ({ a }) => a === 2); // {a: 2}
@@ -328,6 +346,10 @@ export function toArray<T>(value: IArrayFormat<T>): T[] {
 export function now() {
   return Date.now ? Date.now() : new Date().getTime();
 }
+
+export const formatDate = (date: moment.MomentInput | any, type = DATE_FORMAT) => {
+  return moment(date).format(type);
+};
 
 export function findLastIndex<T>(
   arr: T[],

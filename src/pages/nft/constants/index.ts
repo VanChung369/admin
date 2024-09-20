@@ -1,3 +1,9 @@
+export const NFT_ZERO_ID = '#0000';
+export const MIN_VALUE_TOTAL_SUPPLY = 1;
+export const MAX_VALUE_TOTAL_SUPPLY = 10000;
+export const MAX_VALUE_ROYALTY_FEE = 50;
+export const MAX_LENGTH_DESCRIPTION = 3000;
+
 export const NFT_CREATE_FIELD = {
   FILE: 'file',
   FILE_PREVIEW: 'filePreview',
@@ -12,8 +18,6 @@ export const NFT_CREATE_FIELD = {
   IMAGE_MEDIUM: 'imageMedium',
   IMAGE_SMALL: 'imageSmall',
 };
-
-export const NFT_ZERO_ID = '#0000';
 
 export const PARAMS_CONFIG = {
   TOKEN: 'token',
@@ -52,7 +56,66 @@ export const NFT_CREATION_ATTRIBUTE = {
   },
 } as any;
 
-export const MIN_VALUE_TOTAL_SUPPLY = 1;
-export const MAX_VALUE_TOTAL_SUPPLY = 10000;
-export const MAX_VALUE_ROYALTY_FEE = 50;
-export const MAX_LENGTH_DESCRIPTION = 3000;
+// nft manager
+
+export const NFT_MANAGEMENT_FIELD = {
+  KEYWORD: 'keyword',
+  STATUS: 'status',
+  PAGE: 'page',
+  LIMIT: 'limit',
+  SORT: 'sort',
+  TYPE: 'type',
+};
+
+export const NFT_TABS = {
+  ERC721: {
+    key: 'ERC-721',
+    label: 'NFT.management.ERC-721',
+    type: 'erc-721',
+  },
+  ERC1155: {
+    key: 'ERC-1155',
+    label: 'NFT.management.ERC-1155',
+    type: 'erc-1155',
+  },
+};
+
+export const NFT_STATUS = [
+  {
+    name: 'NFT.management.off.sale',
+    value: 'off-sale',
+    color: 'red',
+  },
+  {
+    name: 'NFT.management.on.sale',
+    value: 'on-sale',
+    color: 'green',
+  },
+  {
+    name: 'NFT.management.sold.out',
+    value: 'sold-out',
+    color: 'gold',
+  },
+];
+
+export const NFT_MANAGEMENT_FIELD_SORTER = {
+  DEFAULT: 'default',
+  CREATED_AT: 'createdAt',
+  NFT_ID: 'code',
+  NFT_NAME: 'name',
+  TOTAL_SUPPLY: 'totalSupply',
+  TOTAL_MINTED: 'totalMinted',
+  ON_SALE_QUANTITY: 'onSaleQuantity',
+};
+
+export const NFT_MANAGEMENT_COLUMN = {
+  NO: 'no',
+  CREATED_AT: 'createdAt',
+  NFT_ID: 'code',
+  NFT_NAME: 'name',
+  TOTAL_SUPPLY: 'totalSupply',
+  TOTAL_MINTED: 'totalMinted',
+  ON_SALE_QUANTITY: 'onSaleQuantity',
+  NFT_STATUS: 'status',
+  ACTIONS: 'actions',
+};

@@ -7,3 +7,7 @@ export async function createNFT(body: API.CreateNFT, options?: { [key: string]: 
     options: options,
   });
 }
+
+export async function getNfts(params: any, options?: { [key: string]: any }) {
+  return api.get<{ data: any }>({ endpoint: '/api/admin/nfts', params: params, options: options });
+}

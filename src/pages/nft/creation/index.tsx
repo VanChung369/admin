@@ -25,7 +25,6 @@ import formatMessage from '@/components/FormatMessage';
 const {
   NAME,
   ROYALTYFEE,
-  IS_PUT_ON_SALE,
   TOTAL_SUPPLY,
   DESCRIPTION,
   IMAGE_MEDIUM,
@@ -112,7 +111,7 @@ const NFTCreation = () => {
   };
 
   const handlecreateNFTSuccess = (id: any) => {
-    navigate(`${ROUTES_PATH.NFT_DETAIL}/${id}`);
+    navigate(`${ROUTES_PATH.NFT}`);
     formatMessage({
       descriptor: { id: 'codeMessage.S1' },
       type: 'success',

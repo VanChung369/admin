@@ -11,7 +11,7 @@ export default {
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
-  'menu.nft': 'NFT',
+  'menu.nft': 'NFT Management',
   'menu.sale': 'Sale Order',
   'menu.revenue': 'Revenue',
   'menu.exception.403': '403',
