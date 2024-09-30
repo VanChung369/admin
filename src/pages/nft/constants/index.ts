@@ -119,3 +119,36 @@ export const NFT_MANAGEMENT_COLUMN = {
   NFT_STATUS: 'status',
   ACTIONS: 'actions',
 };
+
+// nft detail
+
+export const NFT_PROFILE_TABS = {
+  PREVIEW: {
+    key: 'PREVIEW',
+    label: 'NFT.detail.preview',
+  },
+  CONTENT: {
+    key: 'CONTENT',
+    label: 'NFT.detail.content',
+  },
+};
+
+export const NFT_STANDARD = [
+  { value: 'erc-721', key: 0, label: 'NFT.management.ERC-721' },
+  { value: 'erc-1155', key: 1, label: 'NFT.management.ERC-1155' },
+];
+
+export const NFT_DETAIL_ATTRIBUTE: any = {
+  mythology: {
+    text: 'NFT.create.mythology',
+  },
+  god: {
+    text: 'NFT.create.god',
+  },
+  level: {
+    text: 'NFT.create.level',
+  },
+  class: {
+    text: 'NFT.create.class',
+  },
+};

@@ -1,8 +1,9 @@
 import { useIntl } from '@umijs/max';
 import { Row, Typography } from 'antd';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
-import style from './index.less';
+import { FC, Fragment, useCallback, useEffect, useRef, useState } from 'react';
+import ButtonWrapper from '@/components/ButtonWrapper';
+import styleLess from './index.less';
 
 const { Paragraph } = Typography;
 
@@ -31,33 +32,51 @@ const TextExpand: FC<TextExpandProps> = ({
   rowsNumber,
   ...props
 }) => {
-  const [ellipsis, setEllipsis] = useState(true);
   const intl = useIntl();
+  const [ellipsis, setEllipsis] = useState(true);
+  const [isExpandable, setIsExpandable] = useState(false);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+
+  const checkExpandable = useCallback(() => {
+    if (paragraphRef.current) {
+      const { clientHeight, scrollHeight } = paragraphRef.current;
+      setIsExpandable(scrollHeight > clientHeight);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkExpandable();
+  }, [text, checkExpandable]);
 
   return (
-    <>
+    <Fragment>
       <Paragraph
+        ref={paragraphRef}
         className={classNames(className)}
         {...props}
-        ellipsis={ellipsis ? { rows: rowsNumber || 5 } : false}
+        ellipsis={
+          ellipsis ? { rows: rowsNumber || 5, expandable: 'collapsible', symbol: '' } : false
+        }
       >
         {text ?? '--'}
       </Paragraph>
-      <Row justify={justify}>
-        {/* <ButtonDesign
-          {...props}
-          className={classNames(style.ReadMoreButton)}
-          onClick={() => {
-            setEllipsis(!ellipsis);
-          }}
-          text={
-            textButton || ellipsis
-              ? intl.formatMessage({ id: 'common.textExpand.readMore' })
-              : intl.formatMessage({ id: 'common.textExpand.showLess' })
-          }
-        /> */}
-      </Row>
-    </>
+      {isExpandable && (
+        <Row justify={justify}>
+          <ButtonWrapper
+            {...props}
+            className={styleLess.text_expand__button}
+            onClick={() => {
+              setEllipsis(!ellipsis);
+            }}
+            text={
+              textButton || ellipsis
+                ? intl.formatMessage({ id: 'common.textExpand.readMore' })
+                : intl.formatMessage({ id: 'common.textExpand.showLess' })
+            }
+          />
+        </Row>
+      )}
+    </Fragment>
   );
 };
 

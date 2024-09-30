@@ -1,3 +1,9 @@
+export const EXTERNAL_URL = {
+  POLYGON_SCAN: 'https://amoy.polygonscan.com/tx',
+  POLYGON_SCAN_ADDRESS: 'https://amoy.polygonscan.com/address',
+  POLYGON_SCAN_TOKEN: 'https://amoy.polygonscan.com/token',
+};
+
 const ROUTES_PATH = {
   LOGIN: '/user/login',
   DASHBOARD: '/dashboard',
@@ -10,6 +16,7 @@ const ROUTES_PATH = {
   SALE_EDITION: '/sales/edit',
   SALE_CREATION: '/sales/create',
   REVENUE: '/revenue',
+  MARKET_NFT_DETAIL: `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/nft`,
 };
 
 export default ROUTES_PATH;

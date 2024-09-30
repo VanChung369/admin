@@ -8,7 +8,7 @@ type NFTCreationButtonProps = {
   id?: string;
 };
 
-const NFTCreationButton = ({ isSubmit, onDiscard, id }: NFTCreationButtonProps) => {
+const NFTButton = ({ isSubmit, onDiscard, id }: NFTCreationButtonProps) => {
   const intl = useIntl();
 
   return (
@@ -34,4 +34,4 @@ const NFTCreationButton = ({ isSubmit, onDiscard, id }: NFTCreationButtonProps) 
     </div>
   );
 };
-export default NFTCreationButton;
+export default NFTButton;

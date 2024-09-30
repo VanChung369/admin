@@ -6,10 +6,9 @@ import PageHeader from '@/components/PageHeader';
 import { useIntl } from '@umijs/max';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import { NFT_CREATE_FIELD, PARAMS_CONFIG } from '../constants';
-import styleLess from './index.less';
 import { nftSchema } from '../schema';
-import NFTCreationField from './components/NFTCreationField';
-import NFTCreationButton from './components/NFTCreationButton';
+import NFTField from './components/NFTField';
+import NFTButton from './components/NFTButton';
 import NFTPreview from './components/NFTPreview';
 import { useAppSelector } from '@/hooks';
 import selectedConfig from '@/redux/config/selector';
@@ -21,6 +20,7 @@ import { get, trim } from 'lodash';
 import { MEDIA } from '@/constants/file';
 import { clearRequestParams, getFormatedFile } from '@/utils/utils';
 import formatMessage from '@/components/FormatMessage';
+import { PageContainer } from '@ant-design/pro-components';
 
 const {
   NAME,
@@ -167,38 +167,40 @@ const NFTCreation = () => {
   };
 
   return (
-    <LoadingWrapper loading={loadingCreateNFT}>
-      <PageHeader
-        showBack
-        title={intl.formatMessage({
-          id: 'NFT.create',
-        })}
-        onBack={onBackClick}
-      />
+    <PageContainer title={false}>
+      <LoadingWrapper loading={loadingCreateNFT}>
+        <PageHeader
+          showBack
+          title={intl.formatMessage({
+            id: 'NFT.create',
+          })}
+          onBack={onBackClick}
+        />
 
-      <Formik
-        innerRef={formikRef}
-        initialValues={initFormValue}
-        onSubmit={handleSubmit}
-        validationSchema={nftSchema(intl)}
-      >
-        {({ values }: any) => {
-          return (
-            <Form className={styleLess.create_nft}>
-              <Row gutter={20} justify="space-between">
-                <Col xs={24} sm={24} md={12} lg={16} xl={16} xxl={16}>
-                  <NFTCreationField />
-                  <NFTCreationButton isSubmit={loadingCreateNFT} onDiscard={onDiscard} id={id} />
-                </Col>
-                <Col xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
-                  <NFTPreview />
-                </Col>
-              </Row>
-            </Form>
-          );
-        }}
-      </Formik>
-    </LoadingWrapper>
+        <Formik
+          innerRef={formikRef}
+          initialValues={initFormValue}
+          onSubmit={handleSubmit}
+          validationSchema={nftSchema(intl)}
+        >
+          {({ values }: any) => {
+            return (
+              <Form>
+                <Row gutter={20} justify="space-between">
+                  <Col xs={24} sm={24} md={12} lg={16} xl={16} xxl={16}>
+                    <NFTField />
+                    <NFTButton isSubmit={loadingCreateNFT} onDiscard={onDiscard} id={id} />
+                  </Col>
+                  <Col xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
+                    <NFTPreview />
+                  </Col>
+                </Row>
+              </Form>
+            );
+          }}
+        </Formik>
+      </LoadingWrapper>
+    </PageContainer>
   );
 };
 

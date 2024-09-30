@@ -12,7 +12,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: 'NFT Treasure',
   pwa: true,
-  logo: `${process.env.UMI_APP_PUBLIC_DOMAIN}/logo.png`,
+  logo: `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/logo.png`,
   iconfontUrl: '',
 };
 

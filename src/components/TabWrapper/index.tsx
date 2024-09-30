@@ -9,6 +9,7 @@ interface Tab {
   tab: string;
   content: any;
   className?: string;
+  [key: string]: any;
 }
 
 const TabWapper = ({ listTab, onChangeTab, className, ...props }: TabsProps) => {

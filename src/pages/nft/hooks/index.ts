@@ -1,4 +1,4 @@
-import { createNFT, getNfts } from '@/services/api/nft';
+import { createNFT, deleteNFT, getNft, getNfts } from '@/services/api/nft';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { NFT_MANAGEMENT_FIELD, NFT_MANAGEMENT_FIELD_SORTER } from '../constants';
 import { ORDERS } from '@/constants';
@@ -96,5 +96,66 @@ export const useGetListNFTs = (params: any) => {
   return {
     loading: isLoading,
     data: useFetchListNFTs.data,
+  };
+};
+
+// get nft
+export const useGetNFT = (id?: string) => {
+  const handleGetNFT = async () => {
+    try {
+      const data = await getNft(id);
+
+      return data[0];
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const useFetchNFT: any = useQuery({
+    queryKey: ['getNFT', id],
+    queryFn: () => handleGetNFT(),
+    refetchOnWindowFocus: false,
+    enabled: !!id,
+  });
+
+  const { isLoading, isError } = useFetchNFT;
+
+  return {
+    loading: isLoading,
+    error: isError,
+    data: useFetchNFT.data,
+  };
+};
+
+// detele nft
+
+export interface paramDeleteNFT {
+  id?: string;
+  onSuccess: (id: any) => void;
+  onError: () => void;
+}
+
+export const useDeleteNFT = () => {
+  const handleDeleteNFT = useMutation({
+    mutationFn: async (params: paramDeleteNFT) => {
+      try {
+        const response = await deleteNFT(params.id);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      variables.onSuccess(data._id);
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleDeleteNFT.isPending,
+    onDeleteNFT: handleDeleteNFT.mutate,
   };
 };

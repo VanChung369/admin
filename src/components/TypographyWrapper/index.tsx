@@ -78,6 +78,7 @@ const TypographyWrapper: FC<TypographyWrapperProps> = ({
           className={className}
           rowsNumber={rowsNumber}
           textButton={textButton}
+          {...props}
         />
       );
       break;
