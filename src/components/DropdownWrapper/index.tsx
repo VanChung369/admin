@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Dropdown } from 'antd';
 
 type DropdownWrapperProps = {
-  children: ReactNode;
+  children?: ReactNode;
   menu: any;
   placement?: string | any;
   trigger?: string | any;

@@ -4,11 +4,20 @@ import { DEFAULT_UNIT_PRESETS, IS_WINDOW, OPEN_CLOSED_CHARACTERS, TINY_NUM } fro
 import { FlattedElement, IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from './typings';
 import HTTP_STATUS_CONTSTANTS from '@/constants/status';
 import { EXTENSION_3D_SUPPORT_ARRAY, IMAGE_TYPE, MEDIA } from '@/constants/file';
-import { EMPTY_DEFAULT_TEXT, MAX_LENGTH_PRICE, MAX_NFT_CODE_LENGTH } from '@/constants/input';
-import { EMPTY_TEXT, MAX_CODE_LENGTH } from '@/constants';
+import {
+  EMPTY_DEFAULT_TEXT,
+  MAX_LENGTH_PRICE,
+  MAX_NFT_CODE_LENGTH,
+  NFT_DECIMAL_SCALE,
+  ZERO_VALUE,
+} from '@/constants/input';
+import { EMPTY_TEXT, LENGTH_CONSTANTS, MAX_CODE_LENGTH } from '@/constants';
 import { shortenIfAddress } from '@thirdweb-dev/react';
 import moment from 'moment';
 import { DATE_FORMAT } from '@/constants/date';
+import BigNumber from 'bignumber.js';
+
+const { MIN_VALUE } = LENGTH_CONSTANTS;
 
 /* eslint-disable */
 const reg =
@@ -21,6 +30,37 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 export function isUndefined(value: any): value is undefined {
   return typeof value === UNDEFINED;
 }
+
+export const getValueAttribute = (attributes: any, field: string) =>
+  attributes?.[field]?.text || attributes?.[field];
+
+export const formatCurrency = (
+  value: any,
+  options: { isNotCompare?: boolean; decimal?: number; isNotFormatDecimal?: boolean } = {},
+) => {
+  BigNumber.config({
+    EXPONENTIAL_AT: 100,
+  });
+
+  const { isNotCompare, decimal = NFT_DECIMAL_SCALE, isNotFormatDecimal } = options;
+
+  const formatDecimal = isNotFormatDecimal ? undefined : decimal;
+
+  if (!value) {
+    return ZERO_VALUE;
+  }
+  if (isNotCompare) {
+    return new BigNumber(value).toFormat();
+  }
+
+  return new BigNumber(value).isLessThan(new BigNumber(MIN_VALUE))
+    ? new BigNumber(MIN_VALUE).toFormat()
+    : new BigNumber(value).toFormat(formatDecimal);
+};
+
+export const getNumber = (value?: number) => {
+  return value ?? ZERO_VALUE;
+};
 
 export const clearRequestParams = (params?: any) => {
   const newParams = {} as any;

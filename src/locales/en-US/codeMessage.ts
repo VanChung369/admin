@@ -1,5 +1,6 @@
 export default {
   'codeMessage.S1': 'Create NFT successfully',
+  'codeMessage.S2': 'Delete NFT successfully',
 
   //error message
   'codeMessage.E1': 'login failed',
@@ -10,4 +11,5 @@ export default {
   'codeMessage.E5': 'Create NFT failed',
   'codeMessage.E6': 'Must select number of columns greater than {column}',
   'codeMessage.E7': 'Must select number of columns less than {column}',
+  'codeMessage.E8': 'Delete NFT failed',
 };

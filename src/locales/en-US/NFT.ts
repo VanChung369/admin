@@ -1,5 +1,5 @@
-import { columns } from './../../pages/nft/management/components/ListTable/columns';
 export default {
+  'NFT.management': 'NFT Management',
   'NFT.content': 'NFT Content *',
   'NFT.file.support':
     'Upload Image, Video, Audio, or 3D Model. File types supported: \nJPG, PNG, GIF, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB',
@@ -84,4 +84,35 @@ export default {
   'NFT.management.columns.selected': 'Columns Selected',
   'NFT.management.columns.apply': 'Apply',
   'NFT.management.columns.warning': 'You can select up to {column} columns',
+
+  // nft detail
+
+  'NFT.detail': 'NFT Detail',
+  'NFT.detail.warning':
+    'Sell order is invalid since on sale quantity ({quantity} editions) is greater than available quantity ({number} editions). Please remove NFT from sale for further actions.',
+  'NFT.detail.actions': 'More Actions',
+  'NFT.detail.action.edit': 'Edit NFT',
+  'NFT.detail.action.delete': 'Delete NFT',
+  'NFT.detail.action.delete.description': 'Are you sure you want to delete "{name}" ?',
+  'NFT.detail.proceed.delete': 'Proceed To Delete',
+  'NFT.detail.view.market': 'View On Market',
+  'NFT.detail.view.ploygon': 'View On PolygonScan',
+  'NFT.detail.view.ipfs': 'View On IPFS',
+  'NFT.detail.preview': 'Preview',
+  'NFT.detail.content': 'Content',
+  'NFT.detail.create.at': 'Created at',
+  'NFT.detail.supply': 'Total Supply',
+  'NFT.detail.supply.tooltip': 'The total number of NFT editions that are created',
+  'NFT.detail.minted': 'Total Minted',
+  'NFT.detail.minted.tooltip': 'The total number of NFT editions that are minted on blockchain',
+  'NFT.detail.quantity': 'On Sale Quantity',
+  'NFT.detail.quantity.tooltip':
+    'The total number of NFT editions that are currently listed for sale',
+  'NFT.detail.price': 'Listing Price',
+  'NFT.detail.id': 'NFT ID',
+  'NFT.detail.standard': 'NFT Standard',
+  'NFT.detail.contract.address': 'Contract Address',
+  'NFT.detail.royalties': 'Royalties',
+  'NFT.detail.royalties.tooltip':
+    'A portion of each secondary sale transaction goes to NFT author as royalties',
 };

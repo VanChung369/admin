@@ -20,7 +20,7 @@ import { isString } from 'lodash';
 import { LENGTH_CONSTANTS } from '@/constants';
 import { PercentageOutlined } from '@ant-design/icons';
 
-const NFTCreationField = () => {
+const NFTField = () => {
   const intl = useIntl();
   const { values } = useFormikContext() as any;
   const { general = {} } = useAppSelector(selectedConfig.getConfig);
@@ -194,4 +194,4 @@ const NFTCreationField = () => {
     </div>
   );
 };
-export default NFTCreationField;
+export default NFTField;

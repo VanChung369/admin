@@ -70,7 +70,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     avatarProps: {
       src: initialState?.currentUser?.avatar
         ? initialState.currentUser.avatar
-        : `${process.env.UMI_APP_PUBLIC_DOMAIN}/images/no-profile-md.png`,
+        : `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/images/no-profile-md.png`,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;

@@ -50,7 +50,6 @@ const initParams = {
 const NFTManagement: React.FC = () => {
   const intl = useIntl();
   const navigate = useNavigate();
-  const { id } = useParams();
   const [primaryColumn, setPrimaryColumn] = useState(defaultValue);
   const [activeTab, setActiveTab] = useState(NFT_TABS.ERC721.key);
 
@@ -121,7 +120,10 @@ const NFTManagement: React.FC = () => {
   ];
 
   return (
-    <PageContainer className={styleLess.nft_management}>
+    <PageContainer
+      title={intl.formatMessage({ id: 'NFT.management' })}
+      className={styleLess.nft_management}
+    >
       <div className={styleLess.nft_management__button}>
         <ButtonWrapper
           prefixIcon={<FileAddOutlined />}
