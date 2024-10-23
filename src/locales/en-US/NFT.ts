@@ -1,12 +1,14 @@
 export default {
   'NFT.management': 'NFT Management',
   'NFT.content': 'NFT Content *',
+  'NFT.admin': 'Admin',
   'NFT.file.support':
     'Upload Image, Video, Audio, or 3D Model. File types supported: \nJPG, PNG, GIF, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB',
   'NFT.file.upload': 'Drag and Drop file or upload from your device',
   'NFT.file.preview': 'Preview Image',
   'NFT.file.previwe.desc':
     'Because you’ve included multimedia, you’ll need to provide an image \n(JPG, PNG, or GIF) to display preview of your item. Max size: 2 MB',
+  'NFT.all': 'All',
 
   // nft create
   'NFT.create': 'Create NFT',
@@ -90,7 +92,7 @@ export default {
   'NFT.detail': 'NFT Detail',
   'NFT.detail.warning':
     'Sell order is invalid since on sale quantity ({quantity} editions) is greater than available quantity ({number} editions). Please remove NFT from sale for further actions.',
-  'NFT.detail.actions': 'More Actions',
+  'NFT.detail.more.actions': 'More Actions',
   'NFT.detail.action.edit': 'Edit NFT',
   'NFT.detail.action.delete': 'Delete NFT',
   'NFT.detail.action.delete.description': 'Are you sure you want to delete "{name}" ?',
@@ -105,7 +107,7 @@ export default {
   'NFT.detail.supply.tooltip': 'The total number of NFT editions that are created',
   'NFT.detail.minted': 'Total Minted',
   'NFT.detail.minted.tooltip': 'The total number of NFT editions that are minted on blockchain',
-  'NFT.detail.quantity': 'On Sale Quantity',
+  'NFT.detail.sale.quantity': 'On Sale Quantity',
   'NFT.detail.quantity.tooltip':
     'The total number of NFT editions that are currently listed for sale',
   'NFT.detail.price': 'Listing Price',
@@ -115,4 +117,26 @@ export default {
   'NFT.detail.royalties': 'Royalties',
   'NFT.detail.royalties.tooltip':
     'A portion of each secondary sale transaction goes to NFT author as royalties',
+  'NFT.detail.owner': 'NFT Owner',
+  'NFT.detail.sale.history': 'NFT Sale History',
+  'NFT.detail.no': 'No',
+  'NFT.detail.current.owner': 'Current Owner',
+  'NFT.detail.token.id': 'Token ID',
+  'NFT.detail.minted.by': 'Minted By',
+  'NFT.detail.quantity': 'Quantity',
+  'NFT.detail.actions': 'Actions',
+  'NFT.detail.total.owner': 'Total Owner:',
+  'NFT.detail.search.owner.placeholder': 'Search by Owner Address, Token ID, Minting Addess',
+  'NFT.detail.sale.date': 'Sale Date',
+  'NFT.detail.market.channel': 'Market Channel',
+  'NFT.detail.pirce': 'Price',
+  'NFT.detail.history.subtotal': 'Subtotal',
+  'NFT.detail.history.royalties': 'Royalties',
+  'NFT.detail.sale.primary': 'Primary Sale',
+  'NFT.detail.sale.secondary': 'Secondary Sale',
+  'NFT.detail.history.search.token.id': 'Search by Token ID',
+  'NFT.detail.history.search.start.date': 'Start Date',
+  'NFT.detail.history.search.end.date': 'End Date',
+  'NFT.detail.history.search.market.channel': 'Market Channel',
+  'NFT.detail.history.total.revenue': 'Total Revenue: ',
 };

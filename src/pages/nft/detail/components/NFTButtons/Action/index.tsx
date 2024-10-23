@@ -76,7 +76,7 @@ const NFTAction = () => {
       <ButtonWrapper
         variant="primary"
         className={styleLess.action__button}
-        text={intl.formatMessage({ id: 'NFT.detail.actions' })}
+        text={intl.formatMessage({ id: 'NFT.detail.more.actions' })}
         afterIcon={<DownOutlined />}
       />
     </DropdownWrapper>

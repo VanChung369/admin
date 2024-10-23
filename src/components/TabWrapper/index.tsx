@@ -9,19 +9,21 @@ interface Tab {
   tab: string;
   content: any;
   className?: string;
+  disabled?: boolean;
   [key: string]: any;
 }
 
-const TabWapper = ({ listTab, onChangeTab, className, ...props }: TabsProps) => {
+const TabWapper = ({ listTab, onChangeTab, className, disabled, ...props }: TabsProps) => {
   return (
     <Tabs
       className={classNames(styleLess.tab, className)}
       onChange={onChangeTab}
-      items={listTab.map(({ content, key, tab }: Tab) => {
+      items={listTab.map(({ content, key, tab, disabled }: Tab) => {
         return {
           label: tab,
           key: key,
           children: content,
+          disabled: disabled,
         };
       })}
       {...props}

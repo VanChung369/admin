@@ -12,6 +12,7 @@ import ButtonWrapper from '@/components/ButtonWrapper';
 import { FileAddOutlined } from '@ant-design/icons';
 import TabWapper from '@/components/TabWrapper';
 import { Card } from 'antd';
+import { useQueryClient } from '@tanstack/react-query';
 
 const { KEYWORD, STATUS, PAGE, LIMIT, TYPE } = NFT_MANAGEMENT_FIELD;
 const { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } = LENGTH_CONSTANTS;
@@ -50,6 +51,7 @@ const initParams = {
 const NFTManagement: React.FC = () => {
   const intl = useIntl();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [primaryColumn, setPrimaryColumn] = useState(defaultValue);
   const [activeTab, setActiveTab] = useState(NFT_TABS.ERC721.key);
 
@@ -103,6 +105,7 @@ const NFTManagement: React.FC = () => {
           columnsItem={primaryColumnsItem}
         />
       ),
+      disabled: queryClient.isFetching(),
     },
     {
       key: NFT_TABS.ERC1155.key,
@@ -116,6 +119,7 @@ const NFTManagement: React.FC = () => {
           columnsItem={primaryColumnsItem}
         />
       ),
+      disabled: queryClient.isFetching(),
     },
   ];
 
