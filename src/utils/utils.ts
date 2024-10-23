@@ -31,6 +31,32 @@ export function isUndefined(value: any): value is undefined {
   return typeof value === UNDEFINED;
 }
 
+export const getStartDateTimestamp = (value: any) => {
+  if (!value) {
+    return;
+  }
+  return moment(value).clone().startOf('days').toISOString();
+};
+
+export const getEndDateTimestamp = (value: any) => {
+  if (!value) {
+    return;
+  }
+  return moment(value).clone().endOf('days').toISOString();
+};
+
+export const disabledFromDate = (date: any) => (current: moment.Moment) => {
+  return (
+    (date && current?.clone()?.endOf('day') > date?.clone()?.endOf('day')) || current > moment()
+  );
+};
+
+export const disabledUntilDate = (date: any) => (current: moment.Moment) => {
+  return (
+    (date && current?.clone()?.startOf('day') < date?.clone()?.startOf('day')) || current > moment()
+  );
+};
+
 export const getValueAttribute = (attributes: any, field: string) =>
   attributes?.[field]?.text || attributes?.[field];
 

@@ -152,3 +152,51 @@ export const NFT_DETAIL_ATTRIBUTE: any = {
     text: 'NFT.create.class',
   },
 };
+
+export const TABLE_CONTENT_TABS = {
+  NFT_OWNER: {
+    key: 'NFT_OWNER',
+    label: 'NFT.detail.owner',
+    type: 'nft-owner',
+  },
+  NFT_SALE_HISTORY: {
+    key: 'NFT_SALE_HISTORY',
+    label: 'NFT.detail.sale.history',
+    type: 'nft-sale-history',
+  },
+};
+
+export const NFT_SALE_HISTORY_FIELD_SORTER = {
+  DEFAULT: 'default',
+  CREATED_AT: 'createdAt',
+  QUANTITY: 'quantity',
+  UNIT_PRICE: 'saleOrder.unitPrice',
+  SALE_ORDER: 'saleOrder',
+  REVENUE: 'revenue',
+};
+
+export const NFT_SALE_HISTORY_FIELD = {
+  KEYWORD: 'keyword',
+  FROM: 'from',
+  UNTIL: 'until',
+  TYPE: 'type',
+  PAGE: 'page',
+  LIMIT: 'limit',
+  ORDER: 'order',
+  SORT: 'sort',
+};
+
+export const NFT_MARKET_CHANNEL = [
+  {
+    name: 'NFT.all',
+    value: null,
+  },
+  {
+    name: 'NFT.detail.sale.primary',
+    value: 'sell',
+  },
+  {
+    name: 'NFT.detail.sale.secondary',
+    value: 'resell',
+  },
+];

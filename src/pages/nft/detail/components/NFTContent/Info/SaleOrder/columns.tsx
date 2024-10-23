@@ -17,7 +17,7 @@ export const columns = (intl: any, data: any, nftStandard?: string) => [
     helpText: intl.formatMessage({ id: 'NFT.detail.minted.tooltip' }),
   },
   {
-    label: intl.formatMessage({ id: 'NFT.detail.quantity' }),
+    label: intl.formatMessage({ id: 'NFT.detail.sale.quantity' }),
     value: getNumber(data?.saleOrder?.quantity),
     type: TYPE_INPUT.NUMBER,
   },

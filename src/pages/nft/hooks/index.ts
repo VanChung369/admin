@@ -1,10 +1,22 @@
-import { createNFT, deleteNFT, getNft, getNfts } from '@/services/api/nft';
+import {
+  createNFT,
+  deleteNFT,
+  getListNftOwner,
+  getListNftSaleHistory,
+  getNft,
+  getNfts,
+} from '@/services/api/nft';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { NFT_MANAGEMENT_FIELD, NFT_MANAGEMENT_FIELD_SORTER } from '../constants';
+import {
+  NFT_MANAGEMENT_FIELD,
+  NFT_MANAGEMENT_FIELD_SORTER,
+  NFT_SALE_HISTORY_FIELD_SORTER,
+} from '../constants';
 import { ORDERS } from '@/constants';
 import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
 import { omit } from 'lodash';
+import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
 
 // create or update nft
 export interface paramCreateNFT {
@@ -157,5 +169,97 @@ export const useDeleteNFT = () => {
   return {
     loading: handleDeleteNFT.isPending,
     onDeleteNFT: handleDeleteNFT.mutate,
+  };
+};
+
+export const useGetListNFTOwner = (id: string, params?: any) => {
+  const newParams = omit({ ...params });
+
+  for (const key in newParams) {
+    if (!newParams[key]) {
+      delete newParams[key];
+    }
+  }
+
+  const handleGetListNFTOwner = async () => {
+    try {
+      const response = await getListNftOwner(id, newParams);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const useFetchListNFTOwner: any = useQuery({
+    queryKey: ['getListNFTOwner', newParams],
+    queryFn: () => handleGetListNFTOwner(),
+    refetchOnWindowFocus: false,
+    enabled: !!newParams,
+  });
+
+  const { isLoading, isError } = useFetchListNFTOwner;
+
+  return {
+    loading: isLoading,
+    error: isError,
+    data: useFetchListNFTOwner.data,
+  };
+};
+
+const { QUANTITY, UNIT_PRICE, SALE_ORDER, REVENUE } = NFT_SALE_HISTORY_FIELD_SORTER;
+export const useGetListNFTSaleHistory = (id: string, params?: any) => {
+  const INDEXED_SORTER = {
+    [NFT_SALE_HISTORY_FIELD_SORTER.DEFAULT]: { [CREATED_AT]: DESC },
+    [NFT_SALE_HISTORY_FIELD_SORTER.CREATED_AT]: { [CREATED_AT]: DESC },
+    [QUANTITY]: { [QUANTITY]: ASC, [CREATED_AT]: DESC },
+    [UNIT_PRICE]: { [UNIT_PRICE]: ASC, [CREATED_AT]: DESC },
+    [SALE_ORDER]: { [SALE_ORDER]: ASC, [CREATED_AT]: DESC },
+    [REVENUE]: { [REVENUE]: ASC, [CREATED_AT]: DESC },
+  };
+
+  const newParams = omit({ ...params }, [FIELD, ORDER]) as any;
+  newParams.from = getStartDateTimestamp(params?.from);
+  newParams.until = getEndDateTimestamp(params?.until);
+  newParams.type = params?.type;
+  const field = params?.[FIELD] || DEFAULT;
+
+  for (const key in INDEXED_SORTER?.[field]) {
+    if (key === field && params?.[ORDER] && params?.[FIELD]) {
+      newParams[`${SORT}[${key}]`] = params?.[ORDER];
+    } else {
+      newParams[`${SORT}[${key}]`] = INDEXED_SORTER?.[field]?.[key];
+    }
+  }
+
+  for (const key in newParams) {
+    if (!newParams[key]) {
+      delete newParams[key];
+    }
+  }
+
+  const handleGetListNFTSaleHistory = async () => {
+    try {
+      const response = await getListNftSaleHistory(id, newParams);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const useFetchListNFTSaleHistory: any = useQuery({
+    queryKey: ['getListNFTSaleHistory', newParams],
+    queryFn: () => handleGetListNFTSaleHistory(),
+    refetchOnWindowFocus: false,
+    enabled: !!newParams,
+  });
+
+  const { isLoading, isError } = useFetchListNFTSaleHistory;
+
+  return {
+    loading: isLoading,
+    error: isError,
+    data: useFetchListNFTSaleHistory.data,
   };
 };

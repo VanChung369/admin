@@ -8,7 +8,7 @@ export type FormkWrapperProps = {
   prefix?: any;
   placeholder?: any;
   options?: {
-    value: string | number;
+    value: string | number | null;
     name: string | number;
     key?: string | number;
   }[];

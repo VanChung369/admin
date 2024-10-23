@@ -28,3 +28,25 @@ export async function deleteNFT(id?: string, options?: { [key: string]: any }) {
     options: options,
   });
 }
+
+export async function getListNftOwner(
+  id: string,
+  params?: any,
+  options?: { [key: string]: any },
+): Promise<Record<string, any>> {
+  return api.get<Record<string, any>>({
+    endpoint: `/api/admin/nfts/${id}/owner`,
+    params: params,
+    options: options,
+  });
+}
+
+export async function getListNftSaleHistory(
+  id: string,
+  params?: any,
+): Promise<Record<string, any>> {
+  return api.get<Record<string, any>>({
+    endpoint: `/api/admin/nfts/${id}/transactions`,
+    params: params,
+  });
+}

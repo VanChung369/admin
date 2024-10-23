@@ -1,4 +1,4 @@
-import { NFT_PROFILE_TABS } from '@/pages/nft/constants';
+import { NFT_PROFILE_TABS, TABLE_CONTENT_TABS } from '@/pages/nft/constants';
 import { useQueryClient } from '@tanstack/react-query';
 import { useIntl, useParams } from '@umijs/max';
 import React, { Fragment, useState } from 'react';
@@ -8,13 +8,17 @@ import { Card, Col, Row } from 'antd';
 import TabWapper from '@/components/TabWrapper';
 import Info from './Info';
 import styleLess from './index.less';
+import NFTOwner from '../NFTOwner';
+import NFTSaleHistory from '../NFTSaleHistory';
 
 const NFTContent = () => {
   const intl = useIntl();
   const queryClient = useQueryClient();
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState(NFT_PROFILE_TABS.PREVIEW.key);
+  const [activeTableTab, setActiveTableTab] = useState(TABLE_CONTENT_TABS.NFT_OWNER.key);
   const handleChangeTab = (value: string) => setActiveTab(value);
+  const handleChangeTableTab = (value: string) => setActiveTableTab(value);
 
   const query: any = queryClient.getQueryData(['getNFT', id]);
 
@@ -30,6 +34,19 @@ const NFTContent = () => {
       key: NFT_PROFILE_TABS.CONTENT.key,
       tab: intl.formatMessage({ id: NFT_PROFILE_TABS.CONTENT.label }),
       content: <PreviewContent type={query?.media?.type} src={query?.media?.url} />,
+    },
+  ];
+
+  const listTableContentTab = [
+    {
+      key: TABLE_CONTENT_TABS.NFT_OWNER.key,
+      tab: intl.formatMessage({ id: TABLE_CONTENT_TABS.NFT_OWNER.label }),
+      content: <NFTOwner />,
+    },
+    {
+      key: TABLE_CONTENT_TABS.NFT_SALE_HISTORY.key,
+      tab: intl.formatMessage({ id: TABLE_CONTENT_TABS.NFT_SALE_HISTORY.label }),
+      content: <NFTSaleHistory />,
     },
   ];
 
@@ -55,6 +72,13 @@ const NFTContent = () => {
             <Info />
           </Col>
         </Row>
+      </Card>
+      <Card className={styleLess.nft_content__table}>
+        <TabWapper
+          onChangeTab={handleChangeTableTab}
+          activeKey={activeTableTab}
+          listTab={listTableContentTab}
+        />
       </Card>
     </div>
   );

@@ -12,4 +12,7 @@ export default {
   'codeMessage.E6': 'Must select number of columns greater than {column}',
   'codeMessage.E7': 'Must select number of columns less than {column}',
   'codeMessage.E8': 'Delete NFT failed',
+  'codeMessage.E9': 'Get list NFT failed',
+  'codeMessage.E10': 'Get list NFT owner failed',
+  'codeMessage.E11': 'Get list NFT history failed',
 };

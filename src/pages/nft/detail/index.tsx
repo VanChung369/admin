@@ -10,6 +10,7 @@ import styleLess from './index.less';
 import NFTWarning from './components/NFTWarning';
 import NFTButtons from './components/NFTButtons';
 import NFTContent from './components/NFTContent';
+import formatMessage from '@/components/FormatMessage';
 
 const NFTDetail: React.FC = () => {
   const intl = useIntl();
@@ -20,6 +21,11 @@ const NFTDetail: React.FC = () => {
 
   useEffect(() => {
     if (error) {
+      formatMessage({
+        descriptor: { id: 'codeMessage.E9' },
+        type: 'error',
+      });
+      navigate(ROUTES_PATH.DASHBOARD);
     }
   }, [error]);
 

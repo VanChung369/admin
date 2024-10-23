@@ -41,4 +41,4 @@ export const MAX_LENGTH_TOTAL_SUPPLY = 7;
 export const NFT_POSITIVE_SCALE = 0;
 export const NFT_DECIMAL_SCALE = 2;
 export const NFT_DECIMAL_SCALE_PRICE = 18;
-export const NFT_USD_DECIMAL_SCALE = 8;
+export const NFT_USDC_DECIMAL_SCALE = 8;
