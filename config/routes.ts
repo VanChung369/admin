@@ -44,7 +44,7 @@ export default [
   },
   {
     path: `${ROUTES_PATH.NFT_EDITION}/:id`,
-    component: './Home',
+    component: './nft/creation',
   },
   {
     path: ROUTES_PATH.NFT_CREATION,

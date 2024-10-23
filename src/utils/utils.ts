@@ -11,15 +11,97 @@ import {
   NFT_DECIMAL_SCALE,
   ZERO_VALUE,
 } from '@/constants/input';
-import { EMPTY_TEXT, LENGTH_CONSTANTS, MAX_CODE_LENGTH } from '@/constants';
+import { EMPTY_TEXT, LENGTH_CONSTANTS, MAX_CODE_LENGTH, TOKEN_SUPPORT } from '@/constants';
 import { shortenIfAddress } from '@thirdweb-dev/react';
 import moment from 'moment';
 import { DATE_FORMAT } from '@/constants/date';
 import BigNumber from 'bignumber.js';
+import { NFT_ATTRIBUTE_CREATED_FIELD, NFT_CREATE_FIELD } from '@/pages/nft/constants';
+
+const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, IS_PUT_ON_SALE, CURRENCY, IMAGE_MEDIUM, IMAGE_SMALL } =
+  NFT_CREATE_FIELD;
 
 const { MIN_VALUE } = LENGTH_CONSTANTS;
 
 /* eslint-disable */
+export const getFieldValues = (values: any, objectField: any = NFT_ATTRIBUTE_CREATED_FIELD) => {
+  return Object.values(objectField).reduce((acc: any, field: string | any) => {
+    if (field === NFT_CREATE_FIELD.FILE || field === NFT_CREATE_FIELD.FILE_PREVIEW) {
+      acc[field] = values?.[field]?.previewContent;
+    } else {
+      acc[field] = values?.[field];
+    }
+    return acc;
+  }, {});
+};
+
+export const checkValueNftChange = (preVal: object, newVal: object, isEditing?: boolean) => {
+  let newPrevNft = { ...preVal };
+
+  if (isEditing) {
+    newPrevNft = {
+      ...getDefaultFieldNFTValues(preVal),
+      ...getAttributeFieldNFTValues(preVal),
+    };
+  }
+
+  const defaultPrevValues = getFieldValues(newPrevNft, NFT_CREATE_FIELD) as object;
+  const attributePrevValues = getFieldValues(newPrevNft) as object;
+
+  const defaultNewValues = getFieldValues(newVal, NFT_CREATE_FIELD) as object;
+  const attributeNewValues = getFieldValues(newVal) as object;
+
+  const prevNft = { ...defaultPrevValues, ...attributePrevValues };
+  const newNft = { ...defaultNewValues, ...attributeNewValues };
+
+  return JSON.stringify(prevNft) !== JSON.stringify(newNft);
+};
+
+export const getAttributeFieldNFTValues = (values: any) => {
+  return Object.values(NFT_ATTRIBUTE_CREATED_FIELD).reduce((acc: any, field: string | any) => {
+    acc[field] = values?.attributes?.[field]?.text || values?.attributes?.[field];
+    return acc;
+  }, {});
+};
+
+export const getDefaultFieldNFTValues = (values: any) => {
+  return Object.values(NFT_CREATE_FIELD).reduce((acc: any, field: string | any) => {
+    switch (field) {
+      case FILE:
+        acc[FILE] = {
+          fileList: [{ type: values?.media?.type || IMAGE_TYPE }],
+          previewContent: values?.media?.url || values?.image?.url || '',
+        };
+        break;
+      case FILE_PREVIEW:
+        acc[FILE_PREVIEW] = {
+          fileList: [],
+          previewContent: values?.image?.url || '',
+        };
+        break;
+      case IMAGE_MEDIUM:
+        acc[IMAGE_MEDIUM] = values?.image?.mediumUrl;
+        break;
+      case IMAGE_SMALL:
+        acc[IMAGE_SMALL] = values?.image?.smallUrl;
+        break;
+      case TOTAL_SUPPLY:
+        acc[TOTAL_SUPPLY] = values?.token?.[TOTAL_SUPPLY]?.toString();
+        break;
+      case IS_PUT_ON_SALE:
+        acc[IS_PUT_ON_SALE] = false;
+        break;
+      case CURRENCY:
+        acc[CURRENCY] = TOKEN_SUPPORT.value;
+        break;
+      default:
+        acc[field] = values?.[field]?.toString() || '';
+        break;
+    }
+    return acc;
+  }, {});
+};
+
 const reg =
   /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
 

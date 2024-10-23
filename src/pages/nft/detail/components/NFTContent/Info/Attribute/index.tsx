@@ -21,13 +21,12 @@ const Attribute = () => {
       const label = intl.formatMessage({ id: NFT_DETAIL_ATTRIBUTE?.[attribute]?.text });
 
       return (
-        <Col lg={6} md={12} sm={12}>
+        <Col lg={6} md={12} sm={12} key={index}>
           <ItemWithLabel
             label={label}
             className={styleLess.nft_detail_attribute__item}
             labelClassName={styleLess.nft_detail_attribute__label}
             contentClass={styleLess.nft_detail_attribute__content}
-            key={index}
           >
             <EllipsisText text={valueAttribute} />
           </ItemWithLabel>

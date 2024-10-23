@@ -112,4 +112,19 @@ declare namespace API {
     imageMedium?: any;
     imageSmall?: any;
   };
+
+  type EditNFT = {
+    file?: any;
+    filePreview?: any;
+    name?: string;
+    royaltyFee?: number;
+    totalSupply?: number;
+    description?: string;
+    isPutOnSale?: boolean;
+    quantity?: number;
+    unitPrice?: number;
+    currency?: any;
+    imageMedium?: any;
+    imageSmall?: any;
+  };
 }

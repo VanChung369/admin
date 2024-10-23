@@ -25,7 +25,7 @@ const SaleOrder = () => {
     <Row gutter={32} className={styleLess.nft_detail_sale}>
       {sale.map((sale, index: number) => {
         return (
-          <Col lg={6} md={12} sm={12}>
+          <Col lg={6} md={12} sm={12} key={index}>
             <ItemWithLabel
               label={sale.label}
               className={styleLess.nft_detail_sale__item}

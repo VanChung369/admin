@@ -23,7 +23,7 @@ const ModalConfirm = ({
   const intl = useIntl();
 
   return (
-    <ModalWrapper visible={visible} width={width || 550} onClose={onClose} {...props}>
+    <ModalWrapper open={visible} width={width || 550} onClose={onClose} {...props}>
       <div className={cx(styleLess.modal_confirm, className)}>
         <div className={styleLess.modal_confirm__title}>{title}</div>
         {innerHtml ? (

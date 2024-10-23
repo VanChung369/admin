@@ -12,15 +12,22 @@ import NFTButton from './components/NFTButton';
 import NFTPreview from './components/NFTPreview';
 import { useAppSelector } from '@/hooks';
 import selectedConfig from '@/redux/config/selector';
-import { useCreateOrUpdateNFT } from '../hooks';
+import { useCreateOrUpdateNFT, useGetNFT } from '../hooks';
 import ROUTES_PATH from '@/constants/routesPath';
 import { useWarnModalPage } from '@/hooks/hook-customs/useWarnModal';
 import { TYPE_INPUT } from '@/constants/input';
 import { get, trim } from 'lodash';
 import { MEDIA } from '@/constants/file';
-import { clearRequestParams, getFormatedFile } from '@/utils/utils';
+import {
+  checkValueNftChange,
+  clearRequestParams,
+  getAttributeFieldNFTValues,
+  getDefaultFieldNFTValues,
+  getFormatedFile,
+} from '@/utils/utils';
 import formatMessage from '@/components/FormatMessage';
 import { PageContainer } from '@ant-design/pro-components';
+import ModalUnsavedChange from './components/ModalUnsaved';
 
 const {
   NAME,
@@ -57,12 +64,28 @@ const NFTCreation = () => {
   const formikRef = useRef<any>(null);
   const { id } = useParams();
   const navigate = useNavigate();
-  const { loading: loadingCreateNFT, onCreateNFT } = useCreateOrUpdateNFT();
+  const {
+    loading: loadingCreateNFT,
+    loadingEditNFT,
+    onCreateNFT,
+    onEditNFT,
+  } = useCreateOrUpdateNFT(id);
+  const { loading, error, data } = useGetNFT(id);
 
   const { general = {} } = useAppSelector(selectedConfig.getConfig);
   const { attributes = [] } = general;
 
   const backUrl = id ? `${ROUTES_PATH.NFT_DETAIL}/${id}` : ROUTES_PATH.NFT;
+
+  useEffect(() => {
+    if (error) {
+      formatMessage({
+        descriptor: { id: 'codeMessage.E9' },
+        type: 'error',
+      });
+      navigate(ROUTES_PATH.DASHBOARD);
+    }
+  }, [error]);
 
   const {
     visibleModalUnsaved,
@@ -89,17 +112,17 @@ const NFTCreation = () => {
     });
   }, [attributes, formikRef]);
 
-  // useEffect(() => {
-  //   if (nftDetail?._id) {
-  //     const attributeFieldValues = getAttributeFieldNFTValues(nftDetail) as object;
-  //     const defaultFieldValues = getDefaultFieldNFTValues(nftDetail) as object;
+  useEffect(() => {
+    if (id) {
+      const attributeFieldValues = getAttributeFieldNFTValues(data) as object;
+      const defaultFieldValues = getDefaultFieldNFTValues(data) as object;
 
-  //     formikRef.current.setValues({
-  //       ...defaultFieldValues,
-  //       ...attributeFieldValues,
-  //     });
-  //   }
-  // }, [nftDetail, attributes, id]);
+      formikRef.current.setValues({
+        ...defaultFieldValues,
+        ...attributeFieldValues,
+      });
+    }
+  }, [data, attributes, id]);
 
   const getOriginFile = (file: any) => get(file, ['fileList', 0, 'originFileObj']);
 
@@ -110,10 +133,25 @@ const NFTCreation = () => {
     });
   };
 
-  const handlecreateNFTSuccess = (id: any) => {
+  const handleUpdateNFTFail = () => {
+    formatMessage({
+      descriptor: { id: 'codeMessage.E12' },
+      type: 'error',
+    });
+  };
+
+  const handleCreateNFTSuccess = () => {
     navigate(`${ROUTES_PATH.NFT}`);
     formatMessage({
       descriptor: { id: 'codeMessage.S1' },
+      type: 'success',
+    });
+  };
+
+  const handleUpdateNFTSuccess = (id: any) => {
+    navigate(`${ROUTES_PATH.NFT_DETAIL}/${id}`);
+    formatMessage({
+      descriptor: { id: 'codeMessage.S3' },
       type: 'success',
     });
   };
@@ -153,14 +191,15 @@ const NFTCreation = () => {
     }
 
     if (id) {
-      const params = {
+      onEditNFT({
         data: formData,
-        id: id,
-      };
+        onSuccess: handleUpdateNFTSuccess,
+        onError: handleUpdateNFTFail,
+      });
     } else {
       onCreateNFT({
         data: formData,
-        onSuccess: handlecreateNFTSuccess,
+        onSuccess: handleCreateNFTSuccess,
         onError: handleCreateNFTFail,
       });
     }
@@ -168,7 +207,7 @@ const NFTCreation = () => {
 
   return (
     <PageContainer title={false}>
-      <LoadingWrapper loading={loadingCreateNFT}>
+      <LoadingWrapper loading={loadingCreateNFT || loadingEditNFT || loading}>
         <PageHeader
           showBack
           title={intl.formatMessage({
@@ -184,6 +223,7 @@ const NFTCreation = () => {
           validationSchema={nftSchema(intl)}
         >
           {({ values }: any) => {
+            setValueChange(checkValueNftChange(id ? data : initFormValue, values, !!id));
             return (
               <Form>
                 <Row gutter={20} justify="space-between">
@@ -199,6 +239,13 @@ const NFTCreation = () => {
             );
           }}
         </Formik>
+
+        <ModalUnsavedChange
+          visible={visibleModalUnsaved}
+          onClose={onCloseModalUnsaved}
+          backUrl={backUrl}
+          afterClose={afterCloseModalUnsaved}
+        />
       </LoadingWrapper>
     </PageContainer>
   );

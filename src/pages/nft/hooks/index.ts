@@ -1,6 +1,7 @@
 import {
   createNFT,
   deleteNFT,
+  editNFT,
   getListNftOwner,
   getListNftSaleHistory,
   getNft,
@@ -19,15 +20,15 @@ import { omit } from 'lodash';
 import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
 
 // create or update nft
-export interface paramCreateNFT {
+export interface paramCreateOrUpdateNFT {
   data: any;
-  onSuccess: (id: any) => void;
+  onSuccess: (id?: any) => void;
   onError: () => void;
 }
 
-export const useCreateOrUpdateNFT = () => {
+export const useCreateOrUpdateNFT = (id?: string) => {
   const handleCreateNFT = useMutation({
-    mutationFn: async (params: paramCreateNFT) => {
+    mutationFn: async (params: paramCreateOrUpdateNFT) => {
       try {
         const response = await createNFT(params.data);
         return response;
@@ -44,9 +45,29 @@ export const useCreateOrUpdateNFT = () => {
     onSettled: (data, error, variables, context) => {},
   });
 
+  const handleEditNFT = useMutation({
+    mutationFn: async (params: paramCreateOrUpdateNFT) => {
+      try {
+        const response = await editNFT(id, params.data);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      variables.onSuccess(data._id);
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
   return {
     loading: handleCreateNFT.isPending,
+    loadingEditNFT: handleCreateNFT.isPending,
     onCreateNFT: handleCreateNFT.mutate,
+    onEditNFT: handleEditNFT.mutate,
   };
 };
 

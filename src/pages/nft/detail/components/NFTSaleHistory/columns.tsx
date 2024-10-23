@@ -90,13 +90,4 @@ export const columns = (intl: any, page: number, limit: number): ProColumns<any>
       );
     },
   },
-  {
-    title: intl.formatMessage({ id: 'NFT.detail.actions' }),
-    dataIndex: '_id',
-    key: 'actions',
-    width: 100,
-    render: (value: any) => {
-      return <>button</>;
-    },
-  },
 ];

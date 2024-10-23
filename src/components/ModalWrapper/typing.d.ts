@@ -2,7 +2,7 @@ export type ModalWrapperProps = {
   title?: any;
   onClose?: any;
   showCloseIcon?: boolean;
-  visible: boolean;
+  open: boolean;
   width?: number | string;
   maskClosable?: boolean;
   wrapClassName?: string;
