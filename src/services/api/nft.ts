@@ -8,6 +8,14 @@ export async function createNFT(body: API.CreateNFT, options?: { [key: string]: 
   });
 }
 
+export async function editNFT(id?: string, body?: API.EditNFT, options?: { [key: string]: any }) {
+  return api.patch<any>({
+    endpoint: `/api/admin/nfts/${id}`,
+    body: body,
+    options: options,
+  });
+}
+
 export async function getNfts(params: any, options?: { [key: string]: any }) {
   return api.get<{ data: any }>({ endpoint: '/api/admin/nfts', params: params, options: options });
 }

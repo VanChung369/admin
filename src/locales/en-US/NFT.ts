@@ -39,6 +39,9 @@ export default {
   'NFT.create.preview.placeholder': 'Preview of your NFT',
   'NFT.create.price': 'Price',
   'NFT.create.quantity': 'Quantity',
+  'NFT.update.unsave': 'Unsave changed',
+  'NFT.update.unsave.description': 'If you leave this page, any unsaved changes will be lost.',
+  'NFT.update.leave.page': 'Leave page',
 
   //nft validation
 
