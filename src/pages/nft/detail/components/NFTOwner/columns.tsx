@@ -67,7 +67,7 @@ export const columns = (
     render: (value: any, row: any) => {
       return (
         <a
-          href={`${EXTERNAL_URL.POLYGON_SCAN_TOKEN}/${contractAddress}/${row.tokenId}`}
+          href={`${EXTERNAL_URL.POLYGON_SCAN_TOKEN}/${contractAddress}/#${row.tokenId}`}
           target="_blank"
           rel="noreferrer"
         >

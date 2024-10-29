@@ -18,6 +18,7 @@ import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
 import { omit } from 'lodash';
 import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
+import { createTransactions, updateTransactions } from '@/services/api/transaction';
 
 // create or update nft
 export interface paramCreateOrUpdateNFT {
@@ -282,5 +283,71 @@ export const useGetListNFTSaleHistory = (id: string, params?: any) => {
     loading: isLoading,
     error: isError,
     data: useFetchListNFTSaleHistory.data,
+  };
+};
+
+// transaction
+
+export interface paramCreateTransaction {
+  data: any;
+  onSuccess: (id?: any, data?: any) => void;
+  onError: () => void;
+}
+
+export interface paramUpdateTransaction {
+  id: string;
+  data: any;
+  onSuccess: () => void;
+  onError: () => void;
+}
+
+export const useCreateTransaction = () => {
+  const handleCreateTransaction = useMutation({
+    mutationFn: async (params: paramCreateTransaction) => {
+      try {
+        const response = await createTransactions(params.data);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      const dataRequest = data?.signature?.dataRequest || [];
+      variables.onSuccess(data._id, dataRequest);
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleCreateTransaction.isPending,
+    onCreateTransaction: handleCreateTransaction.mutate,
+  };
+};
+
+export const useUpdateTransaction = () => {
+  const handleUpdateTransaction = useMutation({
+    mutationFn: async (params: paramUpdateTransaction) => {
+      try {
+        const response = await updateTransactions(params.id, params.data);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      variables.onSuccess();
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleUpdateTransaction.isPending,
+    onUpdateTransaction: handleUpdateTransaction.mutate,
   };
 };

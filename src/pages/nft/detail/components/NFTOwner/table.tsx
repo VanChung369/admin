@@ -58,7 +58,7 @@ const TableOwner = ({
       pageSize={limit}
       current={page}
       onChangePagination={handleChangePaging}
-      rowKey={(row: any) => row?._id}
+      rowKey={(row: any) => row?.tokenId}
     />
   );
 };

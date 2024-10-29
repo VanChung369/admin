@@ -23,9 +23,9 @@ export type FormkWrapperProps = {
   showSearch?: boolean;
   filterOption?: any;
   dropdownMatchSelectWidth?: any;
-  labelClassName?: string;
+  labelClassName?: any;
   containerClassName?: string;
-  errorClassName?: string;
+  errorClassName?: any;
   decimalScale?: number;
   autoFocus?: boolean;
   required?: boolean;

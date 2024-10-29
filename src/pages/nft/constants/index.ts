@@ -200,3 +200,31 @@ export const NFT_MARKET_CHANNEL = [
     value: 'resell',
   },
 ];
+
+// mint nft
+
+export const NFT_MINTED_FIELD = {
+  QUANTITY: 'quantity',
+  TO_ADDRESS: 'toAddress',
+};
+
+export const SALE_STEPS = {
+  PROCESSING: 1,
+  SUCCESSFUL: 2,
+  FAILED: 3,
+};
+
+export const NFT_TRANSACTION_STATUS = {
+  DRAFT: 'draft',
+  SUCCESS: 'success',
+  CANCEL: 'cancel',
+  FAILED: 'failed',
+};
+
+export const NFT_TRANSACTION_TYPE = {
+  LISTED: 'listed',
+  DELISTED: 'delisted',
+  MINTED: 'minted',
+  TRANSFER: 'transfer',
+  ADMIN_MINTED: 'admin-minted',
+};

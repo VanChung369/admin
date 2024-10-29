@@ -6,12 +6,16 @@ import {
   MIN_VALUE_TOTAL_SUPPLY,
   NFT_ATTRIBUTE_CREATED_FIELD,
   NFT_CREATE_FIELD,
+  NFT_MINTED_FIELD,
 } from '../constants';
 import { MEDIA } from '@/constants/file';
+import { isAddress } from '@/utils/utils';
 
 const { NAME, ROYALTYFEE, TOTAL_SUPPLY, DESCRIPTION, FILE, FILE_PREVIEW } = NFT_CREATE_FIELD;
 
 const { CLASS, GOD, LEVEL, MYTHOLOGY, TYPE } = NFT_ATTRIBUTE_CREATED_FIELD;
+
+const { QUANTITY, TO_ADDRESS } = NFT_MINTED_FIELD;
 
 export const nftSchema = (intl: any) => {
   return object({
@@ -135,5 +139,23 @@ export const nftSchema = (intl: any) => {
           id: 'NFT.class.error.required',
         }),
       ),
+  });
+};
+
+export const nftMintSchema = (intl: any, maxQuantity: number) => {
+  return object().shape({
+    [QUANTITY]: number()
+      .positive(intl.formatMessage({ id: 'NFT.mint.quantity.positive' }))
+      .required(intl.formatMessage({ id: 'NFT.mint.quantity.required' }))
+      .max(
+        maxQuantity,
+        intl.formatMessage({ id: 'NFT.mint.quantity.max' }, { number: maxQuantity }),
+      ),
+    [TO_ADDRESS]: string()
+      .trim()
+      .required(intl.formatMessage({ id: 'NFT.mint.to.address.required' }))
+      .test('isAddress', intl.formatMessage({ id: 'NFT.mint.is.address' }), (value: any) => {
+        return isAddress(value);
+      }),
   });
 };

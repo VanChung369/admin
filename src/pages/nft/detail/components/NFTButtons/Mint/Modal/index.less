@@ -1,0 +1,77 @@
+@import '@/styles/variables.less';
+
+.mint_nft_modal {
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0.005em;
+  }
+
+  &__form {
+    &__input {
+      margin-bottom: 5px;
+    }
+
+    &__label {
+      padding: 0px 0px 5px 0px;
+    }
+
+    &__button_max {
+      position: absolute;
+      right: 15px;
+      width: 80px;
+      height: 40px;
+      &:focus,
+      &:active,
+      &:hover {
+        background-color: @color-violet !important;
+        opacity: 0.7;
+      }
+    }
+
+    &__button_mint {
+      margin-top: 10px;
+      height: 40px;
+      width: 100%;
+      &:focus,
+      &:active,
+      &:hover {
+        background-color: @color-violet !important;
+        opacity: 0.7;
+      }
+    }
+
+    &__sub_content {
+      text-align: right;
+      &__icon {
+        margin-left: 5px;
+      }
+    }
+
+    &__note {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: @color-trout;
+      height: 70px;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+
+      &__text {
+        font-weight: 300;
+        font-size: 14px;
+        letter-spacing: 0.005em;
+        margin: 0px;
+      }
+
+      &__icon {
+        padding-right: 10px;
+        color: @warning-color;
+      }
+    }
+  }
+}
