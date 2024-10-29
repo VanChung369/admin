@@ -1,8 +1,8 @@
-import WalletService from './walletService';
+import Wallet from './wallet';
 
 let instance: any;
 
-export default class MetamaskService extends WalletService {
+export default class MetamaskService extends Wallet {
   constructor(props?: any) {
     super(props);
   }

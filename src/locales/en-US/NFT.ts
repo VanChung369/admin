@@ -61,6 +61,11 @@ export default {
   'NFT.god.error.required': 'God is required',
   'NFT.class.error.required': 'Level is required',
   'NFT.level.error.required': 'Class is required',
+  'NFT.mint.quantity.positive': 'Please input number greater than 0.',
+  'NFT.mint.quantity.required': 'Quantity is required',
+  'NFT.mint.quantity.max': 'Quantity cannot be greater than {number}',
+  'NFT.mint.to.address.required': 'Recipient’s Wallet Address is required',
+  'NFT.mint.is.address': 'Wallet address is invalid',
 
   // nft management
 
@@ -142,4 +147,24 @@ export default {
   'NFT.detail.history.search.end.date': 'End Date',
   'NFT.detail.history.search.market.channel': 'Market Channel',
   'NFT.detail.history.total.revenue': 'Total Revenue: ',
+
+  // mint nft
+
+  'NFT.mint': 'Mint NFT',
+  'NFT.mint.enter.quantity': 'Enter Mint Quantity',
+  'NFT.mint.quantity': 'Mint Quantity',
+  'NFT.mint.max': 'Max',
+  'NFT.mint.limit': 'Minting Limit: {number}',
+  'NFT.mint.tooltip':
+    'This is the maximum edition that can be minted. \nOnly editions which are not minted nor being listed for sale are available to mint',
+  'NFT.mint.recipient.wallet.address': 'Recipient’s Wallet Address',
+  'NFT.mint.recipient.wallet.address.placeholder': 'Enter Wallet Address',
+  'NFT.mint.note':
+    '<strong>NOTE</strong>: Due to gas limit on Polygon network, \nyou can only mint up to {number} NFTs each time',
+  'NFT.mint.proceed': 'Proceed To Mint',
+  'NFT.mint.success':
+    'You have successfully minted <strong>{number}</strong> editions of <strong>{name}</strong>',
+  'NFT.mint.single.success':
+    'You have successfully minted <strong>{number}</strong> edition of <strong>{name}</strong>',
+  'NFT.mint.view.ploygon': 'View On PolygonScan',
 };

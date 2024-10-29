@@ -44,3 +44,9 @@ export const ORDERS = {
 
 export const EMPTY_TEXT = '--';
 export const MAX_CODE_LENGTH = 10;
+
+export const SOCKET_EVENT = {
+  NOTIFICATION: 'notification',
+  REMOVE_FROM_SALE: 'removeFromSale',
+  ADMIN_MINT: 'adminMint',
+};

@@ -2,11 +2,11 @@ import ButtonWrapper from '@/components/ButtonWrapper';
 import DropdownWrapper from '@/components/DropdownWrapper';
 import { useGetConfig } from '@/hooks/hook-customs/useGetConfig';
 import { NFT_STATUS } from '@/pages/nft/constants';
-import { getNumber } from '@/utils/utils';
+import { getIpfsLink, getNumber } from '@/utils/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { useIntl, useParams } from '@umijs/max';
 import { MenuProps } from 'antd';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styleLess from './index.less';
 import { Link } from 'umi';
 import ROUTES_PATH, { EXTERNAL_URL } from '@/constants/routesPath';
@@ -17,12 +17,24 @@ import { DownOutlined } from '@ant-design/icons';
 const NFTAction = () => {
   const intl = useIntl();
   const { id } = useParams();
+  const [ipfsLink, setIpfsLink] = useState('');
   const queryClient = useQueryClient();
   const query: any = queryClient.getQueryData(['getNFT', id]);
-
   const { ipfsGateway } = useGetConfig();
   const totalMinted = getNumber(query?.token?.totalMinted);
   const isNftOffsale = NFT_STATUS[0].value === query?.status;
+  const cid = query?.token?.cid;
+
+  useEffect(() => {
+    const fetchIpfsLink = async () => {
+      if (cid) {
+        const link = await getIpfsLink(cid);
+        setIpfsLink(link);
+      }
+    };
+
+    fetchIpfsLink();
+  }, [cid]);
 
   const items: MenuProps['items'] = [
     {
@@ -49,7 +61,7 @@ const NFTAction = () => {
             target="_blank"
             rel="noreferrer"
           >
-            {query?.token?.cid ? (
+            {cid ? (
               <div className={styleLess.action_menu__item}>
                 {intl.formatMessage({ id: 'NFT.detail.view.ploygon' })}
               </div>
@@ -59,8 +71,8 @@ const NFTAction = () => {
               </div>
             )}
           </a>
-          {query?.cid && (
-            <a href={`${ipfsGateway}${query?.token?.cid}`} target="_blank" rel="noreferrer">
+          {cid && (
+            <a href={`${ipfsGateway}${ipfsLink}`} target="_blank" rel="noreferrer">
               <div className={cx(styleLess.action_menu__item, styleLess.action_menu__border_none)}>
                 {intl.formatMessage({ id: 'NFT.detail.view.ipfs' })}
               </div>

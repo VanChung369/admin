@@ -21,7 +21,7 @@ import {
 } from '@thirdweb-dev/react';
 import { FC, Fragment, useEffect } from 'react';
 import formatMessage from '../FormatMessage';
-import MetamaskService from '@/services/api/metaMaskService';
+
 import { useLogin } from '@/pages/User/Login/hooks';
 import ModalWrongNetwork from '../ModalWrongNetwork';
 import ModalConnectWallet from '../ModalConnectWallet';
@@ -29,6 +29,7 @@ import { useModel, history } from '@umijs/max';
 import { flushSync } from 'react-dom';
 import ROUTES_PATH from '@/constants/routesPath';
 import selectedConnection from '@/redux/connection/selector';
+import MetamaskService from '@/services/blockchain';
 
 const ConnectWalletWrapper: FC<{
   children: any;
@@ -94,7 +95,7 @@ const ConnectWalletWrapper: FC<{
     if (account !== address || !address || !initialState?.currentUser) {
       setUpAddress();
     }
-  }, [account, initialState]);
+  }, [account]);
 
   const handleCheckIsAdmin = async (wallet: MetamaskService) => {
     const isAdmin = await wallet.isAdmin(account as string);

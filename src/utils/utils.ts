@@ -17,6 +17,7 @@ import moment from 'moment';
 import { DATE_FORMAT } from '@/constants/date';
 import BigNumber from 'bignumber.js';
 import { NFT_ATTRIBUTE_CREATED_FIELD, NFT_CREATE_FIELD } from '@/pages/nft/constants';
+import { ethers } from 'ethers';
 
 const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, IS_PUT_ON_SALE, CURRENCY, IMAGE_MEDIUM, IMAGE_SMALL } =
   NFT_CREATE_FIELD;
@@ -24,6 +25,27 @@ const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, IS_PUT_ON_SALE, CURRENCY, IMAGE_MEDIUM
 const { MIN_VALUE } = LENGTH_CONSTANTS;
 
 /* eslint-disable */
+
+export const getIpfsLink = async (url: string) => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Access the IPFS link from the data object
+    const ipfsLink = data.data; // This is your IPFS link
+    const cleanedipfsLink = ipfsLink.replace('ipfs://', '');
+    console.log('IPFS Link:', ipfsLink);
+    return cleanedipfsLink; // Return the IPFS link or handle it as needed
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
 export const getFieldValues = (values: any, objectField: any = NFT_ATTRIBUTE_CREATED_FIELD) => {
   return Object.values(objectField).reduce((acc: any, field: string | any) => {
     if (field === NFT_CREATE_FIELD.FILE || field === NFT_CREATE_FIELD.FILE_PREVIEW) {
@@ -33,6 +55,14 @@ export const getFieldValues = (values: any, objectField: any = NFT_ATTRIBUTE_CRE
     }
     return acc;
   }, {});
+};
+
+export const isAddress = (address: string) => {
+  try {
+    return ethers.utils.isAddress(address?.trim());
+  } catch (error) {
+    return false;
+  }
 };
 
 export const checkValueNftChange = (preVal: object, newVal: object, isEditing?: boolean) => {
@@ -88,9 +118,9 @@ export const getDefaultFieldNFTValues = (values: any) => {
       case TOTAL_SUPPLY:
         acc[TOTAL_SUPPLY] = values?.token?.[TOTAL_SUPPLY]?.toString();
         break;
-      case IS_PUT_ON_SALE:
-        acc[IS_PUT_ON_SALE] = false;
-        break;
+      // case IS_PUT_ON_SALE:
+      //   acc[IS_PUT_ON_SALE] = false;
+      //   break;
       case CURRENCY:
         acc[CURRENCY] = TOKEN_SUPPORT.value;
         break;
