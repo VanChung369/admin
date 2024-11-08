@@ -134,7 +134,7 @@ const NFTField = () => {
               })}
             />
           </Col>
-          <Col md={12} xs={24}>
+          <Col md={12} xs={24} className={styleLess.nft_creation__attribute__row__royalties}>
             <FormWrapper
               name={NFT_CREATE_FIELD.ROYALTYFEE}
               label={intl.formatMessage({
