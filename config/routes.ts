@@ -54,7 +54,7 @@ export default [
     path: ROUTES_PATH.SALE,
     name: 'sale',
     icon: 'fund',
-    component: './Home',
+    component: './SaleOrder/management',
   },
   {
     path: `${ROUTES_PATH.SALE_DETAIL}/:id`,
@@ -62,11 +62,11 @@ export default [
   },
   {
     path: `${ROUTES_PATH.SALE_EDITION}/:id`,
-    component: './Home',
+    component: './SaleOrder/creation',
   },
   {
     path: ROUTES_PATH.SALE_CREATION,
-    component: './Home',
+    component: './SaleOrder/creation',
   },
   {
     path: ROUTES_PATH.REVENUE,
