@@ -19,8 +19,7 @@ import BigNumber from 'bignumber.js';
 import { NFT_ATTRIBUTE_CREATED_FIELD, NFT_CREATE_FIELD } from '@/pages/nft/constants';
 import { ethers } from 'ethers';
 
-const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, IS_PUT_ON_SALE, CURRENCY, IMAGE_MEDIUM, IMAGE_SMALL } =
-  NFT_CREATE_FIELD;
+const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, CURRENCY, IMAGE_MEDIUM, IMAGE_SMALL } = NFT_CREATE_FIELD;
 
 const { MIN_VALUE } = LENGTH_CONSTANTS;
 
@@ -87,6 +86,10 @@ export const checkValueNftChange = (preVal: object, newVal: object, isEditing?: 
   return JSON.stringify(prevNft) !== JSON.stringify(newNft);
 };
 
+export const checkValueChange = (preVal: object, newVal: object) => {
+  return JSON.stringify(preVal) !== JSON.stringify(newVal);
+};
+
 export const getAttributeFieldNFTValues = (values: any) => {
   return Object.values(NFT_ATTRIBUTE_CREATED_FIELD).reduce((acc: any, field: string | any) => {
     acc[field] = values?.attributes?.[field]?.text || values?.attributes?.[field];
@@ -118,9 +121,6 @@ export const getDefaultFieldNFTValues = (values: any) => {
       case TOTAL_SUPPLY:
         acc[TOTAL_SUPPLY] = values?.token?.[TOTAL_SUPPLY]?.toString();
         break;
-      // case IS_PUT_ON_SALE:
-      //   acc[IS_PUT_ON_SALE] = false;
-      //   break;
       case CURRENCY:
         acc[CURRENCY] = TOKEN_SUPPORT.value;
         break;
@@ -166,6 +166,20 @@ export const disabledFromDate = (date: any) => (current: moment.Moment) => {
 export const disabledUntilDate = (date: any) => (current: moment.Moment) => {
   return (
     (date && current?.clone()?.startOf('day') < date?.clone()?.startOf('day')) || current > moment()
+  );
+};
+
+export const disabledSaleOrderStartDate = (date: any) => (current: moment.Moment) => {
+  return (
+    (date && current?.clone()?.endOf('day') > date?.clone()?.endOf('day')) ||
+    current < moment().startOf('day')
+  );
+};
+
+export const disabledSaleOrderEndDate = (date: any) => (current: moment.Moment) => {
+  return (
+    (date && current?.clone()?.startOf('day') < date?.clone()?.startOf('day')) ||
+    current < moment().startOf('day')
   );
 };
 

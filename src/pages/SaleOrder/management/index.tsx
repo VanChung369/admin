@@ -21,6 +21,7 @@ const {
   FROM_ADDRESS,
   SOLD,
   QUANTITY,
+  NFT,
   REMAIN,
   SALE_METHOD,
   UNIT_PRICE,
@@ -33,7 +34,7 @@ const {
 const defaultValue = [
   NO,
   CREATED_AT,
-  FROM_ADDRESS,
+  NFT,
   SOLD,
   QUANTITY,
   REMAIN,
@@ -62,6 +63,7 @@ const SaleOrderManagement: React.FC = () => {
   const primaryColumnsItem = [
     { label: intl.formatMessage({ id: 'sale.order.management.no' }), value: NO, disabled: true },
     { label: intl.formatMessage({ id: 'sale.order.management.created.by' }), value: FROM_ADDRESS },
+    { label: intl.formatMessage({ id: 'sale.order.management.nft.name' }), value: NFT },
     { label: intl.formatMessage({ id: 'sale.order.management.quantity' }), value: QUANTITY },
     { label: intl.formatMessage({ id: 'sale.order.management.sold' }), value: SOLD },
     { label: intl.formatMessage({ id: 'sale.order.management.remain' }), value: REMAIN },
@@ -99,7 +101,7 @@ const SaleOrderManagement: React.FC = () => {
           className={styleLess.sale_order_management__button__create}
         />
       </div>
-      <Card className={styleLess.sale_order_management__tab}>
+      <Card className={styleLess.sale_order_management__table}>
         <SaleOrder
           params={params}
           getListColumn={getListColumn}

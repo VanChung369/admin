@@ -1,3 +1,4 @@
+import EllipsisText from '@/components/EllipsisText';
 import ShortenAddress from '@/components/ShortenAddress';
 import { TYPE_INPUT } from '@/constants/input';
 import { formatCurrency, formatText, getNumber } from '@/utils/utils';
@@ -17,7 +18,7 @@ export const columns = (intl: any, data: any, nftStandard?: string) => [
     helpText: intl.formatMessage({ id: 'NFT.detail.minted.tooltip' }),
   },
   {
-    label: intl.formatMessage({ id: 'NFT.detail.sale.quantity' }),
+    label: <EllipsisText text={intl.formatMessage({ id: 'NFT.detail.sale.quantity' })} />,
     value: getNumber(data?.saleOrder?.quantity),
     type: TYPE_INPUT.NUMBER,
   },
@@ -38,7 +39,7 @@ export const columns = (intl: any, data: any, nftStandard?: string) => [
     value: nftStandard && intl.formatMessage({ id: nftStandard }),
   },
   {
-    label: intl.formatMessage({ id: 'NFT.detail.contract.address' }),
+    label: <EllipsisText text={intl.formatMessage({ id: 'NFT.detail.contract.address' })} />,
     value: <ShortenAddress address={data?.token?.address} isCopy={true} />,
   },
   {

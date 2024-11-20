@@ -1,4 +1,9 @@
 export default {
+  'sale.order.unsave': 'Unsave changed',
+  'sale.order.unsave.description': 'If you leave this page, any unsaved changes will be lost.',
+  'sale.order.leave.page': 'Leave page',
+
+  // management
   'sale.order.management': 'Sale Order Management',
   'sale.order.management.total': 'Total Sale Orders: ',
   'sale.order.management.sold.out': 'Sold out',
@@ -23,7 +28,46 @@ export default {
   'sale.order.management.start.date': 'Start date',
   'sale.order.management.end.date': 'End date',
   'sale.order.management.created.at': 'Created at',
+  'sale.order.management.nft.name': 'NFT name',
   'sale.order.management.actions': 'Actions',
+  // create sale order
   'sale.order.create': 'Sale Order Create',
-  'sale.order.detail': 'Sale Order detail',
+  'sale.order.create.method': 'Selling Method',
+  'sale.order.create.unit.price': 'Unit price',
+  'sale.order.create.unit.price.description': 'Enter the price for each copy to be instantly sold',
+  'sale.order.create.unit.price.placeholder': 'Enter unit price',
+  'sale.order.create.quantity': 'Quantity',
+  'sale.order.create.quantity.description': 'Enter the number of copies to put on sale',
+  'sale.order.create.quantity.placeholder': 'Enter quantity',
+  'sale.order.create.quantity.max': 'Max',
+  'sale.order.create.start.date': 'Start date',
+  'sale.order.create.start.date.placeholder': 'Enter start date',
+  'sale.order.create.end.date': 'End date',
+  'sale.order.create.end.date.placeholder': 'Enter end date',
+  'sale.order.create.button.discard': 'Discard',
+  'sale.order.create.button.create': 'Create',
+  'sale.order.create.timed.auction.description': 'Create sale order timed auction',
+  'sale.order.create.instant.sale.description': 'Create sale order instant',
+  'sale.order.create.nft': 'Select NFT',
+  'sale.order.create.nft.description':
+    'Choose the NFT you want to put on sale. You can only select Off-sale items.',
+  'sale.order.create.quantity.limit': 'Quantity Limit: {number}',
+  'sale.order.create.quantity.limit.tooltip':
+    'This is the maximum quantity that can be. \nOnly editions which are not minted nor being listed for sale are available to mint',
+  // vailidation
+  'sale.order.method.error.required': 'Method is required',
+  'sale.order.quantity.error.required': 'Quantity is required',
+  'sale.order.quantity.error.max': 'Quantity cannot exceed {max}',
+  'sale.order.quantity.error.positive': 'Quantity must be positive',
+  'sale.order.unit.price.error.required': 'Unit price is required',
+  'sale.order.unit.price.error.positive': 'Unit price must be positive',
+  'sale.order.method.nft.required': 'NFT is required',
+  'sale.order.start.date.error.required': 'Start date is required',
+  'sale.order.start.date.error.greater.now': 'Start date must be greater now',
+  'sale.order.start.date.error.earlier.end.date': 'Start date must be earlier than end date',
+  'sale.order.end.date.error.required': 'End date is required',
+  'sale.order.end.date.error.greater.now': 'End date must be greater now',
+  'sale.order.end.date.error.later.start.date': 'End date must be later than start date',
+
+  'sale.order.detail': 'Sell detail',
 };

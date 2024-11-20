@@ -1,0 +1,71 @@
+@import '@/styles/variables.less';
+
+.sale_order__nft {
+  display: flex;
+  // align-items: center;
+  gap: 12px;
+
+  :global {
+    .ant-image .ant-image-img {
+      width: 50px;
+      height: unset;
+      border-radius: 3px;
+    }
+  }
+}
+
+.error_quantity {
+  position: absolute;
+  bottom: 7px;
+}
+
+.sale_order_creation {
+  &__method_input {
+    :global {
+      .ant-pro-checkcard {
+        .ant-pro-checkcard-content {
+          .ant-pro-checkcard-avatar {
+            align-content: center;
+            .ant-avatar {
+              img {
+                object-fit: fill;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &__quantity {
+    &_input {
+      margin-bottom: 5px;
+    }
+
+    &_label {
+      padding: 0px 0px 5px 0px;
+    }
+
+    &_button_max {
+      position: absolute;
+      right: 1px;
+      width: 65px;
+      height: 40px;
+      &:focus,
+      &:active,
+      &:hover {
+        background-color: @color-violet !important;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &__sub {
+    &_content {
+      text-align: right;
+      margin-top: 5px;
+      &__icon {
+        margin-left: 5px;
+      }
+    }
+  }
+}

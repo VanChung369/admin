@@ -20,7 +20,8 @@ type TextExpandProps = {
     | 'space-between'
     | 'space-evenly'
     | undefined;
-
+  classNameMore?: any;
+  classNameLess?: any;
   [key: string]: any;
 };
 
@@ -30,6 +31,8 @@ const TextExpand: FC<TextExpandProps> = ({
   justify = 'start',
   textButton,
   rowsNumber,
+  classNameMore,
+  classNameLess,
   ...props
 }) => {
   const intl = useIntl();
@@ -52,7 +55,7 @@ const TextExpand: FC<TextExpandProps> = ({
     <Fragment>
       <Paragraph
         ref={paragraphRef}
-        className={classNames(className)}
+        className={classNames(className, isExpandable ? classNameMore : classNameLess)}
         {...props}
         ellipsis={
           ellipsis ? { rows: rowsNumber || 5, expandable: 'collapsible', symbol: '' } : false

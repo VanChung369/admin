@@ -105,7 +105,6 @@ declare namespace API {
     royaltyFee?: number;
     totalSupply?: number;
     description?: string;
-    isPutOnSale?: boolean;
     quantity?: number;
     unitPrice?: number;
     currency?: any;
@@ -120,11 +119,20 @@ declare namespace API {
     royaltyFee?: number;
     totalSupply?: number;
     description?: string;
-    isPutOnSale?: boolean;
     quantity?: number;
     unitPrice?: number;
     currency?: any;
     imageMedium?: any;
     imageSmall?: any;
+  };
+
+  type CreateSaleOrder = {
+    quantity?: number;
+    unitPrice?: number;
+    currency?: any;
+    method?: number;
+    nftID?: string;
+    startDate?: any;
+    endDate?: any;
   };
 }

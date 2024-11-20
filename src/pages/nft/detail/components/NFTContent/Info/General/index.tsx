@@ -31,6 +31,7 @@ const General = () => {
       )}
       <TypographyWrapper
         className={styleLess.nft_detail_info__description}
+        classNameLess={styleLess.nft_detail_info__description_expandable}
         justify="end"
         typeTypography={TYPE_TYPOGRAPHY.TEXT_EXPAND}
         rowsNumber={2}
