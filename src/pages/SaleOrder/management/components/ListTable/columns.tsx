@@ -1,7 +1,6 @@
 import EllipsisText from '@/components/EllipsisText';
 import NumberWrapper from '@/components/NumberWrapper';
 import ResponsiveImage from '@/components/ResponsiveImage';
-import { NFT_STATUS } from '@/pages/nft/constants';
 import { formatDate, formatText } from '@/utils/utils';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -19,6 +18,27 @@ export const columns = (intl: any, page: number, limit: number): ProColumns<any>
     key: 'no',
     width: 50,
     render: (_value: any, _row: any, index: number) => (page - 1) * limit + index + 1,
+  },
+  {
+    title: intl.formatMessage({ id: 'sale.order.management.nft.name' }),
+    dataIndex: 'nft',
+    key: 'nft',
+    width: 125,
+    ellipsis: true,
+    render: (_value: any, row: any) => {
+      return (
+        <Link
+          className={styleLess.sale_order_nft_detail}
+          to={`${ROUTES_PATH.NFT_DETAIL}/${row?.nft?.id}`}
+          target="_blank"
+        >
+          <div className={styleLess.nft_name}>
+            <ResponsiveImage src={row?.nft?.image?.smallUrl} />
+            <EllipsisText text={row?.nft?.name} />
+          </div>
+        </Link>
+      );
+    },
   },
   {
     title: intl.formatMessage({ id: 'sale.order.management.created.by' }),
@@ -39,16 +59,17 @@ export const columns = (intl: any, page: number, limit: number): ProColumns<any>
     title: intl.formatMessage({ id: 'sale.order.management.sold' }),
     dataIndex: 'sold',
     key: 'sold',
-    width: 75,
+    width: 65,
     sorter: true,
     ellipsis: true,
-    render: (value: any) => <NumberWrapper thousandSeparator value={value} displayType="text" />,
+    render: (value: any) =>
+      value ? 0 : <NumberWrapper thousandSeparator value={Number(value)} displayType="text" />,
   },
   {
     title: intl.formatMessage({ id: 'sale.order.management.remain' }),
     dataIndex: 'remain',
     key: 'remain',
-    width: 75,
+    width: 65,
     sorter: true,
     render: (value: any) => {
       return <NumberWrapper thousandSeparator value={value} displayType="text" />;
@@ -69,14 +90,14 @@ export const columns = (intl: any, page: number, limit: number): ProColumns<any>
     dataIndex: 'startDate',
     key: 'startDate',
     width: 100,
-    render: (value: any) => formatDate(value),
+    render: (value: any, row: any) => (row?.startDate ? formatDate(value) : '---'),
   },
   {
     title: intl.formatMessage({ id: 'sale.order.management.end.date' }),
     dataIndex: 'endDate',
     key: 'endDate',
     width: 100,
-    render: (value: any) => formatDate(value),
+    render: (value: any, row: any) => (row?.endDate ? formatDate(value) : '---'),
   },
   {
     title: intl.formatMessage({ id: 'sale.order.management.created.at' }),
@@ -90,7 +111,7 @@ export const columns = (intl: any, page: number, limit: number): ProColumns<any>
     title: intl.formatMessage({ id: 'sale.order.management.method' }),
     dataIndex: 'method',
     key: 'method',
-    width: 75,
+    width: 85,
     render: (value: any) => {
       const curMethod = SALE_ORDER_METHOD.find((method) => method?.value === value);
       return (

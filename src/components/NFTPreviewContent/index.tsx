@@ -8,13 +8,16 @@ import EllipsisText from '../EllipsisText';
 import { useIntl, useModel } from '@umijs/max';
 import ShortenAddress from '../ShortenAddress';
 import NoProfile from '@/resources/images/no-profile-md.png';
+import NumberWrapper from '../NumberWrapper';
+import { TOKEN_SUPPORT } from '@/constants';
 
 type PreviewContentProps = {
   nft: any;
+  saleOrder?: any;
   children?: ReactNode;
 };
 
-const NFTPreviewContent = ({ nft, children }: PreviewContentProps) => {
+const NFTPreviewContent = ({ nft, saleOrder, children }: PreviewContentProps) => {
   const intl = useIntl();
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
@@ -38,18 +41,40 @@ const NFTPreviewContent = ({ nft, children }: PreviewContentProps) => {
             )}
           </div>
           <div className={styleLess.preview__content_user_address}>
-            <ShortenAddress address={currentUser?.address} extraShort={true} />
+            <ShortenAddress
+              address={nft?.creatorAddress ? nft?.creatorAddress : currentUser?.address}
+              extraShort={true}
+            />
           </div>
         </div>
         <Row className={styleLess.preview__content_sub_title}>
           <Col span={8} className={styleLess.preview__content_sub_title__price}>
             <div> {intl.formatMessage({ id: 'NFT.create.price' })}</div>
-            <div>---</div>
+            <div>
+              {saleOrder?.unitPrice ? (
+                <>
+                  <NumberWrapper
+                    thousandSeparator
+                    value={saleOrder?.unitPrice}
+                    displayType="text"
+                  />{' '}
+                  {TOKEN_SUPPORT.symbol}
+                </>
+              ) : (
+                '---'
+              )}
+            </div>
           </Col>
           <Col span={8} offset={8} className={styleLess.preview__content_sub_title__total}>
             <div>
               <div>{intl.formatMessage({ id: 'NFT.create.quantity' })}</div>
-              <div>---</div>
+              <div>
+                {saleOrder?.quantity ? (
+                  <NumberWrapper thousandSeparator value={saleOrder?.quantity} displayType="text" />
+                ) : (
+                  '---'
+                )}
+              </div>
             </div>
           </Col>
         </Row>

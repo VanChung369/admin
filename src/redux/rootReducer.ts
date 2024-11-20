@@ -3,10 +3,12 @@ import ConfigSlice, { namespace as ConfigNamespace } from './config/slice';
 import AddressSlice, { namespace as AddressNamespace } from './address/slice';
 import ConnectionSlice, { namespace as ConnectionNamespace } from './connection/slice';
 import AuthenticationSlice, { namespace as AuthenticationNamespace } from './authentication/slice';
+import SaleOrderSlice, { namespace as SaleOrderNamespace } from './saleOrder/slice';
 
 export default combineReducers({
   [ConfigNamespace]: ConfigSlice,
   [AddressNamespace]: AddressSlice,
   [ConnectionNamespace]: ConnectionSlice,
   [AuthenticationNamespace]: AuthenticationSlice,
+  [SaleOrderNamespace]: SaleOrderSlice,
 });

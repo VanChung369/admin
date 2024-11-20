@@ -11,7 +11,6 @@ export const NFT_CREATE_FIELD = {
   ROYALTYFEE: 'royaltyFee',
   TOTAL_SUPPLY: 'totalSupply',
   DESCRIPTION: 'description',
-  IS_PUT_ON_SALE: 'isPutOnSale',
   QUANTITY: 'quantity',
   UNIT_PRICE: 'unitPrice',
   CURRENCY: 'currency',

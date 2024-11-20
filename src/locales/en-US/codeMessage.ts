@@ -2,6 +2,7 @@ export default {
   'codeMessage.S1': 'Create NFT successfully',
   'codeMessage.S2': 'Delete NFT successfully',
   'codeMessage.S3': 'Update NFT successfully',
+  'codeMessage.S4': 'Create Sale Orders successfully',
 
   //error message
   'codeMessage.E1': 'login failed',
@@ -17,4 +18,5 @@ export default {
   'codeMessage.E10': 'Get list NFT owner failed',
   'codeMessage.E11': 'Get list NFT history failed',
   'codeMessage.E12': 'Update NFT failed',
+  'codeMessage.E13': 'Create Sale Order failed',
 };

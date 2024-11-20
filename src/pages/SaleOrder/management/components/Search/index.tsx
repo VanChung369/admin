@@ -72,6 +72,7 @@ const SearchSaleOrder = ({ onSubmit, params }: SearchProps) => {
                 placeholder={intl.formatMessage({ id: 'sale.order.management.search.placeholder' })}
                 onSearch={handleChangeField(setFieldValue, KEYWORD)}
                 typeInput={TYPE_INPUT.SEARCH_DEBOUNCE}
+                autoComplete="off"
               />
             </Col>
             <Col lg={3} sm={12} xs={24}>

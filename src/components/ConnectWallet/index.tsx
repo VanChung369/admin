@@ -21,7 +21,6 @@ import {
 } from '@thirdweb-dev/react';
 import { FC, Fragment, useEffect } from 'react';
 import formatMessage from '../FormatMessage';
-
 import { useLogin } from '@/pages/User/Login/hooks';
 import ModalWrongNetwork from '../ModalWrongNetwork';
 import ModalConnectWallet from '../ModalConnectWallet';

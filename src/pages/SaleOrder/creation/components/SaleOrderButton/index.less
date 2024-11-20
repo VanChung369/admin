@@ -1,0 +1,27 @@
+@import '@/styles/variables.less';
+
+.sale_order_button {
+  margin-top: 10px;
+
+  &__discard {
+    min-width: 145px;
+    height: 40px;
+    &:focus,
+    &:active,
+    &:hover {
+      background-color: transparent !important;
+      opacity: 0.7;
+    }
+  }
+
+  &__create {
+    min-width: 145px;
+    height: 40px;
+    &:focus,
+    &:active,
+    &:hover {
+      background-color: @color-violet !important;
+      opacity: 0.7;
+    }
+  }
+}

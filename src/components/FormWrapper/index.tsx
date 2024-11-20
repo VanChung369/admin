@@ -21,6 +21,8 @@ import InputRadio from './components/inputRadio';
 import InputAutoComplete from './components/inputAutoComplete';
 import InputRange from './components/inputRange';
 import InputSearchDebounce from './components/inputSearchDebounce';
+import InputCheckCardGroup from './components/inputCheckCardGroup';
+import InfinityScrollSelect from './components/inputInfiniteScroll';
 
 const FormWrapper: FC<FormkWrapperProps> = ({
   customComponent,
@@ -96,6 +98,12 @@ const FormWrapper: FC<FormkWrapperProps> = ({
       break;
     case TYPE_INPUT.SEARCH_DEBOUNCE:
       inputRender = InputSearchDebounce;
+      break;
+    case TYPE_INPUT.CHECK_CARD_GROUP:
+      inputRender = InputCheckCardGroup;
+      break;
+    case TYPE_INPUT.SELECT_INFINITY_SCROLL:
+      inputRender = InfinityScrollSelect;
       break;
   }
 

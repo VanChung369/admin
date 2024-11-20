@@ -9,7 +9,7 @@ export type FormkWrapperProps = {
   placeholder?: any;
   options?: {
     value: string | number | null;
-    name: string | number;
+    name?: string | number;
     key?: string | number;
   }[];
   subLabel?: any;
@@ -84,5 +84,6 @@ export type FormkWrapperProps = {
   textSelectAll?: any;
   helpText?: any;
   helpTextClassName?: any;
+  autoComplete?: any;
   [key: string]: any;
 };

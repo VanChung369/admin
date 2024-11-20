@@ -3,8 +3,8 @@
 import { ORDERS } from '@/constants';
 import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
-import { getSaleOrders } from '@/services/api/sale-order';
-import { useQuery } from '@tanstack/react-query';
+import { createSaleOrders, getSaleOrders } from '@/services/api/sale-order';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 import { SALE_ORDER_MANAGEMENT_FIELD, SALE_ORDER_MANAGEMENT_FIELD_SORTER } from '../constants';
 
@@ -63,5 +63,45 @@ export const useGetListSaleOrder = (params: any) => {
   return {
     loading: isLoading,
     data: useFetchListNFTs.data,
+  };
+};
+
+// create sale order
+export interface paramCreateSaleOrder {
+  data: any;
+  onSuccess: (id?: any) => void;
+  onError: () => void;
+}
+
+export const useCreateSaleOrder = () => {
+  const handleCreateSaleOrder = useMutation({
+    mutationFn: async (params: paramCreateSaleOrder) => {
+      try {
+        const newParams = omit({ ...params.data });
+
+        for (const key in newParams) {
+          if (!newParams[key]) {
+            delete newParams[key];
+          }
+        }
+
+        const response = await createSaleOrders(newParams);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      variables.onSuccess(data._id);
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleCreateSaleOrder.isPending,
+    onCreateSaleOrder: handleCreateSaleOrder.mutate,
   };
 };

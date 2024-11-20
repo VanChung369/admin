@@ -66,19 +66,17 @@ const InputSelect: FC<{
     switch (optionsType) {
       case TYPE_INPUT.CHECKBOX: {
         return (
-          <div className="search-form__all-options">
-            <Checkbox
-              onChange={onCheckAllOptions}
-              id={ALL_OPTIONS}
-              indeterminate={indeterminate}
-              checked={checkAll}
-            >
-              {textSelectAll ??
-                intl.formatMessage({
-                  id: 'common.text.all',
-                })}
-            </Checkbox>
-          </div>
+          <Checkbox
+            onChange={onCheckAllOptions}
+            id={ALL_OPTIONS}
+            indeterminate={indeterminate}
+            checked={checkAll}
+          >
+            {textSelectAll ??
+              intl.formatMessage({
+                id: 'common.text.all',
+              })}
+          </Checkbox>
         );
       }
       default: {
