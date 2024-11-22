@@ -1,0 +1,28 @@
+@import '@/styles/variables.less';
+
+.pagination {
+  margin-top: 20px;
+
+  :global {
+    .ant-pagination-prev {
+      color: @text-color-white;
+    }
+
+    .ant-pagination-item-active {
+      border-color: @color-violet;
+      a {
+        font-weight: 600;
+        letter-spacing: 0.005em;
+        color: @color-violet;
+      }
+    }
+
+    .ant-pagination-options {
+      position: absolute;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(0%);
+      left: 0;
+      margin: auto;
+    }
+  }
+}

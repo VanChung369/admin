@@ -16,6 +16,7 @@ import {
 import classNames from 'classnames';
 import { GetRowKey } from 'rc-table/es/interface';
 import { Fragment, ReactNode, Ref } from 'react';
+import styleLess from './index.less';
 
 type TableProps = {
   headerTitle?: string | ReactNode;
@@ -131,7 +132,7 @@ const Table = <T extends Record<string, any>, D extends Record<string, any>>({
       {isPagination && (
         <Row justify={justify}>
           <Pagination
-            className={classNames('pagination', classNamePagination)}
+            className={classNames(styleLess.pagination, classNamePagination)}
             size={sizePagination}
             total={totalPagination}
             current={currentPagination}

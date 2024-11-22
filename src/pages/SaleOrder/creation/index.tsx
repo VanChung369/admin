@@ -2,7 +2,7 @@ import LoadingWrapper from '@/components/LoadingWrapper';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl, useNavigate, useParams } from '@umijs/max';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { saleOrderSchema } from '../schema';
 import { SALE_ORDER_CREATE_FIELD, SALE_ORDER_CREATE_METHOD } from '../constants';
 import { useWarnModalPage } from '@/hooks/hook-customs/useWarnModal';
@@ -22,6 +22,9 @@ import ModalUnsavedChange from './components/ModalUnsaved';
 import { checkValueChange } from '@/utils/utils';
 import { trim } from 'lodash';
 import moment from 'moment';
+import AuthorizeTModal from './components/ModalAuthorize';
+import MetamaskService from '@/services/blockchain';
+import { useAddress } from '@thirdweb-dev/react';
 
 const { QUANTITY, UNIT_PRICE, CURRENCY, METHOD, NFT_ID, START_DATE, END_DATE } =
   SALE_ORDER_CREATE_FIELD;
@@ -38,7 +41,10 @@ const initFormValue = {
 
 const SaleOrderCreation = () => {
   const intl = useIntl();
+  const account = useAddress();
   const formikRef = useRef<any>(null);
+  const [visible, setVisible] = useState(false);
+
   const navigate = useNavigate();
   const { quantity } = useAppSelector(selectedQuantity.getQuantity);
   const {
@@ -60,7 +66,10 @@ const SaleOrderCreation = () => {
     onDiscard,
   } = useWarnModalPage(ROUTES_PATH.SALE);
 
-  const handleCreateSaleOrderail = () => {
+  const handleToggleAuthorize = () => setVisible(!visible);
+
+  const handleCreateSaleOrderFail = () => {
+    setVisible(false);
     formatMessage({
       descriptor: { id: 'codeMessage.E13' },
       type: 'error',
@@ -68,6 +77,7 @@ const SaleOrderCreation = () => {
   };
 
   const handleCreateSaleOrderSuccess = () => {
+    setVisible(false);
     navigate(`${ROUTES_PATH.SALE}`);
     formatMessage({
       descriptor: { id: 'codeMessage.S4' },
@@ -76,7 +86,17 @@ const SaleOrderCreation = () => {
   };
 
   const handleSubmit = async (values: any = {}) => {
-    console.log(values);
+    handleToggleAuthorize();
+
+    const wallet = new MetamaskService().getInstance();
+
+    const isAdmin = await wallet.isAdmin(account as string);
+
+    if (!isAdmin) {
+      handleCreateSaleOrderFail();
+      return false;
+    }
+
     const data = {
       [QUANTITY]: values?.[QUANTITY],
       [UNIT_PRICE]: values?.[UNIT_PRICE],
@@ -96,7 +116,7 @@ const SaleOrderCreation = () => {
     onCreateSaleOrder({
       data: data,
       onSuccess: handleCreateSaleOrderSuccess,
-      onError: handleCreateSaleOrderail,
+      onError: handleCreateSaleOrderFail,
     });
   };
 
@@ -148,6 +168,12 @@ const SaleOrderCreation = () => {
           onClose={onCloseModalUnsaved}
           backUrl={ROUTES_PATH.SALE}
           afterClose={afterCloseModalUnsaved}
+        />
+
+        <AuthorizeTModal
+          visible={visible}
+          onClose={handleToggleAuthorize}
+          title={intl.formatMessage({ id: 'common.text.authorizing.account.title' })}
         />
       </LoadingWrapper>
     </PageContainer>
