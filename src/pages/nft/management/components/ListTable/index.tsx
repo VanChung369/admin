@@ -11,7 +11,7 @@ import { useIntl } from '@umijs/max';
 import { columns } from './columns';
 
 const { PAGE, LIMIT } = NFT_MANAGEMENT_FIELD;
-const { DEFAULT_PAGE } = LENGTH_CONSTANTS;
+const { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } = LENGTH_CONSTANTS;
 const { ORDER, FIELD } = ORDERS;
 
 const ListTable = ({
@@ -63,6 +63,7 @@ const ListTable = ({
       dataSource={data}
       pageSize={limit}
       current={page}
+      isPagination={total > limit || total > DEFAULT_PAGE_SIZE}
       onChangePagination={handleChangePaging}
       onChange={handleChangeTable}
       emptyText={emtpyText}

@@ -8,7 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useIntl, useParams } from '@umijs/max';
 import React, { useMemo } from 'react';
 import styleLess from './index.less';
-import { Form, Formik, FormikHelpers, FormikValues } from 'formik';
+import { Form, Formik } from 'formik';
 import FormWrapper from '@/components/FormWrapper';
 import {
   MAX_LENGTH_TOTAL_SUPPLY,

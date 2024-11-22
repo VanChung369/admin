@@ -55,7 +55,6 @@ const SaleOrderField = () => {
   const maxLimit = totalSupply - totalMinted - onSaleQuantity;
 
   useEffect(() => {
-    // <-- Use useEffect here
     if (maxLimit) {
       dispatch(
         handleSetQuantity({

@@ -33,7 +33,7 @@ const {
 
 const defaultValue = [
   NO,
-  CREATED_AT,
+  SALE_STATUS,
   NFT,
   SOLD,
   QUANTITY,

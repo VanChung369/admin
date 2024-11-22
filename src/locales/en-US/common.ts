@@ -9,4 +9,7 @@ export default {
   'common.text.delete': 'Delete',
   'common.text.cancel': 'Cancel',
   'common.text.copy.success': 'Copy successfully',
+  'common.text.authorizing.account.title': 'Authorizing your account',
+  'common.text.authorizing.account.sub.title':
+    'Please wait for us to authorize your wallet address',
 };
