@@ -6,9 +6,9 @@ export const PERCENTAGE_NUMBER = 100;
 export const PERCENTAGE_SUFFIX = '%';
 
 export const TOKEN_SUPPORT = {
-  symbol: 'USDC',
+  symbol: 'UDC',
   icon: 'https://s3.coinmarketcap.com/static-gravity/image/5a8229787b5e4c809b5914eef709b59a.png',
-  value: 'usd',
+  value: 'udc',
 };
 
 export const LENGTH_CONSTANTS = {

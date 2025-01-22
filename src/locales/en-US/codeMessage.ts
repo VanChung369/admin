@@ -19,4 +19,5 @@ export default {
   'codeMessage.E11': 'Get list NFT history failed',
   'codeMessage.E12': 'Update NFT failed',
   'codeMessage.E13': 'Create Sale Order failed',
+  'codeMessage.E14': 'Get sale order failed',
 };

@@ -90,3 +90,23 @@ export const SALE_ORDER_CREATE_METHOD = [
     value: 2,
   },
 ];
+
+export const SALE_ORDER_TYLE = [
+  {
+    name: 'sale.order.detail.sell',
+    value: 'sell',
+    color: 'red',
+  },
+  {
+    name: 'sale.order.detail.resell',
+    value: 'resell',
+    color: 'green',
+  },
+];
+
+// cancel sale order
+export const CANCEL_SALE_STEPS = {
+  PROCESSING: 1,
+  SUCCESSFUL: 2,
+  FAILED: 3,
+};
