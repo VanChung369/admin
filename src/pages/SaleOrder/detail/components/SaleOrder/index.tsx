@@ -14,18 +14,16 @@ const SaleOrder = () => {
   const intl = useIntl();
   const queryClient = useQueryClient();
   const { id } = useParams();
-  const query: any = queryClient.getQueryData(['getNFT', id]);
+  const query: any = queryClient.getQueryData(['getSaleOrder', id]);
 
-  const nftStandard = NFT_STANDARD.find(
-    (standard) => standard?.value === query?.token?.standard,
-  )?.label;
+  const nftStandard = NFT_STANDARD.find((standard) => standard?.value === query?.nft?.token)?.label;
   const sale = columns(intl, query, nftStandard);
 
   return (
     <Row gutter={32} className={styleLess.sale_detail}>
       {sale.map((sale, index: number) => {
         return (
-          <Col lg={6} md={12} sm={12} key={index}>
+          <Col lg={4} md={12} sm={12} key={index}>
             <ItemWithLabel
               label={sale.label}
               className={styleLess.sale_detail__item}

@@ -58,7 +58,7 @@ export default [
   },
   {
     path: `${ROUTES_PATH.SALE_DETAIL}/:id`,
-    component: './Home',
+    component: './SaleOrder/detail',
   },
   {
     path: `${ROUTES_PATH.SALE_EDITION}/:id`,

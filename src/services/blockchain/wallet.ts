@@ -94,4 +94,83 @@ export default class Wallet {
       }
     }
   };
+
+  cancelSellOrder = async ({
+    signer,
+    data,
+    onCancelMetamask,
+    onCallback,
+    onError,
+  }: {
+    signer?: any;
+    data?: Array<any> | any;
+    onCancelMetamask?: () => void;
+    onCallback?: (hash?: any) => void;
+    onError?: () => void;
+  }) => {
+    const sdkSigner = ThirdwebSDK.fromSigner(signer, Number(process.env.UMI_APP_CHAIN_ID));
+    const contract = await sdkSigner.getContract(process.env.UMI_APP_PROXY_ADDRESS!);
+    try {
+      const response = await contract.call('handleCancelOrder', [...data]);
+      console.log(response);
+      if (response?.receipt?.blockHash) {
+        if (response?.receipt?.status) {
+          onCallback &&
+            onCallback({
+              hash: response?.receipt?.transactionHash,
+              status: NFT_TRANSACTION_STATUS.SUCCESS,
+            });
+        } else {
+          onError && onError();
+        }
+      }
+    } catch (error: any) {
+      console.log('Cancel sell order error:', error);
+      if (WALLET_STATUS.CANCEL_METAMASK === error?.code) {
+        onCancelMetamask && onCancelMetamask();
+      } else {
+        onError && onError();
+      }
+    }
+  };
+
+  setAdmin = async ({
+    signer,
+    data,
+    onCancelMetamask,
+    onCallback,
+    onError,
+  }: {
+    signer?: any;
+    data?: Array<any> | any;
+    onCancelMetamask?: () => void;
+    onCallback?: (hash?: any) => void;
+    onError?: () => void;
+  }) => {
+    const sdkSigner = ThirdwebSDK.fromSigner(signer, Number(process.env.UMI_APP_CHAIN_ID));
+    const contract = await sdkSigner.getContract(process.env.UMI_APP_PROXY_ADDRESS!);
+
+    try {
+      const response = await contract.call('setAdminList', [...data]);
+
+      if (response?.receipt?.blockHash) {
+        if (response?.receipt?.status) {
+          onCallback &&
+            onCallback({
+              hash: response?.receipt?.transactionHash,
+              status: NFT_TRANSACTION_STATUS.SUCCESS,
+            });
+        } else {
+          onError && onError();
+        }
+      }
+    } catch (error: any) {
+      console.log('Set admin error:', error);
+      if (WALLET_STATUS.CANCEL_METAMASK === error?.code) {
+        onCancelMetamask && onCancelMetamask();
+      } else {
+        onError && onError();
+      }
+    }
+  };
 }

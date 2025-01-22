@@ -1,12 +1,11 @@
-// get list nfts
-
 import { ORDERS } from '@/constants';
 import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
-import { createSaleOrders, getSaleOrders } from '@/services/api/sale-order';
+import { createSaleOrders, getSaleOrder, getSaleOrders } from '@/services/api/sale-order';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 import { SALE_ORDER_MANAGEMENT_FIELD, SALE_ORDER_MANAGEMENT_FIELD_SORTER } from '../constants';
+import { createTransactions, updateTransactions } from '@/services/api/transaction';
 
 const { DEFAULT, CREATED_AT, SOLD, QUANTITY, REMAIN, UNIT_PRICE } =
   SALE_ORDER_MANAGEMENT_FIELD_SORTER;
@@ -103,5 +102,97 @@ export const useCreateSaleOrder = () => {
   return {
     loading: handleCreateSaleOrder.isPending,
     onCreateSaleOrder: handleCreateSaleOrder.mutate,
+  };
+};
+
+//get sale order
+export const useGetSaleOrder = (id?: string) => {
+  const handleGetSaleOrder = async () => {
+    try {
+      const data = await getSaleOrder(id);
+
+      return data[0];
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const useFetchSaleOrder: any = useQuery({
+    queryKey: ['getSaleOrder', id],
+    queryFn: () => handleGetSaleOrder(),
+    refetchOnWindowFocus: false,
+    enabled: !!id,
+  });
+
+  const { isLoading, isError } = useFetchSaleOrder;
+
+  return {
+    loading: isLoading,
+    error: isError,
+    data: useFetchSaleOrder.data,
+  };
+};
+
+export interface paramCreateTransaction {
+  data: any;
+  onSuccess: (id?: any, data?: any) => void;
+  onError: () => void;
+}
+
+export interface paramUpdateTransaction {
+  id: string;
+  data: any;
+  onSuccess: () => void;
+  onError: () => void;
+}
+
+export const useCreateTransaction = () => {
+  const handleCreateTransaction = useMutation({
+    mutationFn: async (params: paramCreateTransaction) => {
+      try {
+        const response = await createTransactions(params.data);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      const dataRequest = data?.signature?.dataRequest || [];
+      variables.onSuccess(data._id, dataRequest);
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleCreateTransaction.isPending,
+    onCreateTransaction: handleCreateTransaction.mutate,
+  };
+};
+
+export const useUpdateTransaction = () => {
+  const handleUpdateTransaction = useMutation({
+    mutationFn: async (params: paramUpdateTransaction) => {
+      try {
+        const response = await updateTransactions(params.id, params.data);
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onError: (error, variables, context) => {
+      variables.onError();
+    },
+    onSuccess: (data, variables, context) => {
+      variables.onSuccess();
+    },
+    onSettled: (data, error, variables, context) => {},
+  });
+
+  return {
+    loading: handleUpdateTransaction.isPending,
+    onUpdateTransaction: handleUpdateTransaction.mutate,
   };
 };

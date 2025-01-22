@@ -18,3 +18,13 @@ export async function createSaleOrders(
     options: options,
   });
 }
+
+export async function getSaleOrder(
+  id?: string,
+  options?: { [key: string]: any },
+): Promise<Record<string, any>> {
+  return api.get<Record<string, any>>({
+    endpoint: `/api/admin/sale-orders/${id}`,
+    options: options,
+  });
+}
