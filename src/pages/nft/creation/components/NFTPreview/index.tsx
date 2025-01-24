@@ -10,7 +10,6 @@ import imageError from '@/resources/images/image-error.png';
 import NFTPreviewContent from '@/components/NFTPreviewContent';
 import { useQueryClient } from '@tanstack/react-query';
 import { uniqBy } from 'lodash';
-import Countdown, { CountdownProps } from 'antd/es/statistic/Countdown';
 
 const { FILE, FILE_PREVIEW } = NFT_CREATE_FIELD;
 const NFTPreview = () => {

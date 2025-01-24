@@ -72,7 +72,7 @@ export default [
     path: ROUTES_PATH.REVENUE,
     name: 'revenue',
     icon: 'wallet',
-    component: './Home',
+    component: './Revenue/management',
   },
   // {
   //   path: '/admin',

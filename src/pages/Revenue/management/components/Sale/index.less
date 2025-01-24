@@ -1,0 +1,53 @@
+@import '@/styles/variables.less';
+
+.sale {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  &__col {
+    background: @color-gray;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 10px 20px;
+    max-width: 24%;
+  }
+  &__lable {
+    &_text {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.015em;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: row;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: capitalize;
+    margin-bottom: 4px;
+
+    &_icon {
+      padding-right: 5px;
+      width: 25px;
+      height: 25px;
+    }
+    &_currency {
+      padding-left: 3px;
+    }
+    &_value {
+    }
+  }
+  &__usd {
+    display: flex;
+    flex-direction: row;
+    margin-left: 32px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: @color-heliotrope;
+  }
+}

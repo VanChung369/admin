@@ -13,6 +13,7 @@ import nft from './en-US/NFT';
 import password from './en-US/password';
 import modal from './en-US/modal';
 import saleOrder from './en-US/saleOrder';
+import revenue from './en-US/revenue';
 
 export default {
   'navBar.lang': 'Languages',
@@ -39,4 +40,5 @@ export default {
   ...password,
   ...modal,
   ...saleOrder,
+  ...revenue,
 };
