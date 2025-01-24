@@ -12,5 +12,6 @@ export default {
   'common.text.authorizing.account.title': 'Authorizing your account',
   'common.text.authorizing.account.sub.title':
     'Please wait for us to authorize your wallet address',
+  'common.text.admin': 'Admin',
   'common.null.text': '---',
 };

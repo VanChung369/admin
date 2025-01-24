@@ -1,10 +1,10 @@
-import { NumberFormatDesignProps } from '@/components/NumberFormatDesign/typings';
 import { DECIMAL_SCALE } from '@/constants/number';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { NumericFormat } from 'react-number-format';
+import { NumberFormatWrapperProps } from './typings';
 
-const NumberFormatDesign: FC<NumberFormatDesignProps> = ({
+const NumberFormatWrapper: FC<NumberFormatWrapperProps> = ({
   value,
   className,
   decimalScale = DECIMAL_SCALE,
@@ -28,4 +28,4 @@ const NumberFormatDesign: FC<NumberFormatDesignProps> = ({
   );
 };
 
-export default NumberFormatDesign;
+export default NumberFormatWrapper;

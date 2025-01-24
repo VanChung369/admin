@@ -13,3 +13,37 @@ export async function updateTransactions(id: string, body?: any) {
     body: body,
   });
 }
+
+export async function getTransactions(params: any, options?: { [key: string]: any }) {
+  return api.get<{ data: any }>({
+    endpoint: '/api/admin/transactions',
+    params: params,
+    options: options,
+  });
+}
+
+export async function getTransactionDetail(
+  id?: string,
+  options?: { [key: string]: any },
+): Promise<Record<string, any>> {
+  return api.get<Record<string, any>>({
+    endpoint: `/api/admin/transactions/${id}`,
+    options: options,
+  });
+}
+
+export async function getOverview(params: any, options?: { [key: string]: any }) {
+  return api.get<{ data: any }>({
+    endpoint: '/api/admin/transactions/overview',
+    params: params,
+    options: options,
+  });
+}
+
+export async function getTopNfts(params: any, options?: { [key: string]: any }) {
+  return api.get<{ data: any }>({
+    endpoint: '/api/a/admin/transactions/best-selling-nfts',
+    params: params,
+    options: options,
+  });
+}

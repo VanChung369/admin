@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 import { InputAttributes } from 'react-number-format';
 
-export type NumberFormatDesignProps = {
+export type NumberFormatWrapperProps = {
   value: number | any;
   customInput?: ComponentType<InputAttributes>;
   defaultValue?: number | any;
