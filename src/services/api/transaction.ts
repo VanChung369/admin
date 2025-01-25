@@ -14,7 +14,7 @@ export async function updateTransactions(id: string, body?: any) {
   });
 }
 
-export async function getTransactions(params: any, options?: { [key: string]: any }) {
+export async function getTransactions(params?: any, options?: { [key: string]: any }) {
   return api.get<{ data: any }>({
     endpoint: '/api/admin/transactions',
     params: params,
@@ -32,6 +32,14 @@ export async function getTransactionDetail(
   });
 }
 
+export async function getAnalytics(params: any, options?: { [key: string]: any }) {
+  return api.get<Record<string, any>>({
+    endpoint: '/api/admin/transactions/sale-analytics',
+    params: params,
+    options: options,
+  });
+}
+
 export async function getOverview(params: any, options?: { [key: string]: any }) {
   return api.get<{ data: any }>({
     endpoint: '/api/admin/transactions/overview',
@@ -42,7 +50,7 @@ export async function getOverview(params: any, options?: { [key: string]: any })
 
 export async function getTopNfts(params: any, options?: { [key: string]: any }) {
   return api.get<{ data: any }>({
-    endpoint: '/api/a/admin/transactions/best-selling-nfts',
+    endpoint: '/api/admin/transactions/best-selling-nfts',
     params: params,
     options: options,
   });

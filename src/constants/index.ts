@@ -7,7 +7,7 @@ export const PERCENTAGE_SUFFIX = '%';
 
 export const TOKEN_SUPPORT = {
   symbol: 'UDC',
-  icon: 'https://s3.coinmarketcap.com/static-gravity/image/5a8229787b5e4c809b5914eef709b59a.png',
+  icon: 'https://firebasestorage.googleapis.com/v0/b/nft-marketplace-85e49.appspot.com/o/symbol%2Fcoin_icon.png?alt=media&token=13c90550-0cb1-4e0e-b43a-7eacdf88a8c0',
   value: 'udc',
 };
 

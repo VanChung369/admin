@@ -20,4 +20,7 @@ export default {
   'codeMessage.E12': 'Update NFT failed',
   'codeMessage.E13': 'Create Sale Order failed',
   'codeMessage.E14': 'Get sale order failed',
+  'codeMessage.E15': 'Get analytics failed',
+  'codeMessage.E16': 'Get transactions failed',
+  'codeMessage.E17': 'Get overview failed',
 };

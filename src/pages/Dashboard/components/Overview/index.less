@@ -1,0 +1,65 @@
+@import '@/styles/variables.less';
+
+.overview {
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &_title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.005em;
+    }
+    &_filter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &__content {
+    &_single {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      &_icon {
+        margin-top: 18px;
+      }
+      &_currency {
+        margin-top: 10px;
+        &_symbol {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 24px;
+          text-transform: capitalize;
+        }
+        &_usd {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 12px;
+        }
+      }
+    }
+    &_multi {
+      display: flex;
+
+      &__text {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 50%;
+        margin-top: 10px;
+      }
+
+      &__label {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        text-transform: capitalize;
+        margin-right: 10px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
