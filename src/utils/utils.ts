@@ -97,6 +97,11 @@ export const getAttributeFieldNFTValues = (values: any) => {
   }, {});
 };
 
+export const getDuration = (from: any, until: any) => {
+  const duration = moment.duration(until.diff(from));
+  return duration;
+};
+
 export const getDefaultFieldNFTValues = (values: any) => {
   return Object.values(NFT_CREATE_FIELD).reduce((acc: any, field: string | any) => {
     switch (field) {

@@ -30,7 +30,7 @@ export default [
     path: ROUTES_PATH.DASHBOARD,
     name: 'dashboard',
     icon: 'dashboard',
-    component: './Home',
+    component: './Dashboard',
   },
   {
     path: ROUTES_PATH.NFT,

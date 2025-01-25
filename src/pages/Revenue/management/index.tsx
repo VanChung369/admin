@@ -6,7 +6,7 @@ import { REVENUE_MANAGEMENT_COLUMN, REVENUE_MANAGEMENT_FIELD, REVENUE_TABS } fro
 import { LENGTH_CONSTANTS } from '@/constants';
 import styleLess from './index.less';
 import ButtonWrapper from '@/components/ButtonWrapper';
-import { FileAddOutlined } from '@ant-design/icons';
+import { ExportOutlined } from '@ant-design/icons';
 import TabWapper from '@/components/TabWrapper';
 import { Card } from 'antd';
 import { useQueryClient } from '@tanstack/react-query';
@@ -135,7 +135,7 @@ const RevenueManagement: React.FC = () => {
     >
       <div className={styleLess.revenue_management__button}>
         <ButtonWrapper
-          prefixIcon={<FileAddOutlined />}
+          prefixIcon={<ExportOutlined />}
           text={intl.formatMessage({ id: 'revenue.management.export' })}
           onClick={handleToggleExportModal}
           variant="primary"
