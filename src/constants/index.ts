@@ -50,3 +50,12 @@ export const SOCKET_EVENT = {
   REMOVE_FROM_SALE: 'removeFromSale',
   ADMIN_MINT: 'adminMint',
 };
+
+export const NOTIFICATION_EVENT = {
+  ADMIN_PUT_ON_SALE: 'admin-put-on-sale',
+  BUY_FROM_ADMIN: 'buy-from-admin',
+  BUY_FROM_USER: 'buy-from-user',
+  DEACTIVE_SELLORDER: 'deactive-sellorder',
+  ACTIVE_SELLORDER: 'active-sellorder',
+  DEACTIVE_SELLORDER_ADMIN: 'deactive-sellorder-admin',
+};

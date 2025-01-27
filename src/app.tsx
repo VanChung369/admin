@@ -94,7 +94,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       if (initialState?.loading) return <PageLoading />;
 
       return (
-        <AppProvider>
+        <AppProvider initialIsOpen={true}>
           {children}
 
           {!isDev && (

@@ -15,6 +15,7 @@ import modal from './en-US/modal';
 import saleOrder from './en-US/saleOrder';
 import revenue from './en-US/revenue';
 import dashboard from './en-US/dashboard';
+import notification from './en-US/notification';
 
 export default {
   'navBar.lang': 'Languages',
@@ -43,4 +44,5 @@ export default {
   ...saleOrder,
   ...revenue,
   ...dashboard,
+  ...notification,
 };

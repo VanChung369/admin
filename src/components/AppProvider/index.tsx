@@ -12,7 +12,8 @@ import ConnectWalletWrapper from '../ConnectWallet';
 
 const AppProvider: FC<{
   children: any;
-}> = ({ children }) => {
+  initialIsOpen?: boolean;
+}> = ({ children, initialIsOpen = true }) => {
   const onBeforeLift: any = (store: any) => () => {
     const state = store.getState();
     setTokenCallApi(state?.[AuthenticationNamespace]?.authenticationToken);
@@ -22,7 +23,7 @@ const AppProvider: FC<{
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {initialIsOpen ? <ReactQueryDevtools initialIsOpen={false} /> : <></>}
       <ThirdwebProvider
         autoConnect={true}
         clientId={process.env.UMI_APP_PUBLIC_TEMPLATE_CLIENT_ID!}

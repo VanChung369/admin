@@ -1,5 +1,6 @@
 import { SelectLang as UmiSelectLang } from '@umijs/max';
-import NoticeIconView from '../NoticeIcon';
+import Notice from '../Notice';
+import AppProvider from '@/components/AppProvider';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -15,5 +16,9 @@ export const SelectLang = () => {
 };
 
 export const Question = () => {
-  return <NoticeIconView />;
+  return (
+    <AppProvider initialIsOpen={false}>
+      <Notice />
+    </AppProvider>
+  );
 };
