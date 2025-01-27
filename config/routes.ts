@@ -74,6 +74,12 @@ export default [
     icon: 'wallet',
     component: './Revenue/management',
   },
+  {
+    path: ROUTES_PATH.TAG,
+    name: 'revenue',
+    icon: 'wallet',
+    component: './Revenue/management',
+  },
   // {
   //   path: '/admin',
   //   name: 'admin',

@@ -16,6 +16,7 @@ const ROUTES_PATH = {
   SALE_EDITION: '/sales/edit',
   SALE_CREATION: '/sales/create',
   REVENUE: '/revenue',
+  TAG: '/tag',
   MARKET_NFT_DETAIL: `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/nft`,
 };
 
