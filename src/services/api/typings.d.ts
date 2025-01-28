@@ -135,4 +135,22 @@ declare namespace API {
     startDate?: any;
     endDate?: any;
   };
+
+  type CreateTag = {
+    name?: string;
+    status?: boolean;
+    itemQuantity?: number;
+    file?: any;
+    imageMedium?: any;
+    imageSmall?: any;
+  };
+
+  type EditTag = {
+    file?: any;
+    imageMedium?: any;
+    imageSmall?: any;
+    name?: string;
+    status?: boolean;
+    itemQuantity?: number;
+  };
 }

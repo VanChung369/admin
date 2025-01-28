@@ -1,0 +1,49 @@
+@import '@/styles/variables.less';
+
+.tag_modal {
+  padding: 25px;
+  &_button {
+    &__create {
+      width: 100%;
+      min-width: 145px;
+      height: 40px;
+      margin-top: 15px;
+      &:focus,
+      &:active,
+      &:hover {
+        background-color: transparent !important;
+        opacity: 0.7;
+      }
+    }
+  }
+  &_switch {
+    height: 33px;
+    width: 65px;
+    :global {
+      .ant-switch-handle {
+        top: 7px;
+        inset-inline-start: 5px;
+      }
+    }
+  }
+  &__file {
+    &_content {
+      &__title {
+        letter-spacing: 0.015em;
+        padding-bottom: 8px;
+        padding-top: 20px;
+        white-space: nowrap;
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 600;
+      }
+      &__sub_title {
+        padding-bottom: 15px;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0.015em;
+      }
+    }
+  }
+}
