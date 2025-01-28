@@ -14,6 +14,7 @@ export default {
   'menu.nft': 'NFT',
   'menu.sale': 'Sale Order',
   'menu.revenue': 'Revenue',
+  'menu.tag': 'Tag',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',

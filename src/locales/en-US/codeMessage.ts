@@ -3,6 +3,8 @@ export default {
   'codeMessage.S2': 'Delete NFT successfully',
   'codeMessage.S3': 'Update NFT successfully',
   'codeMessage.S4': 'Create Sale Orders successfully',
+  'codeMessage.S5': 'Create Tag successfully',
+  'codeMessage.S6': 'Update Tag successfully',
 
   //error message
   'codeMessage.E1': 'login failed',
@@ -23,4 +25,7 @@ export default {
   'codeMessage.E15': 'Get analytics failed',
   'codeMessage.E16': 'Get transactions failed',
   'codeMessage.E17': 'Get overview failed',
+  'codeMessage.E18': 'Error tag',
+  'codeMessage.E19': 'Create Tag failed',
+  'codeMessage.E20': 'Update Tag failed',
 };

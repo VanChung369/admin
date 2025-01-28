@@ -48,7 +48,6 @@ const NFTUploadFile = ({
 
   const previewContent = field?.value?.previewContent;
   const fileFormat = getFormatedFile(field?.value);
-
   useEffect(() => {
     return () => URL.revokeObjectURL(urlBlob);
   }, []);

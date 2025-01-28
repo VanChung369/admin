@@ -40,7 +40,7 @@ const { DEFAULT, CREATED_AT, NFT_ID, NFT_NAME, QUANTITY, UNIT_PRICE, SUB_TOTAL, 
 const { ASC, DESC, FIELD, ORDER } = ORDERS;
 const { FROM, UNTIL, SORT } = REVENUE_MANAGEMENT_FIELD;
 
-export const useGetListRevenues = (params?: any, visible?: boolean, exportData?: boolean) => {
+export const useGetListRevenues = (params?: any) => {
   const { address } = useAppSelector(selectedAddress.getAddress);
 
   const INDEXED_SORTER = {
