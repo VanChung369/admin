@@ -5,6 +5,8 @@ export default {
   'codeMessage.S4': 'Create Sale Orders successfully',
   'codeMessage.S5': 'Create Tag successfully',
   'codeMessage.S6': 'Update Tag successfully',
+  'codeMessage.S7': 'Create collection successfully',
+  'codeMessage.S8': 'Update collection successfully',
 
   //error message
   'codeMessage.E1': 'login failed',
@@ -28,4 +30,11 @@ export default {
   'codeMessage.E18': 'Error tag',
   'codeMessage.E19': 'Create Tag failed',
   'codeMessage.E20': 'Update Tag failed',
+  'codeMessage.E21': 'Create collection failed',
+  'codeMessage.E22': 'Update collection failed',
+
+  // server error
+  'codeMessage.E100': 'Data invalid',
+  'codeMessage.E101': 'No data exit',
+  'codeMessage.E102': 'Data exit',
 };

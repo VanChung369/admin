@@ -17,6 +17,7 @@ import revenue from './en-US/revenue';
 import dashboard from './en-US/dashboard';
 import notification from './en-US/notification';
 import tag from './en-US/tag';
+import collection from './en-US/collection';
 
 export default {
   'navBar.lang': 'Languages',
@@ -47,4 +48,5 @@ export default {
   ...dashboard,
   ...notification,
   ...tag,
+  ...collection,
 };
