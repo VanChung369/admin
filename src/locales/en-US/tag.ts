@@ -1,4 +1,3 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
 export default {
   'tag.management': 'Tag Management',
   'tag.management.edit': 'Edit',

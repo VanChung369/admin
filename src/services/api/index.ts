@@ -7,6 +7,7 @@ import * as notification from './notification';
 import * as NFT from './nft';
 import * as transaction from './transaction';
 import * as tag from './tag';
+import * as collection from './collection';
 
 export default {
   auth,
@@ -16,4 +17,5 @@ export default {
   NFT,
   transaction,
   tag,
+  collection,
 };

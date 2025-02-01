@@ -15,6 +15,7 @@ export default {
   'menu.sale': 'Sale Order',
   'menu.revenue': 'Revenue',
   'menu.tag': 'Tag',
+  'menu.collection': 'Collection',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',

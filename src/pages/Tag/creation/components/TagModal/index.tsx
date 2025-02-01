@@ -72,6 +72,12 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
     }
   }, [data, tagId]);
 
+  useEffect(() => {
+    if (!visible && !tagId) {
+      formikRef.current?.resetForm();
+    }
+  }, [visible, tagId]);
+
   const getOriginFile = (file: any) => get(file, ['fileList', 0, 'originFileObj']);
 
   useEffect(() => {
@@ -162,14 +168,22 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
   };
 
   return (
-    <ModalWrapper width={560} onClose={onClose} open={visible}>
+    <ModalWrapper width={560} onClose={onClose} open={visible} destroyOnClose={false}>
       <div className={styleLess.tag_modal}>
+        <div className={styleLess.tag_modal__title}>
+          {tagId
+            ? intl.formatMessage({
+                id: 'tag.management.edit',
+              })
+            : intl.formatMessage({ id: 'tag.management.create' })}
+        </div>
         <LoadingWrapper loading={loadingCreateTag || loadingEditTag || loading}>
           <Formik
             innerRef={formikRef}
             initialValues={initFormValue}
             onSubmit={handleSubmit}
             validationSchema={tagSchema(intl)}
+            enableReinitialize
           >
             {({ values }: any) => {
               return (
@@ -181,10 +195,11 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
                         label={intl.formatMessage({
                           id: 'tag.management.name',
                         })}
-                        required
                         placeholder={intl.formatMessage({
                           id: 'tag.management.name.placeholder',
                         })}
+                        disabled={data?.[ITEM_QUANTITY] > 0}
+                        required
                       />
                     </Col>
                     <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={16}>
@@ -195,6 +210,7 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
                         })}
                         typeInput={TYPE_INPUT.SWITCH}
                         className={styleLess.tag_modal_switch}
+                        disabled={data?.[ITEM_QUANTITY] > 0}
                         size={'large'}
                         required
                       />
@@ -216,6 +232,7 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
                           typeInput={null}
                           component={NFTUploadFile}
                           errorField={`${FILE}.previewContent`}
+                          disabled={data?.[ITEM_QUANTITY] > 0}
                         />
                       </div>
                     </Col>
@@ -228,7 +245,7 @@ const TagModal = ({ visible, onClose, setVisible, tagId }: TagProps) => {
                         : intl.formatMessage({ id: 'tag.management.create' })
                     }
                     htmlType="submit"
-                    disabled={loadingCreateTag}
+                    disabled={loadingCreateTag || data?.[ITEM_QUANTITY] > 0}
                     loading={loadingCreateTag}
                     variant="primary"
                   />

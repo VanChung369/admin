@@ -45,29 +45,3 @@ export const TAG_CREATE_FIELD = {
   IMAGE_MEDIUM: 'imageMedium',
   IMAGE_SMALL: 'imageSmall',
 };
-
-export const SALE_ORDER_CREATE_METHOD = [
-  {
-    title: 'sale.order.management.instant.sale',
-    description: 'sale.order.create.instant.sale.description',
-    value: 1,
-  },
-  {
-    title: 'sale.order.management.timed.auction',
-    description: 'sale.order.create.timed.auction.description',
-    value: 2,
-  },
-];
-
-export const SALE_ORDER_TYLE = [
-  {
-    name: 'sale.order.detail.sell',
-    value: 'sell',
-    color: 'red',
-  },
-  {
-    name: 'sale.order.detail.resell',
-    value: 'resell',
-    color: 'green',
-  },
-];

@@ -69,16 +69,22 @@ export default [
     component: './SaleOrder/creation',
   },
   {
-    path: ROUTES_PATH.REVENUE,
-    name: 'revenue',
-    icon: 'wallet',
-    component: './Revenue/management',
-  },
-  {
     path: ROUTES_PATH.TAG,
     name: 'tag',
     icon: 'tag',
     component: './Tag/management',
+  },
+  {
+    path: ROUTES_PATH.COLLECTION,
+    name: 'collection',
+    icon: 'profile',
+    component: './Collection/management',
+  },
+  {
+    path: ROUTES_PATH.REVENUE,
+    name: 'revenue',
+    icon: 'wallet',
+    component: './Revenue/management',
   },
   // {
   //   path: '/admin',

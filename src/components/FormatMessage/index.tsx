@@ -10,7 +10,7 @@ export default function formatMessage({
   const intl = getIntl(getLocale());
 
   message.config({
-    maxCount: 1,
+    maxCount: 2,
     duration: 3,
   });
 
