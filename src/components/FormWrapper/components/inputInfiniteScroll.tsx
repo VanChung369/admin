@@ -21,6 +21,7 @@ const InfinityScrollSelect: FC<{
   onChange?: any;
   setIsSearch?: any;
   emptyText?: string;
+  mode?: any;
   queryKey?: string[];
 }> = ({
   fetchData,
@@ -33,6 +34,7 @@ const InfinityScrollSelect: FC<{
   onChange,
   setIsSearch,
   emptyText,
+  mode,
   queryKey = ['infinityScrollSelect'],
   ...props
 }) => {
@@ -128,11 +130,20 @@ const InfinityScrollSelect: FC<{
         setValue(selectValue);
       }
     } else {
-      onChange({
-        item: dataShow.find((item: any) => item._id === selectValue),
-        form,
-        field,
-      });
+      if (mode == 'multiple') {
+        let filteredArray = selectValue.filter((item: any) => item !== null);
+        onChange({
+          item: filteredArray,
+          form,
+          field,
+        });
+      } else {
+        onChange({
+          item: dataShow.find((item: any) => item._id === selectValue),
+          form,
+          field,
+        });
+      }
     }
   };
 
@@ -140,6 +151,7 @@ const InfinityScrollSelect: FC<{
     <div className={className}>
       <Select
         {...field}
+        mode={mode}
         onPopupScroll={handleScroll}
         showSearch
         filterOption={true}
@@ -149,6 +161,7 @@ const InfinityScrollSelect: FC<{
         onChange={handleChange}
         optionLabelProp="name"
         optionFilterProp="name"
+        maxTagCount="responsive"
         {...props}
       >
         {dataShow?.map((item: any, index: any) => renderOption({ item, index }))}

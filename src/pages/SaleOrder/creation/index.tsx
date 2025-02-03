@@ -144,6 +144,7 @@ const SaleOrderCreation = () => {
             errorStartDate,
             errorEndDate,
           )}
+          enableReinitialize
         >
           {({ values }: any) => {
             setValueChange(checkValueChange(initFormValue, values));

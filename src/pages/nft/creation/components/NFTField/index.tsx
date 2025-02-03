@@ -3,12 +3,10 @@ import { useIntl } from '@umijs/max';
 import { Card, Col, Row } from 'antd';
 import { useFormikContext } from 'formik';
 import styleLess from './index.less';
-import { NFT_CREATE_FIELD, NFT_CREATION_ATTRIBUTE } from '@/pages/nft/constants';
+import { NFT_CREATE_FIELD, NFT_STANDARD } from '@/pages/nft/constants';
 import FormWrapper from '@/components/FormWrapper';
 import { ATTRIBUTE_EXCLUDE, LIST_PREVIEW_FILE, MAX_PREVIEW_SIZE, MEDIA } from '@/constants/file';
 import NFTUploadFile from '../UploadFile';
-import { useAppSelector } from '@/hooks';
-import selectedConfig from '@/redux/config/selector';
 import {
   MAX_LENGTH_DESCRIPTION,
   MAX_LENGTH_TOTAL_SUPPLY,
@@ -19,31 +17,35 @@ import {
 import { isString } from 'lodash';
 import { LENGTH_CONSTANTS } from '@/constants';
 import { PercentageOutlined } from '@ant-design/icons';
+import { fetchDataColleciton, fetchDataTag } from '@/pages/nft/hooks';
 
-const NFTField = () => {
+const NFTField = ({ listAttribute }: any) => {
   const intl = useIntl();
-  const { values } = useFormikContext() as any;
-  const { general = {} } = useAppSelector(selectedConfig.getConfig);
-  const { attributes = {} } = general;
-  const listAttribute = Object.values(attributes);
-  const attributeWithoutReduceAttribute = listAttribute.filter(
+  const { values, setFieldValue } = useFormikContext() as any;
+
+  const attributeWithoutReduceAttribute = listAttribute?.filter(
     (attribute: any) => !ATTRIBUTE_EXCLUDE.includes(attribute?.name),
   );
 
-  const excludeAttribute = listAttribute.filter((attribute: any) =>
-    ATTRIBUTE_EXCLUDE.includes(attribute?.name),
-  );
+  const formatTypeOptions = NFT_STANDARD.map((status) => ({
+    ...status,
+    name: intl.formatMessage({ id: status.label }),
+  }));
+
+  const handleChangeValueTag = (setFieldValue: any) => (value: any) => {
+    setFieldValue([NFT_CREATE_FIELD.TAG], [...value?.item]);
+  };
+
+  const handleChangeValueCollection = (setFieldValue: any) => (value: any) => {
+    setFieldValue([NFT_CREATE_FIELD.COLLECTION_ID], value?.item?._id);
+  };
 
   const nftFile = getFormatedFile(values?.file);
 
   const renderAttributeFormItem = (attributes: Array<any>, options?: any) => {
     return attributes?.map((attribute: any) => {
-      const label = intl.formatMessage({
-        id: NFT_CREATION_ATTRIBUTE?.[attribute?.name].text,
-      });
-      const placeholder = intl.formatMessage({
-        id: NFT_CREATION_ATTRIBUTE?.[attribute?.name].placeholder,
-      });
+      const label = attribute?.name;
+      const placeholder = attribute?.name;
       const typeInput = attribute?.type?.toUpperCase();
       const selectOptions =
         typeInput === TYPE_INPUT.SELECT
@@ -64,7 +66,6 @@ const NFTField = () => {
             placeholder={placeholder}
             typeInput={typeInput}
             options={selectOptions}
-            thousandSeparator
             maxLength={LENGTH_CONSTANTS.MAX_LENGTH_INPUT}
           />
         </Col>
@@ -120,8 +121,21 @@ const NFTField = () => {
 
       <Card className={styleLess.nft_creation__attribute}>
         <Row gutter={20}>
-          {renderAttributeFormItem(excludeAttribute, { md: 24, xs: 24 })}
-
+          <Col md={24} xs={24}>
+            <FormWrapper
+              name={NFT_CREATE_FIELD.TYPE}
+              label={intl.formatMessage({
+                id: 'NFT.create.type',
+              })}
+              placeholder={intl.formatMessage({
+                id: 'NFT.create.type.placeholder',
+              })}
+              typeInput={TYPE_INPUT.SELECT}
+              options={formatTypeOptions}
+              required
+              allowClear
+            />
+          </Col>
           <Col md={24} xs={24}>
             <FormWrapper
               name={NFT_CREATE_FIELD.NAME}
@@ -145,7 +159,6 @@ const NFTField = () => {
                 id: 'NFT.create.royalties.placeholder',
               })}
               typeInput={TYPE_INPUT.NUMBER}
-              thousandSeparator
               decimalScale={NFT_DECIMAL_SCALE}
               isAllowed={limitPercentage}
               appendInput={
@@ -188,7 +201,43 @@ const NFTField = () => {
               showCount
             />
           </Col>
-          {renderAttributeFormItem(attributeWithoutReduceAttribute, { md: 12, xs: 24 })}
+          <Col md={12} xs={24}>
+            <FormWrapper
+              mode={'multiple'}
+              typeInput={TYPE_INPUT.SELECT_INFINITY_SCROLL}
+              placeholder={intl.formatMessage({
+                id: 'NFT.create.tag',
+              })}
+              required
+              name={NFT_CREATE_FIELD.TAG}
+              label={intl.formatMessage({
+                id: 'NFT.create.tag',
+              })}
+              fetchData={fetchDataTag}
+              queryKey={['infinityScrollSelectTag']}
+              onChange={handleChangeValueTag(setFieldValue)}
+              allowClear
+            />
+          </Col>
+          <Col md={12} xs={24}>
+            <FormWrapper
+              typeInput={TYPE_INPUT.SELECT_INFINITY_SCROLL}
+              placeholder={intl.formatMessage({
+                id: 'NFT.create.collection',
+              })}
+              required
+              name={NFT_CREATE_FIELD.COLLECTION_ID}
+              label={intl.formatMessage({
+                id: 'NFT.create.collection',
+              })}
+              fetchData={fetchDataColleciton}
+              queryKey={['infinityScrollSelectCollection']}
+              onChange={handleChangeValueCollection(setFieldValue)}
+              allowClear
+            />
+          </Col>
+          {listAttribute &&
+            renderAttributeFormItem(attributeWithoutReduceAttribute, { md: 12, xs: 24 })}
         </Row>
       </Card>
     </div>

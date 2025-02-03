@@ -19,6 +19,10 @@ import selectedAddress from '@/redux/address/selector';
 import { omit } from 'lodash';
 import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
 import { createTransactions, updateTransactions } from '@/services/api/transaction';
+import { getTags } from '@/services/api/tag';
+import { TAG_STATUS } from '@/pages/Tag/constants';
+import { getCollections } from '@/services/api/collection';
+import { COLLECTION_STATUS } from '@/pages/Collection/constants';
 
 // create or update nft
 export interface paramCreateOrUpdateNFT {
@@ -350,4 +354,36 @@ export const useUpdateTransaction = () => {
     loading: handleUpdateTransaction.isPending,
     onUpdateTransaction: handleUpdateTransaction.mutate,
   };
+};
+
+export const fetchDataTag = async ({ limit, offset, searchValue }: any) => {
+  const param = {
+    keyword: searchValue,
+    page: offset,
+    limit: limit,
+    status: TAG_STATUS[1].value,
+  };
+  try {
+    const response = await getTags(param);
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { docs: [], totalDocs: 0 };
+  }
+};
+
+export const fetchDataColleciton = async ({ limit, offset, searchValue }: any) => {
+  const param = {
+    keyword: searchValue,
+    page: offset,
+    limit: limit,
+    status: COLLECTION_STATUS[1].value,
+  };
+  try {
+    const response = await getCollections(param);
+    return response;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { docs: [], totalDocs: 0 };
+  }
 };

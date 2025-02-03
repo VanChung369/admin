@@ -16,16 +16,19 @@ export const NFT_CREATE_FIELD = {
   CURRENCY: 'currency',
   IMAGE_MEDIUM: 'imageMedium',
   IMAGE_SMALL: 'imageSmall',
+  TAG: 'tag',
+  COLLECTION_ID: 'collectionId',
+  TYPE: 'type',
 };
 
 export const PARAMS_CONFIG = {
   TOKEN: 'token',
   SALE_ORDER: 'saleOrder',
   ATTRIBUTES: 'attributes',
+  TAG_ARRAY: 'tag[]',
 };
 
 export const NFT_ATTRIBUTE_CREATED_FIELD = {
-  TYPE: 'type',
   CLASS: 'class',
   GOD: 'god',
   MYTHOLOGY: 'mythology',
@@ -33,10 +36,6 @@ export const NFT_ATTRIBUTE_CREATED_FIELD = {
 };
 
 export const NFT_CREATION_ATTRIBUTE = {
-  type: {
-    text: 'NFT.create.type',
-    placeholder: 'NFT.create.tye.placeholder',
-  },
   mythology: {
     text: 'NFT.create.mythology',
     placeholder: 'NFT.create.mythology.placeholder',

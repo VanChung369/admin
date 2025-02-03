@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Col, Row } from 'antd';
-import { NFT_CREATE_FIELD, NFT_ZERO_ID } from '@/pages/nft/constants';
-import { useAppSelector } from '@/hooks';
-import selectedConfig from '@/redux/config/selector';
+import { NFT_CREATE_FIELD } from '@/pages/nft/constants';
 import styleLess from './index.less';
 import EllipsisText from '../EllipsisText';
 import { useIntl, useModel } from '@umijs/max';

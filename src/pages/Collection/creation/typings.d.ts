@@ -22,4 +22,5 @@ interface PropertyFormProps {
   dataProperties?: any;
   properties?: any;
   setProperties?: any;
+  disabled?: boolean;
 }

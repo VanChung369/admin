@@ -19,7 +19,17 @@ import BigNumber from 'bignumber.js';
 import { NFT_ATTRIBUTE_CREATED_FIELD, NFT_CREATE_FIELD } from '@/pages/nft/constants';
 import { ethers } from 'ethers';
 
-const { FILE, FILE_PREVIEW, TOTAL_SUPPLY, CURRENCY, IMAGE_MEDIUM, IMAGE_SMALL } = NFT_CREATE_FIELD;
+const {
+  FILE,
+  FILE_PREVIEW,
+  TOTAL_SUPPLY,
+  CURRENCY,
+  IMAGE_MEDIUM,
+  IMAGE_SMALL,
+  TAG,
+  COLLECTION_ID,
+  TYPE,
+} = NFT_CREATE_FIELD;
 
 const { MIN_VALUE } = LENGTH_CONSTANTS;
 
@@ -70,15 +80,22 @@ export const checkValueNftChange = (preVal: object, newVal: object, isEditing?: 
   if (isEditing) {
     newPrevNft = {
       ...getDefaultFieldNFTValues(preVal),
-      ...getAttributeFieldNFTValues(preVal),
+      ...(getAttributeFieldNFTValues(preVal) || {}),
     };
   }
 
+  const NFT_ATTRIBUTE = (preVal as any)?.attributes
+    ? Object?.keys((preVal as any)?.attributes)?.reduce((acc: any, key) => {
+        acc[key.toUpperCase()] = key;
+        return acc;
+      }, {})
+    : {};
+
   const defaultPrevValues = getFieldValues(newPrevNft, NFT_CREATE_FIELD) as object;
-  const attributePrevValues = getFieldValues(newPrevNft) as object;
+  const attributePrevValues = getFieldValues(newPrevNft, NFT_ATTRIBUTE) as object;
 
   const defaultNewValues = getFieldValues(newVal, NFT_CREATE_FIELD) as object;
-  const attributeNewValues = getFieldValues(newVal) as object;
+  const attributeNewValues = getFieldValues(newVal, NFT_ATTRIBUTE) as object;
 
   const prevNft = { ...defaultPrevValues, ...attributePrevValues };
   const newNft = { ...defaultNewValues, ...attributeNewValues };
@@ -91,7 +108,16 @@ export const checkValueChange = (preVal: object, newVal: object) => {
 };
 
 export const getAttributeFieldNFTValues = (values: any) => {
-  return Object.values(NFT_ATTRIBUTE_CREATED_FIELD).reduce((acc: any, field: string | any) => {
+  if (!values?.attributes || typeof values.attributes !== 'object') {
+    return {};
+  }
+
+  const NFT_ATTRIBUTE = Object?.keys(values?.attributes)?.reduce((acc: any, key) => {
+    acc[key.toUpperCase()] = key;
+    return acc;
+  }, {});
+
+  return Object.values(NFT_ATTRIBUTE).reduce((acc: any, field: string | any) => {
     acc[field] = values?.attributes?.[field]?.text || values?.attributes?.[field];
     return acc;
   }, {});
@@ -100,6 +126,33 @@ export const getAttributeFieldNFTValues = (values: any) => {
 export const getDuration = (from: any, until: any) => {
   const duration = moment.duration(until.diff(from));
   return duration;
+};
+
+export const transformDataProprety = (data: any) => {
+  const transformed = [];
+
+  for (const key in data) {
+    const item = data[key];
+    const newItem = {
+      type: item.type,
+      value: [],
+      required: item.required,
+      name: key,
+      typeUser: item.typeUser || '',
+    };
+
+    if (item.type === 'select') {
+      newItem.value = item.value.map((v: any) => ({
+        text: v.text,
+      }));
+    } else {
+      newItem.value = item.value;
+    }
+
+    transformed.push(newItem);
+  }
+
+  return transformed;
 };
 
 export const getDefaultFieldNFTValues = (values: any) => {
@@ -128,6 +181,15 @@ export const getDefaultFieldNFTValues = (values: any) => {
         break;
       case CURRENCY:
         acc[CURRENCY] = TOKEN_SUPPORT.value;
+        break;
+      case TAG:
+        acc[TAG] = values?.[TAG]?.map((tag: any) => tag.id);
+        break;
+      case COLLECTION_ID:
+        acc[COLLECTION_ID] = values?.[COLLECTION_ID];
+        break;
+      case TYPE:
+        acc[TYPE] = values?.token?.standard;
         break;
       default:
         acc[field] = values?.[field]?.toString() || '';

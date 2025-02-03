@@ -208,6 +208,7 @@ const CollectionModal = ({ visible, onClose, setVisible, collectionId }: Collect
                         typeInput={TYPE_INPUT.SELECT}
                         required
                         allowClear
+                        disabled={data?.[ITEM_QUANTITY] > 0}
                       />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
@@ -225,6 +226,7 @@ const CollectionModal = ({ visible, onClose, setVisible, collectionId }: Collect
                         })}
                         maxLength={MAX_LENGTH_DESCRIPTION}
                         showCount
+                        disabled={data?.[ITEM_QUANTITY] > 0}
                       />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
@@ -233,6 +235,7 @@ const CollectionModal = ({ visible, onClose, setVisible, collectionId }: Collect
                         dataProperties={data?.[PROPERTIES]}
                         properties={properties}
                         setProperties={setProperties}
+                        disabled={data?.[ITEM_QUANTITY] > 0}
                       />
                     </Col>
                   </Row>
