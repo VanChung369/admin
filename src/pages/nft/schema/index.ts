@@ -11,9 +11,7 @@ import {
 import { MEDIA } from '@/constants/file';
 import { isAddress } from '@/utils/utils';
 
-const { NAME, ROYALTYFEE, TOTAL_SUPPLY, DESCRIPTION, FILE, FILE_PREVIEW } = NFT_CREATE_FIELD;
-
-const { CLASS, GOD, LEVEL, MYTHOLOGY, TYPE } = NFT_ATTRIBUTE_CREATED_FIELD;
+const { NAME, ROYALTYFEE, TOTAL_SUPPLY, DESCRIPTION, FILE, FILE_PREVIEW, TYPE } = NFT_CREATE_FIELD;
 
 const { QUANTITY, TO_ADDRESS } = NFT_MINTED_FIELD;
 
@@ -111,34 +109,34 @@ export const nftSchema = (intl: any) => {
           id: 'NFT.decription.error.required',
         }),
       ),
-    [MYTHOLOGY]: string()
-      .nullable()
-      .required(
-        intl.formatMessage({
-          id: 'NFT.mythology.error.required',
-        }),
-      ),
-    [GOD]: string()
-      .trim()
-      .required(
-        intl.formatMessage({
-          id: 'NFT.god.error.required',
-        }),
-      ),
-    [LEVEL]: string()
-      .nullable()
-      .required(
-        intl.formatMessage({
-          id: 'NFT.level.error.required',
-        }),
-      ),
-    [CLASS]: string()
-      .nullable()
-      .required(
-        intl.formatMessage({
-          id: 'NFT.class.error.required',
-        }),
-      ),
+    // [MYTHOLOGY]: string()
+    //   .nullable()
+    //   .required(
+    //     intl.formatMessage({
+    //       id: 'NFT.mythology.error.required',
+    //     }),
+    //   ),
+    // [GOD]: string()
+    //   .trim()
+    //   .required(
+    //     intl.formatMessage({
+    //       id: 'NFT.god.error.required',
+    //     }),
+    //   ),
+    // [LEVEL]: string()
+    //   .nullable()
+    //   .required(
+    //     intl.formatMessage({
+    //       id: 'NFT.level.error.required',
+    //     }),
+    //   ),
+    // [CLASS]: string()
+    //   .nullable()
+    //   .required(
+    //     intl.formatMessage({
+    //       id: 'NFT.class.error.required',
+    //     }),
+    //   ),
   });
 };
 

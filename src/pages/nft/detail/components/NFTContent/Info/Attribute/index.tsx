@@ -14,16 +14,14 @@ const Attribute = () => {
   const { id } = useParams();
   const query: any = queryClient.getQueryData(['getNFT', id]);
 
-  const renderAttributeItem = Object.keys(NFT_DETAIL_ATTRIBUTE).map(
+  const renderAttributeItem = Object.keys(query?.attributes || {}).map(
     (attribute: any, index: number) => {
       const valueAttribute = getValueAttribute(query?.attributes, attribute);
-
-      const label = intl.formatMessage({ id: NFT_DETAIL_ATTRIBUTE?.[attribute]?.text });
 
       return (
         <Col lg={6} md={12} sm={12} key={index}>
           <ItemWithLabel
-            label={label}
+            label={attribute}
             className={styleLess.nft_detail_attribute__item}
             labelClassName={styleLess.nft_detail_attribute__label}
             contentClass={styleLess.nft_detail_attribute__content}

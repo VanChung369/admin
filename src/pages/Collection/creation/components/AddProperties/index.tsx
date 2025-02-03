@@ -14,6 +14,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   dataProperties,
   properties,
   setProperties,
+  disabled,
 }) => {
   const intl = useIntl();
 
@@ -106,7 +107,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             type="inner"
             style={{ marginBottom: 16 }}
             extra={
-              <Button icon={<DeleteOutlined />} onClick={() => handleRemoveProperty(key)} danger>
+              <Button
+                icon={<DeleteOutlined />}
+                onClick={() => handleRemoveProperty(key)}
+                danger
+                disabled={disabled}
+              >
                 {intl.formatMessage({ id: 'collection.management.delete.property' })}
               </Button>
             }
@@ -121,6 +127,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                 placeholder={intl.formatMessage({
                   id: 'collection.management.display.name.placeholder',
                 })}
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -129,6 +136,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                 value={property.type}
                 onChange={(value) => handlePropertyChange(key, 'type', value)}
                 options={COLLECTION_PROPERTIES_TYPE}
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -142,12 +150,14 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                       placeholder={intl.formatMessage({
                         id: 'collection.management.values.placeholder',
                       })}
+                      disabled={disabled}
                     />
                     <Button
                       icon={<DeleteOutlined />}
                       onClick={() => handleRemoveValue(key, valueIndex)}
                       danger
                       size="small"
+                      disabled={disabled}
                     />
                   </Space>
                 ))
@@ -158,10 +168,16 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                   placeholder={intl.formatMessage({
                     id: 'collection.management.values.placeholder',
                   })}
+                  disabled={disabled}
                 />
               )}
               {property.type === 'select' && (
-                <Button type="dashed" onClick={() => handleAddValue(key)} icon={<PlusOutlined />}>
+                <Button
+                  type="dashed"
+                  onClick={() => handleAddValue(key)}
+                  icon={<PlusOutlined />}
+                  disabled={disabled}
+                >
                   {intl.formatMessage({
                     id: 'collection.management.add.value',
                   })}
@@ -172,6 +188,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             <Form.Item>
               <Checkbox
                 checked={property.required}
+                disabled={disabled}
                 onChange={(e) => handlePropertyChange(key, 'required', e.target.checked)}
               >
                 Required
@@ -189,13 +206,20 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
                 placeholder={intl.formatMessage({
                   id: 'collection.management.type.user.placeholder',
                 })}
+                disabled={disabled}
               />
             </Form.Item>
           </Card>
         );
       })}
       {Object.keys(properties).length < 4 && (
-        <Button type="dashed" onClick={handleAddProperty} block icon={<PlusOutlined />}>
+        <Button
+          type="dashed"
+          onClick={handleAddProperty}
+          block
+          icon={<PlusOutlined />}
+          disabled={disabled}
+        >
           {intl.formatMessage({
             id: 'collection.management.add.property',
           })}

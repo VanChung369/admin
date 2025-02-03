@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { Col, Row } from 'antd';
@@ -10,13 +10,11 @@ import { nftSchema } from '../schema';
 import NFTField from './components/NFTField';
 import NFTButton from './components/NFTButton';
 import NFTPreview from './components/NFTPreview';
-import { useAppSelector } from '@/hooks';
-import selectedConfig from '@/redux/config/selector';
 import { useCreateOrUpdateNFT, useGetNFT } from '../hooks';
 import ROUTES_PATH from '@/constants/routesPath';
 import { useWarnModalPage } from '@/hooks/hook-customs/useWarnModal';
 import { TYPE_INPUT } from '@/constants/input';
-import { get, trim } from 'lodash';
+import { get, trim, uniqBy } from 'lodash';
 import { MEDIA } from '@/constants/file';
 import {
   checkValueNftChange,
@@ -24,10 +22,12 @@ import {
   getAttributeFieldNFTValues,
   getDefaultFieldNFTValues,
   getFormatedFile,
+  transformDataProprety,
 } from '@/utils/utils';
 import formatMessage from '@/components/FormatMessage';
 import { PageContainer } from '@ant-design/pro-components';
 import ModalUnsavedChange from './components/ModalUnsaved';
+import { useQueryClient } from '@tanstack/react-query';
 
 const {
   NAME,
@@ -38,9 +38,12 @@ const {
   IMAGE_SMALL,
   FILE,
   FILE_PREVIEW,
+  TAG,
+  COLLECTION_ID,
+  TYPE,
 } = NFT_CREATE_FIELD;
 
-const { TOKEN, ATTRIBUTES } = PARAMS_CONFIG;
+const { TOKEN, ATTRIBUTES, TAG_ARRAY } = PARAMS_CONFIG;
 
 const initFormValue = {
   [NAME]: '',
@@ -57,6 +60,9 @@ const initFormValue = {
   [ROYALTYFEE]: '',
   [TOTAL_SUPPLY]: '',
   [DESCRIPTION]: '',
+  [TAG]: [],
+  [COLLECTION_ID]: '',
+  [TYPE]: null,
 } as any;
 
 const NFTCreation = () => {
@@ -64,6 +70,9 @@ const NFTCreation = () => {
   const formikRef = useRef<any>(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const query: any = queryClient.getQueryData(['infinityScrollSelectCollection', '']);
+  const [dataAttribute, setDataAttribute] = useState<any>();
   const {
     loading: loadingCreateNFT,
     loadingEditNFT,
@@ -71,10 +80,6 @@ const NFTCreation = () => {
     onEditNFT,
   } = useCreateOrUpdateNFT(id);
   const { loading, error, data } = useGetNFT(id);
-
-  const { general = {} } = useAppSelector(selectedConfig.getConfig);
-  const { attributes = [] } = general;
-
   const backUrl = id ? `${ROUTES_PATH.NFT_DETAIL}/${id}` : ROUTES_PATH.NFT;
 
   useEffect(() => {
@@ -97,23 +102,25 @@ const NFTCreation = () => {
   } = useWarnModalPage(backUrl);
 
   useEffect(() => {
-    const defaultAttributesValues = attributes.reduce((acc: any, attribute: any) => {
-      const typeInput = attribute?.type?.toUpperCase();
-      const fieldValue = typeInput === TYPE_INPUT.SELECT ? null : '';
+    if (dataAttribute && !id) {
+      const defaultAttributesValues = dataAttribute.reduce((acc: any, attribute: any) => {
+        const typeInput = attribute?.type?.toUpperCase();
+        const fieldValue = typeInput === TYPE_INPUT.SELECT ? null : '';
 
-      acc[`${attribute?.name}`] = fieldValue;
-      initFormValue[`${attribute?.name}`] = fieldValue;
-      return acc;
-    }, {});
+        acc[`${attribute?.name}`] = fieldValue;
+        initFormValue[`${attribute?.name}`] = fieldValue;
+        return acc;
+      }, {});
 
-    formikRef?.current?.setValues({
-      ...formikRef?.current?.values,
-      ...defaultAttributesValues,
-    });
-  }, [attributes, formikRef]);
+      formikRef?.current?.setValues({
+        ...formikRef?.current?.values,
+        ...defaultAttributesValues,
+      });
+    }
+  }, [query, dataAttribute, formikRef, id]);
 
   useEffect(() => {
-    if (id) {
+    if (id && data) {
       const attributeFieldValues = getAttributeFieldNFTValues(data) as object;
       const defaultFieldValues = getDefaultFieldNFTValues(data) as object;
 
@@ -122,7 +129,7 @@ const NFTCreation = () => {
         ...attributeFieldValues,
       });
     }
-  }, [data, attributes, id]);
+  }, [data, id]);
 
   const getOriginFile = (file: any) => get(file, ['fileList', 0, 'originFileObj']);
 
@@ -165,7 +172,7 @@ const NFTCreation = () => {
       image = getOriginFile(filePreview);
     }
 
-    const attributesData = attributes.reduce((acc: any, attribute: any) => {
+    const attributesData = dataAttribute.reduce((acc: any, attribute: any) => {
       acc[`${ATTRIBUTES}[${attribute?.name}]`] = values?.[attribute?.name];
       return acc;
     }, {});
@@ -179,6 +186,9 @@ const NFTCreation = () => {
       [IMAGE_SMALL]: image && imageSmall,
       [DESCRIPTION]: trim(values?.[DESCRIPTION]),
       [ROYALTYFEE]: values?.[ROYALTYFEE],
+      [TAG]: values?.[TAG],
+      [COLLECTION_ID]: values?.[COLLECTION_ID],
+      [TYPE]: values?.[TYPE],
       [`${TOKEN}[${TOTAL_SUPPLY}]`]: values?.[TOTAL_SUPPLY],
       ...attributesData,
     } as any;
@@ -187,7 +197,13 @@ const NFTCreation = () => {
 
     const formData = new FormData();
     for (const key in formatData) {
-      formData.append(key, formatData[key]);
+      if (Array.isArray(formatData[key])) {
+        formatData[key].forEach((item: any, index: number) => {
+          formData.append(`${TAG_ARRAY}`, item);
+        });
+      } else {
+        formData.append(key, formatData[key]);
+      }
     }
 
     if (id) {
@@ -211,7 +227,7 @@ const NFTCreation = () => {
         <PageHeader
           showBack
           title={intl.formatMessage({
-            id: 'NFT.create',
+            id: id ? 'NFT.update' : 'NFT.create',
           })}
           onBack={onBackClick}
         />
@@ -221,14 +237,28 @@ const NFTCreation = () => {
           initialValues={initFormValue}
           onSubmit={handleSubmit}
           validationSchema={nftSchema(intl)}
+          enableReinitialize
         >
           {({ values }: any) => {
+            useEffect(() => {
+              const dataCollection: any = uniqBy(
+                query?.pages.flatMap((page: any) => page?.docs) || [],
+                '_id',
+              ).find((item: any) => item._id === values?.[NFT_CREATE_FIELD.COLLECTION_ID]);
+
+              const listAttribute = dataCollection
+                ? Object.values(transformDataProprety(dataCollection?.properties))
+                : [];
+
+              setDataAttribute(listAttribute);
+            }, [query, values?.[NFT_CREATE_FIELD.COLLECTION_ID]]);
+
             setValueChange(checkValueNftChange(id ? data : initFormValue, values, !!id));
             return (
               <Form>
                 <Row gutter={20} justify="space-between">
                   <Col xs={24} sm={24} md={12} lg={16} xl={16} xxl={16}>
-                    <NFTField />
+                    <NFTField listAttribute={dataAttribute} />
                     <NFTButton isSubmit={loadingCreateNFT} onDiscard={onDiscard} id={id} />
                   </Col>
                   <Col xs={24} sm={24} md={12} lg={8} xl={8} xxl={8}>
