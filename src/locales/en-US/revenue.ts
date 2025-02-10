@@ -79,6 +79,6 @@ export default {
   'revenue.export.quantity': 'Quantity',
   'revenue.export.currency': 'Currency',
 
-  'revenue.export.start.date,error.required': 'Start date is required',
-  'revenue.export.end.date,error.required': 'End date is required',
+  'revenue.export.start.date.error.required': 'Start date is required',
+  'revenue.export.end.date.error.required': 'End date is required',
 };

@@ -9,6 +9,8 @@ export default {
   'menu.register-result': 'Kết quả đăng ký',
   'menu.dashboard': 'Bảng điều khiển',
   'menu.dashboard.analysis': 'Trang phân tích',
+  'menu.tag': 'Thẻ',
+  'menu.collection': 'Bộ sưu tập',
   'menu.dashboard.monitor': 'Trang theo dõi',
   'menu.dashboard.workplace': 'Nơi làm việc',
   'menu.nft': 'NFT',

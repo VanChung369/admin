@@ -11,7 +11,13 @@ import settings from './vi-VN/settings';
 import login from './vi-VN/login';
 import nft from './vi-VN//NFT';
 import password from './vi-VN/password';
-import revenue from './en-US/revenue';
+import revenue from './vi-VN/revenue';
+import collection from './vi-VN/collection';
+import tag from './vi-VN/tag';
+import dashboard from './vi-VN/dashboard';
+import notification from './vi-VN/notification';
+import modal from './vi-VN/modal';
+import saleOrder from './vi-VN/saleOrder';
 
 export default {
   'navBar.lang': 'ngôn ngữ',
@@ -38,4 +44,10 @@ export default {
   ...nft,
   ...password,
   ...revenue,
+  ...collection,
+  ...dashboard,
+  ...tag,
+  ...notification,
+  ...modal,
+  ...saleOrder,
 };

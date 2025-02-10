@@ -71,6 +71,8 @@ export default {
   'NFT.mint.quantity.max': 'Quantity cannot be greater than {number}',
   'NFT.mint.to.address.required': 'Recipient’s Wallet Address is required',
   'NFT.mint.is.address': 'Wallet address is invalid',
+  'NFT.tag.error.required': 'Tag is required',
+  'NFT.collection.error.required': 'Collection is required',
 
   // nft management
 
