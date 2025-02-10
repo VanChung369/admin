@@ -27,7 +27,6 @@ export const collectionSchema = (intl: any) => {
         id: 'collection.description.error.required',
       }),
     ),
-
     [PROPERTIES]: object()
       .test(
         'is-not-empty',

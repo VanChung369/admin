@@ -6,14 +6,14 @@ export const getExportModalSchema = (intl: any) => {
       .nullable()
       .required(
         intl.formatMessage({
-          id: 'revenue.export.start.date,error.required',
+          id: 'revenue.export.start.date.error.required',
         }),
       ),
     until: date()
       .nullable()
       .required(
         intl.formatMessage({
-          id: 'revenue.export.end.date,error.required',
+          id: 'revenue.export.end.date.error.required',
         }),
       ),
   });
