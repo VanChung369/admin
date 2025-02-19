@@ -28,19 +28,23 @@ const Resell = ({ values, onSubmit, getListColumn, listColumn, columnsItem }: Re
   const secondarySaleItem = [
     {
       label: 'revenue.management.secondary.sales.revenue',
-      value: formatCurrency(getNumber(data?.revenue?.secondarySale), { isNotCompare: true }),
+      value: formatCurrency(getNumber(data?.summary?.revenue?.secondarySale), {
+        isNotCompare: true,
+      }),
       toolTip: intl.formatMessage({ id: 'revenue.management.secondary.revenue.tooltip' }),
       appIcon: CoinIcon,
       currency: CURRENCY,
-      usd: getNumber(data?.revenue?.secondarySaleUsd),
+      usd: getNumber(data?.summary?.revenue?.secondarySaleUsd),
     },
     {
       label: 'revenue.management.secondary.sales.volume',
-      value: formatCurrency(getNumber(data?.volume?.secondarySale), { isNotCompare: true }),
+      value: formatCurrency(getNumber(data?.summary?.volume?.secondarySale), {
+        isNotCompare: true,
+      }),
       toolTip: intl.formatMessage({ id: 'revenue.management.secondary.volume.tooltip' }),
       appIcon: CoinIcon,
       currency: CURRENCY,
-      usd: getNumber(data?.volume?.secondarySaleUsd),
+      usd: getNumber(data?.summary?.volume?.secondarySaleUsd),
     },
     {
       label: 'revenue.management.secondary.transactions',
@@ -48,7 +52,7 @@ const Resell = ({ values, onSubmit, getListColumn, listColumn, columnsItem }: Re
     },
     {
       label: 'revenue.management.secondary.nfts.sold',
-      value: getNumber(data?.nftSold),
+      value: getNumber(data?.summary?.nftSold),
     },
   ];
 

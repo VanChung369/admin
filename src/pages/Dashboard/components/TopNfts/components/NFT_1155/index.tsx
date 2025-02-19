@@ -74,7 +74,7 @@ const NFT_1155 = () => {
         scroll={{ x: 390 }}
         isPagination={false}
         emptyText={intl.formatMessage({ id: 'common.text.no.data' })}
-        rowKey={(row: any) => row?._id}
+        rowKey={(row: any) => row?._id?.id}
       />
     </Fragment>
   );
