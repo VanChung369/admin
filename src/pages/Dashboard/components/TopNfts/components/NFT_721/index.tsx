@@ -1,6 +1,6 @@
 import { useGetListNFTs } from '@/pages/nft/hooks';
 import { Link, useIntl } from '@umijs/max';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import NumberWrapper from '@/components/NumberWrapper';
 import ROUTES_PATH from '@/constants/routesPath';
 import ResponsiveImage from '@/components/ResponsiveImage';
@@ -75,7 +75,7 @@ const NFT_721 = () => {
         scroll={{ x: 390 }}
         isPagination={false}
         emptyText={intl.formatMessage({ id: 'common.text.no.data' })}
-        rowKey={(row: any) => row?._id}
+        rowKey={(row: any) => row?._id?.id}
       />
     </Fragment>
   );

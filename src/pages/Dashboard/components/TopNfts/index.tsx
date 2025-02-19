@@ -40,6 +40,7 @@ const TopNFTs: React.FC = () => {
             {intl.formatMessage({ id: 'dashboard.top.nfts' })}
           </div>
         }
+        destroyInactiveTabPane
         onChangeTab={handleChangeTab}
         activeKey={activeTab}
         listTab={listTab}

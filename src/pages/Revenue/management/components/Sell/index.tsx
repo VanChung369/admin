@@ -28,19 +28,19 @@ const Sell = ({ values, onSubmit, getListColumn, listColumn, columnsItem }: Sell
   const primarySaleItem = [
     {
       label: 'revenue.management.primary.sale.revenue',
-      value: formatCurrency(getNumber(data?.revenue?.primarySale), { isNotCompare: true }),
+      value: formatCurrency(getNumber(data?.summary?.revenue?.primarySale), { isNotCompare: true }),
       toolTip: intl.formatMessage({ id: 'revenue.management.primary.revenue.tooltip' }),
       appIcon: CoinIcon,
       currency: CURRENCY,
-      usd: getNumber(data?.revenue?.primarySaleUsd),
+      usd: getNumber(data?.summary?.revenue?.primarySaleUsd),
     },
     {
       label: 'revenue.management.primary.sale.volume',
-      value: formatCurrency(getNumber(data?.volume?.primarySale), { isNotCompare: true }),
+      value: formatCurrency(getNumber(data?.summary?.volume?.primarySale), { isNotCompare: true }),
       toolTip: intl.formatMessage({ id: 'revenue.management.primary.volume.tooltip' }),
       appIcon: CoinIcon,
       currency: CURRENCY,
-      usd: getNumber(data?.volume?.primarySaleUsd),
+      usd: getNumber(data?.summary?.volume?.primarySaleUsd),
     },
     {
       label: 'revenue.management.primary.transactions',
@@ -48,7 +48,7 @@ const Sell = ({ values, onSubmit, getListColumn, listColumn, columnsItem }: Sell
     },
     {
       label: 'revenue.management.primary.nfts.sold',
-      value: formatNumberWithSuffix(getNumber(data?.nftSold)),
+      value: formatNumberWithSuffix(getNumber(data?.summary?.nftSold)),
     },
   ];
   return (

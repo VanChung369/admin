@@ -2,7 +2,7 @@ import { api } from '..';
 
 export async function getCollections(params: any, options?: { [key: string]: any }) {
   return api.get<{ data: any }>({
-    endpoint: '/api/collection',
+    endpoint: '/api/admin/collection',
     params: params,
     options: options,
   });
@@ -10,7 +10,7 @@ export async function getCollections(params: any, options?: { [key: string]: any
 
 export async function createCollection(body: API.CreateTag, options?: { [key: string]: any }) {
   return api.post<any>({
-    endpoint: '/api/collection',
+    endpoint: '/api/admin/collection',
     body: body,
     options: options,
   });
@@ -22,7 +22,7 @@ export async function editCollection(
   options?: { [key: string]: any },
 ) {
   return api.patch<any>({
-    endpoint: `/api/collection/${id}`,
+    endpoint: `/api/admin/collection/${id}`,
     body: body,
     options: options,
   });
@@ -33,7 +33,7 @@ export async function getCollection(
   options?: { [key: string]: any },
 ): Promise<Record<string, any>> {
   return api.get<Record<string, any>>({
-    endpoint: `/api/collection/${id}`,
+    endpoint: `/api/admin/collection/${id}`,
     options: options,
   });
 }

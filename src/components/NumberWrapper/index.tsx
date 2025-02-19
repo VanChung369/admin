@@ -346,19 +346,22 @@ class NumberWrapper extends React.Component<any> {
     const { format, prefix, suffix } = this.props;
 
     if (!format && val) {
-      const isNegative = val[0] === '-';
+      let isNegative = val[0] === '-';
+      if (isNegative) {
+        val = val.substring(1);
+      }
 
-      if (isNegative) val = val.substring(1, val.length);
+      if (prefix && val.indexOf(prefix) === 0) {
+        val = val.substring(prefix.length);
+      }
 
-      val = prefix && val.indexOf(prefix) === 0 ? val.substring(prefix.length, val.length) : val;
+      if (suffix && val.endsWith(suffix)) {
+        val = val.substring(0, val.length - suffix.length);
+      }
 
-      const suffixLastIndex = val.lastIndexOf(suffix);
-      val =
-        suffix && suffixLastIndex !== -1 && suffixLastIndex === val.length - suffix.length
-          ? val.substring(0, suffixLastIndex)
-          : val;
-
-      if (isNegative) val = '-' + val;
+      if (isNegative) {
+        val = '-' + val;
+      }
     }
 
     return val;
@@ -497,12 +500,15 @@ class NumberWrapper extends React.Component<any> {
 
   formatNegation(value = '') {
     const { allowNegative } = this.props;
-    const negationRegex = new RegExp('(-)');
-    const doubleNegationRegex = new RegExp('(-)(.)*(-)');
+
+    value = String(value);
+
+    const negationRegex = new RegExp('^-');
+    const doubleNegationRegex = new RegExp('(-)');
 
     const hasNegation = negationRegex.test(value);
 
-    const removeNegation = doubleNegationRegex.test(value);
+    const removeNegation = doubleNegationRegex.test(value.slice(1));
 
     value = value.replace(/-/g, '');
 
