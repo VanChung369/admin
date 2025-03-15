@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknft_treasure=self.webpackChunknft_treasure||[]).push([[6390],{96390:function(f,n,t){t.r(n),t.d(n,{default:function(){return s}});var r=t(67294),u=t(48141),e=t(85893);function s(){var E=(0,u.useOutletContext)();return(0,e.jsx)(u.Outlet,{context:E})}}}]);

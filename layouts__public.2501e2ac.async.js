@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknft_treasure=self.webpackChunknft_treasure||[]).push([[2784],{74291:function(r,t,u){u.r(t);var _=u(66133),s=u(48141),n=u(85893),a=function(){return(0,n.jsx)(_.Z,{children:(0,n.jsx)(s.Outlet,{})})};t.default=a}}]);
