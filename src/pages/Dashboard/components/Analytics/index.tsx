@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Form, Formik } from 'formik';
 import moment from 'moment';
 import noop from 'lodash/noop';
@@ -34,8 +34,6 @@ const SaleAnalytics = () => {
   const intl = useIntl();
   const [params, setParams] = useState(initialValues);
   const { loading, error, saleAnalytics } = useGetAnalytics(params) as any;
-  const [chartLabels, setChartLabels] = useState([]);
-  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (error) {
@@ -46,15 +44,27 @@ const SaleAnalytics = () => {
     }
   }, [error]);
 
-  const createChartData = (chartParams: any) => {
-    const labels: any = [];
+  const { chartData, chartLabels } = useMemo(() => {
+    if (!saleAnalytics?.length) {
+      return {
+        chartData: [],
+        chartLabels: [],
+      };
+    }
+
+    const labels = new Set<string>();
+    const timeType = params[DASHBOARD_SALE_ANALYTICS.TIME_TYPE];
+    const currency = params[DASHBOARD_SALE_ANALYTICS.CURRENCY];
+    const dataType = params[DASHBOARD_SALE_ANALYTICS.DATA_TYPE];
+    const from = moment(saleAnalytics[0]._id);
+    const until = moment(saleAnalytics[saleAnalytics.length - 1]._id);
+    const duration = getDuration(from, until);
 
     const data = saleAnalytics?.map((sale: any) => {
       const obj: any = {
         tooltip: formatDate(sale?._id, TOOLTIP),
       };
 
-      const timeType = chartParams[DASHBOARD_SALE_ANALYTICS.TIME_TYPE];
       switch (true) {
         case timeType === DASHBOARD_TIME_TYPES[1].value:
           obj.label = formatDate(sale?._id, HOUR) + 'h';
@@ -69,10 +79,6 @@ const SaleAnalytics = () => {
           break;
 
         default:
-          const from = moment(saleAnalytics[0]._id);
-          const until = moment(saleAnalytics[saleAnalytics.length - 1]._id);
-          const duration = getDuration(from, until);
-
           switch (true) {
             case duration.asHours() < 24:
               obj.label = formatDate(sale?._id, HOUR) + 'h';
@@ -90,12 +96,7 @@ const SaleAnalytics = () => {
           break;
       }
 
-      if (labels.indexOf(obj.label) === -1) {
-        labels.push(obj.label);
-      }
-
-      const currency = chartParams[DASHBOARD_SALE_ANALYTICS.CURRENCY];
-      const dataType = chartParams[DASHBOARD_SALE_ANALYTICS.DATA_TYPE];
+      labels.add(obj.label);
 
       const totalValue =
         dataType === DASHBOARD_DATA_TYPES[0].value ? sale?.totalVolume : sale?.totalRevenue;
@@ -109,39 +110,41 @@ const SaleAnalytics = () => {
 
       return obj;
     });
-    setChartData(data);
-    setChartLabels(labels);
-  };
 
-  useEffect(() => {
-    if (saleAnalytics) {
-      createChartData(params);
-    }
-  }, [saleAnalytics]);
+    return {
+      chartData: data,
+      chartLabels: Array.from(labels),
+    };
+  }, [params, saleAnalytics]);
 
-  const dashboardDataTypeOptions = DASHBOARD_DATA_TYPES.map((dataType) => ({
-    ...dataType,
-    name: intl.formatMessage({ id: dataType?.name }),
-  }));
+  const dashboardDataTypeOptions = useMemo(
+    () =>
+      DASHBOARD_DATA_TYPES.map((dataType) => ({
+        ...dataType,
+        name: intl.formatMessage({ id: dataType?.name }),
+      })),
+    [intl],
+  );
 
-  const dashboardTimeTypeOptions = DASHBOARD_TIME_TYPES.map((dataType) => ({
-    ...dataType,
-    name: intl.formatMessage({ id: dataType?.name }),
-  }));
+  const dashboardTimeTypeOptions = useMemo(
+    () =>
+      DASHBOARD_TIME_TYPES.map((dataType) => ({
+        ...dataType,
+        name: intl.formatMessage({ id: dataType?.name }),
+      })),
+    [intl],
+  );
 
-  const handleFieldChange = (setFieldValue: any, field: string) => (val: any) => {
-    setFieldValue(field, val);
-    setParams({
-      ...params,
-      [field]: val,
-    });
-    if (field !== TIME_TYPE) {
-      createChartData({
-        ...params,
+  const handleFieldChange = useCallback(
+    (setFieldValue: any, field: string) => (val: any) => {
+      setFieldValue(field, val);
+      setParams((prevParams) => ({
+        ...prevParams,
         [field]: val,
-      });
-    }
-  };
+      }));
+    },
+    [],
+  );
 
   return (
     <Card>

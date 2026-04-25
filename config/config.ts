@@ -1,5 +1,4 @@
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -13,6 +12,13 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+  codeSplitting: {
+    jsStrategy: 'granularChunks',
+  },
+  jsMinifierOptions: {
+    target: ['chrome80', 'es2020'],
+  },
+  esbuildMinifyIIFE: true,
 
   /**
    * @name Enable reactQuery

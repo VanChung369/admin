@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import { useNavigate } from 'react-router-dom';
 import { LENGTH_CONSTANTS } from '@/constants';
 import styleLess from './index.less';
 import { Card } from 'antd';
@@ -22,7 +21,6 @@ const initParams = {
 
 const TagManagement: React.FC = () => {
   const intl = useIntl();
-  const navigate = useNavigate();
   const [params, setParams] = useState(initParams);
 
   const handleSubmit = (values: any) => {

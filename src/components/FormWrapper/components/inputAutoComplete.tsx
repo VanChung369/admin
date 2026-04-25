@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FieldInputProps, FormikProps } from 'formik';
-import _ from 'lodash';
+import trim from 'lodash/trim';
 import { Input, AutoComplete } from 'antd';
 
 const InputAutoComplete: FC<{
@@ -26,7 +26,7 @@ const InputAutoComplete: FC<{
 
     if (!onBlur) {
       form.handleBlur(e);
-      form.setFieldValue(field.name, _.trim(value));
+      form.setFieldValue(field.name, trim(value));
     } else {
       onBlur(e);
     }

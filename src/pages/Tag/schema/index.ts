@@ -1,4 +1,4 @@
-import { boolean, number, object, string } from 'yup';
+import { boolean, object, string } from 'yup';
 import { TAG_CREATE_FIELD } from '../constants';
 import { MEDIA } from '@/constants/file';
 

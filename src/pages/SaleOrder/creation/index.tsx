@@ -1,6 +1,6 @@
 import LoadingWrapper from '@/components/LoadingWrapper';
 import { PageContainer } from '@ant-design/pro-components';
-import { useIntl, useNavigate, useParams } from '@umijs/max';
+import { useIntl, useNavigate } from '@umijs/max';
 import { Form, Formik } from 'formik';
 import React, { useRef, useState } from 'react';
 import { saleOrderSchema } from '../schema';
@@ -20,7 +20,7 @@ import selectedQuantity from '@/redux/saleOrder/selector';
 import { useChangeDate } from '@/hooks/hook-customs/useChangeDate';
 import ModalUnsavedChange from './components/ModalUnsaved';
 import { checkValueChange } from '@/utils/utils';
-import { trim } from 'lodash';
+import trim from 'lodash/trim';
 import moment from 'moment';
 import AuthorizeTModal from './components/ModalAuthorize';
 import MetamaskService from '@/services/blockchain';

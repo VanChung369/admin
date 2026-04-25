@@ -1,6 +1,5 @@
 // @ts-ignore
 /* eslint-disable */
-import { api } from '..';
 
 // export async function currentUser(options?: { [key: string]: any }, headers?: any) {
 //   return api.get<API.CurrentUser>({

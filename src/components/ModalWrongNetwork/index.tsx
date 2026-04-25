@@ -21,7 +21,7 @@ const ModalWrongNetwork: FC<ModalWrongNetworkProps> = () => {
   const intl = useIntl();
   const switchChain = useSwitchChain();
   const { isWrongNetwork } = useAppSelector(selectedConnection.getConnection);
-  const { initialState, setInitialState } = useModel('@@initialState');
+  const { initialState } = useModel('@@initialState');
 
   const disconnect = async () => {
     await outLogin({}, initialState?.currentUser?.address);

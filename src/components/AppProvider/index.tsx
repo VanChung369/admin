@@ -1,14 +1,21 @@
-import { FC } from 'react';
+import { FC, lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { namespace as AuthenticationNamespace } from '@/redux/authentication/slice';
 import { PolygonAmoyTestnet } from '@thirdweb-dev/chains';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { setTokenCallApi } from '@/utils/api';
 import { persistor, store } from '@/redux/store';
 import ConnectWalletWrapper from '../ConnectWallet';
+
+const queryClient = new QueryClient();
+const isDev = process.env.NODE_ENV === 'development';
+const ReactQueryDevtools = lazy(() =>
+  import('@tanstack/react-query-devtools').then((module) => ({
+    default: module.ReactQueryDevtools,
+  })),
+);
 
 const AppProvider: FC<{
   children: any;
@@ -19,11 +26,13 @@ const AppProvider: FC<{
     setTokenCallApi(state?.[AuthenticationNamespace]?.authenticationToken);
   };
 
-  const queryClient = new QueryClient();
-
   return (
     <QueryClientProvider client={queryClient}>
-      {initialIsOpen ? <ReactQueryDevtools initialIsOpen={false} /> : <></>}
+      {isDev && initialIsOpen ? (
+        <Suspense fallback={null}>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Suspense>
+      ) : null}
       <ThirdwebProvider
         autoConnect={true}
         clientId={process.env.UMI_APP_PUBLIC_TEMPLATE_CLIENT_ID!}

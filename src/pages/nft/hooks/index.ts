@@ -16,7 +16,7 @@ import {
 import { ORDERS } from '@/constants';
 import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
 import { createTransactions, updateTransactions } from '@/services/api/transaction';
 import { getTags } from '@/services/api/tag';

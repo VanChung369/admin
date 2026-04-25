@@ -9,7 +9,7 @@ import styleLess from './index.less';
 import imageError from '@/resources/images/image-error.png';
 import NFTPreviewContent from '@/components/NFTPreviewContent';
 import { useQueryClient } from '@tanstack/react-query';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 
 const { FILE, FILE_PREVIEW } = NFT_CREATE_FIELD;
 const NFTPreview = () => {

@@ -14,7 +14,9 @@ import { useCreateOrUpdateNFT, useGetNFT } from '../hooks';
 import ROUTES_PATH from '@/constants/routesPath';
 import { useWarnModalPage } from '@/hooks/hook-customs/useWarnModal';
 import { TYPE_INPUT } from '@/constants/input';
-import { get, trim, uniqBy } from 'lodash';
+import get from 'lodash/get';
+import trim from 'lodash/trim';
+import uniqBy from 'lodash/uniqBy';
 import { MEDIA } from '@/constants/file';
 import {
   checkValueNftChange,

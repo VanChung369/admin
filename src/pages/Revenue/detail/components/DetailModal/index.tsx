@@ -3,12 +3,7 @@ import { Card, Col, Row, Image } from 'antd';
 import classNames from 'classnames';
 import { DetailItemProps, DetailModalProps } from '../../typings';
 import { Link, useIntl } from '@umijs/max';
-import {
-  formatDate,
-  getAttributeFieldNFTValues,
-  getDefaultFieldNFTValues,
-  getNumber,
-} from '@/utils/utils';
+import { formatDate, getNumber } from '@/utils/utils';
 import { NFT_MARKET_CHANNEL } from '@/pages/nft/constants';
 import { ResellDetailItem, SellDetailItem } from './columns';
 import ModalWrapper from '@/components/ModalWrapper';

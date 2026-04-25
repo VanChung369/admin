@@ -1,15 +1,12 @@
 import EllipsisText from '@/components/EllipsisText';
 import NumberWrapper from '@/components/NumberWrapper';
 import ResponsiveImage from '@/components/ResponsiveImage';
-import { formatDate, formatText } from '@/utils/utils';
+import { formatDate } from '@/utils/utils';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import ROUTES_PATH from '@/constants/routesPath';
 import type { ProColumns } from '@ant-design/pro-components';
 import styleLess from './index.less';
 import TagWrapper from '@/components/TagWrapper';
 import ShortenAddress from '@/components/ShortenAddress';
-import { SALE_ORDER_METHOD, SALE_ORDER_STATUS } from '@/pages/SaleOrder/constants';
 import { TAG_STATUS } from '@/pages/Tag/constants';
 import TagCreateOrUpdate from '@/pages/Tag/creation';
 
