@@ -35,6 +35,22 @@ const getApiBaseUrl = () => {
   return `https://${normalizedApiUrl}`;
 };
 
+const getPublicDomain = () => {
+  const publicDomain = process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN || '';
+
+  if (!publicDomain) {
+    return '';
+  }
+
+  const normalizedPublicDomain = publicDomain.replace(/\/+$/, '');
+
+  if (/^https?:\/\//i.test(normalizedPublicDomain)) {
+    return normalizedPublicDomain;
+  }
+
+  return `https://${normalizedPublicDomain}`;
+};
+
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
@@ -86,7 +102,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     avatarProps: {
       src: initialState?.currentUser?.avatar
         ? initialState.currentUser.avatar
-        : `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/images/no-profile-md.png`,
+        : `${getPublicDomain()}/images/no-profile-md.png`,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;

@@ -4,6 +4,22 @@ export const EXTERNAL_URL = {
   POLYGON_SCAN_TOKEN: 'https://amoy.polygonscan.com/token',
 };
 
+const getPublicDomain = () => {
+  const publicDomain = process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN || '';
+
+  if (!publicDomain) {
+    return '';
+  }
+
+  const normalizedPublicDomain = publicDomain.replace(/\/+$/, '');
+
+  if (/^https?:\/\//i.test(normalizedPublicDomain)) {
+    return normalizedPublicDomain;
+  }
+
+  return `https://${normalizedPublicDomain}`;
+};
+
 const ROUTES_PATH = {
   LOGIN: '/user/login',
   DASHBOARD: '/dashboard',
@@ -18,7 +34,7 @@ const ROUTES_PATH = {
   REVENUE: '/revenue',
   COLLECTION: '/collection',
   TAG: '/tag',
-  MARKET_NFT_DETAIL: `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/nft`,
+  MARKET_NFT_DETAIL: `${getPublicDomain()}/nft`,
 };
 
 export default ROUTES_PATH;
