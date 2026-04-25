@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { omit } from 'lodash';
 
 export interface SaleOrder {
   quantity: number;

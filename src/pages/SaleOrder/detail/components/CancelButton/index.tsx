@@ -1,5 +1,5 @@
-import React, { Fragment, useMemo, useState } from 'react';
-import { MIN_VALUE_TOTAL_COPIES, ZERO_VALUE } from '@/constants/input';
+import React, { Fragment, useState } from 'react';
+import { ZERO_VALUE } from '@/constants/input';
 import { useIntl, useParams } from '@umijs/max';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCreateTransaction, useUpdateTransaction } from '@/pages/nft/hooks';
@@ -28,8 +28,8 @@ const CancelSaleButton = ({ visiblity }: { visiblity?: boolean }) => {
   const [transactionId, setTransactionId] = useState('');
   const [isCompletedCancel, setIsCompletedCancel] = useState(false);
 
-  const { loading: loadingCreateTransaction, onCreateTransaction } = useCreateTransaction();
-  const { loading: loadingUpdateTransaction, onUpdateTransaction } = useUpdateTransaction();
+  const { onCreateTransaction } = useCreateTransaction();
+  const { onUpdateTransaction } = useUpdateTransaction();
 
   const failed = FAILED === stepCancel;
   const successful = SUCCESSFUL === stepCancel;

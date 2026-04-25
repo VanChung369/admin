@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useIntl } from '@umijs/max';
 import styleLess from './index.less';
 import { CreateOrUpdateProps } from './typings';

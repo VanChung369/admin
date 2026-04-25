@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 
 export interface Address {
   address: string;

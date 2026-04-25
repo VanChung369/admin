@@ -1,6 +1,5 @@
-import { useGetListNFTs } from '@/pages/nft/hooks';
 import { Link, useIntl } from '@umijs/max';
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import NumberWrapper from '@/components/NumberWrapper';
 import ROUTES_PATH from '@/constants/routesPath';
 import ResponsiveImage from '@/components/ResponsiveImage';

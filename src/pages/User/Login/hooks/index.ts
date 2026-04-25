@@ -14,23 +14,15 @@ export const useLogin = () => {
   const dispatch = useAppDispatch();
 
   const handleLogin = useMutation({
-    mutationFn: async (params: paramLogin) => {
-      try {
-        const response = await login(params.data);
-        return response;
-      } catch (error) {
-        throw error;
-      }
-    },
-    onError: (error, variables, context) => {
+    mutationFn: (params: paramLogin) => login(params.data),
+    onError: (_error, variables) => {
       variables.onError();
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data, variables) => {
       setTokenCallApi(data.token);
       dispatch(handleSetAuthenticationToken(data));
       variables.onSuccess();
     },
-    onSettled: (data, error, variables, context) => {},
   });
 
   return {

@@ -1,10 +1,9 @@
-import { number, object, string, ref, date, mixed, array } from 'yup';
+import { number, object, string, array } from 'yup';
 import {
   MAX_LENGTH_DESCRIPTION,
   MAX_VALUE_ROYALTY_FEE,
   MAX_VALUE_TOTAL_SUPPLY,
   MIN_VALUE_TOTAL_SUPPLY,
-  NFT_ATTRIBUTE_CREATED_FIELD,
   NFT_CREATE_FIELD,
   NFT_MINTED_FIELD,
 } from '../constants';

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { REVENUE_MANAGEMENT_FIELD, REVENUE_MANAGEMENT_FIELD_SORTER } from '../constants';
 import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { getEndDateTimestamp, getStartDateTimestamp } from '@/utils/utils';
 
 export const useGetTransaction = (id?: string, visible?: boolean) => {

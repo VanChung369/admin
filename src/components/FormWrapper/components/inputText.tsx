@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FieldInputProps, FormikProps } from 'formik';
-import _ from 'lodash';
+import trim from 'lodash/trim';
 import { Input } from 'antd';
 import { LENGTH_CONSTANTS } from '@/constants';
 
@@ -26,7 +26,7 @@ const InputText: FC<{
     const { value } = e.target;
     if (!onBlur) {
       form.handleBlur(e);
-      form.setFieldValue(field.name, _.trim(value));
+      form.setFieldValue(field.name, trim(value));
     } else {
       onBlur(e);
     }

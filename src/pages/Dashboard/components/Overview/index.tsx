@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Form, Formik } from 'formik';
 import noop from 'lodash/noop';
 import Item from './Item';
@@ -42,62 +42,75 @@ const Overview = () => {
   const { sumUsdRevenue, sumRevenue, sumUsdVolume, sumVolume, soldNfts, users, nfts, newUsers } =
     data as any;
 
-  const dashboardTimeTypeOptions = DASHBOARD_TIME_TYPES.map((dataType) => ({
-    ...dataType,
-    name: intl.formatMessage({ id: dataType?.name }),
-  }));
+  const dashboardTimeTypeOptions = useMemo(
+    () =>
+      DASHBOARD_TIME_TYPES.map((dataType) => ({
+        ...dataType,
+        name: intl.formatMessage({ id: dataType?.name }),
+      })),
+    [intl],
+  );
 
-  const handleFieldChange = (setFieldValue: any, field: string) => (val: any) => {
-    setParams({
-      ...params,
-      [field]: val,
-    });
-    setFieldValue(field, val);
-  };
+  const handleFieldChange = useCallback(
+    (setFieldValue: any, field: string) => (val: any) => {
+      setParams((prevParams) => ({
+        ...prevParams,
+        [field]: val,
+      }));
+      setFieldValue(field, val);
+    },
+    [],
+  );
 
-  const saleOverview = [
-    {
-      title: intl.formatMessage({ id: 'dashboard.volume' }),
-      helperText: intl.formatMessage({ id: 'dashboard.volume.tooltip' }),
-      valueSymbol: getNumber(sumVolume),
-      valueUsd: getNumber(sumUsdVolume),
-    },
-    {
-      title: intl.formatMessage({ id: 'dashboard.revenue' }),
-      helperText: intl.formatMessage({ id: 'dashboard.revenue.tooltip' }),
-      valueSymbol: getNumber(sumRevenue),
-      valueUsd: getNumber(sumUsdRevenue),
-    },
-  ];
+  const saleOverview = useMemo(
+    () => [
+      {
+        title: intl.formatMessage({ id: 'dashboard.volume' }),
+        helperText: intl.formatMessage({ id: 'dashboard.volume.tooltip' }),
+        valueSymbol: getNumber(sumVolume),
+        valueUsd: getNumber(sumUsdVolume),
+      },
+      {
+        title: intl.formatMessage({ id: 'dashboard.revenue' }),
+        helperText: intl.formatMessage({ id: 'dashboard.revenue.tooltip' }),
+        valueSymbol: getNumber(sumRevenue),
+        valueUsd: getNumber(sumUsdRevenue),
+      },
+    ],
+    [intl, sumRevenue, sumUsdRevenue, sumUsdVolume, sumVolume],
+  );
 
-  const infoOverview = [
-    {
-      title: intl.formatMessage({ id: 'dashboard.nfts' }),
-      detail: [
-        {
-          label: intl.formatMessage({ id: 'dashboard.created.nfts' }),
-          value: getNumber(nfts),
-        },
-        {
-          label: intl.formatMessage({ id: 'dashboard.sold.nfts' }),
-          value: getNumber(soldNfts),
-        },
-      ],
-    },
-    {
-      title: intl.formatMessage({ id: 'dashboard.users' }),
-      detail: [
-        {
-          label: intl.formatMessage({ id: 'dashboard.total.users' }),
-          value: getNumber(users),
-        },
-        {
-          label: intl.formatMessage({ id: 'dashboard.new.users' }),
-          value: getNumber(newUsers),
-        },
-      ],
-    },
-  ];
+  const infoOverview = useMemo(
+    () => [
+      {
+        title: intl.formatMessage({ id: 'dashboard.nfts' }),
+        detail: [
+          {
+            label: intl.formatMessage({ id: 'dashboard.created.nfts' }),
+            value: getNumber(nfts),
+          },
+          {
+            label: intl.formatMessage({ id: 'dashboard.sold.nfts' }),
+            value: getNumber(soldNfts),
+          },
+        ],
+      },
+      {
+        title: intl.formatMessage({ id: 'dashboard.users' }),
+        detail: [
+          {
+            label: intl.formatMessage({ id: 'dashboard.total.users' }),
+            value: getNumber(users),
+          },
+          {
+            label: intl.formatMessage({ id: 'dashboard.new.users' }),
+            value: getNumber(newUsers),
+          },
+        ],
+      },
+    ],
+    [intl, newUsers, nfts, soldNfts, users],
+  );
 
   return (
     <Card>

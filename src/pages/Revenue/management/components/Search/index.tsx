@@ -2,7 +2,9 @@ import { SearchProps } from '../../typings';
 import { useIntl } from '@umijs/max';
 import { memo, useRef } from 'react';
 import { LENGTH_CONSTANTS, ORDERS } from '@/constants';
-import { isString, omitBy, trim } from 'lodash';
+import isString from 'lodash/isString';
+import omitBy from 'lodash/omitBy';
+import trim from 'lodash/trim';
 import { useChangeAddress } from '@/hooks/hook-customs/useChangeAddress';
 import { Formik } from 'formik';
 import { Col, Form, Row } from 'antd';
@@ -10,10 +12,10 @@ import styleLess from './index.less';
 import { TYPE_INPUT } from '@/constants/input';
 import FormWrapper from '@/components/FormWrapper';
 import { ReloadOutlined } from '@ant-design/icons';
-import { REVENUE_MANAGEMENT_FIELD, REVENUE_TYPE } from '@/pages/Revenue/constants';
+import { REVENUE_MANAGEMENT_FIELD } from '@/pages/Revenue/constants';
 import { disabledFromDate, disabledUntilDate } from '@/utils/utils';
 
-const { PAGE, KEYWORD, FROM, UNTIL, STANDARD } = REVENUE_MANAGEMENT_FIELD;
+const { PAGE, KEYWORD, FROM, UNTIL } = REVENUE_MANAGEMENT_FIELD;
 const { DEFAULT_PAGE } = LENGTH_CONSTANTS;
 const { FIELD, ORDER } = ORDERS;
 

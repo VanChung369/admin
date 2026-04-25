@@ -1,13 +1,8 @@
-import { NFT_PROFILE_TABS, TABLE_CONTENT_TABS } from '@/pages/nft/constants';
-import { useQueryClient } from '@tanstack/react-query';
-import { useIntl, useParams } from '@umijs/max';
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Col, Row } from 'antd';
 import styleLess from './index.less';
 import SaleOrder from '../SaleOrder';
 const SaleOrderContent = () => {
-  const intl = useIntl();
-
   return (
     <div className={styleLess.sale_order_detail}>
       <Card>

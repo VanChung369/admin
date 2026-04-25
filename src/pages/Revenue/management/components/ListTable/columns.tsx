@@ -3,8 +3,6 @@ import NumberWrapper from '@/components/NumberWrapper';
 import ResponsiveImage from '@/components/ResponsiveImage';
 import { formatCurrency, formatDate, formatText } from '@/utils/utils';
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import ROUTES_PATH from '@/constants/routesPath';
 import type { ProColumns } from '@ant-design/pro-components';
 import styleLess from './index.less';
 import { REVENUE_TYPE } from '@/pages/Revenue/constants';

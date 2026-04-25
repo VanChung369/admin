@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useIntl } from '@umijs/max';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import ROUTES_PATH from '@/constants/routesPath';
 import styleLess from './index.less';

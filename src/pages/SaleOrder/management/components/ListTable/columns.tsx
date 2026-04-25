@@ -1,7 +1,7 @@
 import EllipsisText from '@/components/EllipsisText';
 import NumberWrapper from '@/components/NumberWrapper';
 import ResponsiveImage from '@/components/ResponsiveImage';
-import { formatDate, formatText } from '@/utils/utils';
+import { formatDate } from '@/utils/utils';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ROUTES_PATH from '@/constants/routesPath';

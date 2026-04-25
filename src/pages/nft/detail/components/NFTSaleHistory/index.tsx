@@ -2,7 +2,7 @@ import formatMessage from '@/components/FormatMessage';
 import { LENGTH_CONSTANTS } from '@/constants';
 import { NFT_SALE_HISTORY_FIELD } from '@/pages/nft/constants';
 import { useGetListNFTSaleHistory } from '@/pages/nft/hooks';
-import { useIntl, useNavigate, useParams } from '@umijs/max';
+import { useIntl, useParams } from '@umijs/max';
 import React, { useEffect, useState } from 'react';
 import styleLess from './index.less';
 import Search from './search';
