@@ -119,4 +119,5 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 
 export const request = {
   ...errorConfig,
+  baseURL: process.env.UMI_APP_API_URL,
 };
