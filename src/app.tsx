@@ -19,6 +19,22 @@ const authenticationToken = localStoreAuth?.AuthenticationSlice
   ? JSON.parse(localStoreAuth.AuthenticationSlice)?.authenticationToken
   : '';
 
+const getApiBaseUrl = () => {
+  const apiUrl = process.env.UMI_APP_API_URL || '';
+
+  if (!apiUrl) {
+    return '';
+  }
+
+  const normalizedApiUrl = apiUrl.replace(/\/+$/, '');
+
+  if (/^https?:\/\//i.test(normalizedApiUrl)) {
+    return normalizedApiUrl;
+  }
+
+  return `https://${normalizedApiUrl}`;
+};
+
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
@@ -119,5 +135,5 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 
 export const request = {
   ...errorConfig,
-  baseURL: process.env.UMI_APP_API_URL,
+  baseURL: getApiBaseUrl(),
 };
