@@ -1,0 +1,25 @@
+@import '@/styles/variables.less';
+
+.collection_create {
+  &__text {
+    font-weight: 400;
+    font-size: 16x;
+    line-height: 18px;
+    letter-spacing: 0.015em;
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
+
+  &__button {
+    &__create {
+      min-width: 165px;
+      height: 40px;
+
+      &:focus,
+      &:active,
+      &:hover {
+        background-color: @color-violet !important;
+      }
+    }
+  }
+}

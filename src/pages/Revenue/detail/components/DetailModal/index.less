@@ -1,0 +1,142 @@
+@import '@/styles/variables.less';
+
+.revenue_modal {
+  padding: 25px;
+  &__line {
+    &_sale {
+      border-bottom: 1px solid @color-gray;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: 0.005em;
+  }
+  &__time {
+    &_sale {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: 0.015em;
+    }
+  }
+
+  &__row {
+    padding-top: 25px;
+    &__col {
+      &__general {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 42px;
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.015em;
+        padding-bottom: 6px;
+
+        &_quantity {
+          margin-bottom: 10px;
+        }
+        &_button {
+          &__detail {
+            min-width: 165px;
+            height: 40px;
+            background-color: @color-violet;
+            &:focus,
+            &:active,
+            &:hover {
+              background-color: @color-violet !important;
+            }
+          }
+          &__polygonscan {
+            min-width: 165px;
+            height: 40px;
+            background-color: @color-violet;
+
+            &:focus,
+            &:active,
+            &:hover {
+              background-color: @color-violet !important;
+            }
+          }
+        }
+        &_label {
+          display: flex;
+          align-items: center;
+          &__royalties {
+            margin-left: 3px;
+          }
+        }
+        &_content {
+          flex-direction: row;
+          justify-content: flex-end;
+
+          &__currency {
+            padding-left: 3px;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            text-transform: capitalize;
+            opacity: 0.5;
+            &__icon {
+              width: 18px;
+              margin-right: 8px;
+            }
+            &__value {
+              font-weight: 700;
+              font-size: 20px;
+              line-height: 24px;
+              text-transform: capitalize;
+            }
+            &__text {
+            }
+            &__usd {
+              justify-content: flex-end;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 21px;
+              align-items: center;
+              text-align: right;
+              letter-spacing: 0.015em;
+            }
+          }
+          &__address {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            display: flex;
+            align-items: center;
+            text-align: right;
+            letter-spacing: 0.015em;
+
+            &__admin {
+              margin-right: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &___preview {
+    :global {
+      .ant-card-body {
+        .ant-image {
+          .ant-image-img {
+            height: 300px;
+          }
+        }
+      }
+    }
+  }
+}

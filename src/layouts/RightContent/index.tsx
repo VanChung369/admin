@@ -1,6 +1,6 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
 import { SelectLang as UmiSelectLang } from '@umijs/max';
-import NoticeIconView from '../NoticeIcon';
+import Notice from '../Notice';
+import AppProvider from '@/components/AppProvider';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -8,6 +8,7 @@ export const SelectLang = () => {
   return (
     <UmiSelectLang
       style={{
+        color: 'rgba(255, 255, 255, 0.85)',
         padding: 4,
       }}
     />
@@ -16,19 +17,8 @@ export const SelectLang = () => {
 
 export const Question = () => {
   return (
-    <>
-      <div
-        style={{
-          display: 'flex',
-          height: 26,
-        }}
-        onClick={() => {
-          window.open('');
-        }}
-      >
-        <QuestionCircleOutlined />
-      </div>
-      <NoticeIconView />
-    </>
+    <AppProvider initialIsOpen={false}>
+      <Notice />
+    </AppProvider>
   );
 };

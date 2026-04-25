@@ -1,8 +1,8 @@
 import formatMessage from '@/components/FormatMessage';
 import type { RequestOptions } from '@@/plugin-request/request';
-import type { RequestConfig } from '@umijs/max';
+import { type RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
-import { isUndefined } from './utils';
+import { checkSusscessRequest, isUndefined } from './utils';
 
 type CodeMessage = {
   [key: number]: string;
@@ -53,6 +53,7 @@ export const errorConfig: RequestConfig = {
     errorThrower: (res) => {
       const { success, data, errorCode, errorMessage, showType } =
         res as unknown as ResponseStructure;
+
       if (!success) {
         const error: any = new Error(errorMessage);
         error.name = 'BizError';
@@ -118,7 +119,7 @@ export const errorConfig: RequestConfig = {
   },
 
   requestInterceptors: [
-    (config: RequestOptions) => {
+    async (config: RequestOptions) => {
       const url = config?.url?.concat('');
       return { ...config, url };
     },
@@ -126,12 +127,18 @@ export const errorConfig: RequestConfig = {
 
   responseInterceptors: [
     (response) => {
-      const { data } = response as unknown as ResponseStructure;
-
-      if (data?.success === false) {
+      if (!checkSusscessRequest(response)) {
         message.error('Request failed!');
       }
       return response;
     },
+    [
+      (response) => {
+        return response;
+      },
+      async (error: any) => {
+        return Promise.reject(error);
+      },
+    ],
   ],
 };

@@ -1,0 +1,32 @@
+@import '@/styles/variables.less';
+
+.authorize_modal {
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: 0.005em;
+    color: @text-color-white;
+    padding-bottom: 12px;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.015em;
+    color: @text-color-white;
+  }
+
+  &__loading {
+    width: 100%;
+    position: relative;
+    &__icon {
+      position: absolute;
+      top: 0;
+      left: 100%;
+    }
+  }
+}

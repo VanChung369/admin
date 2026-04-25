@@ -10,50 +10,108 @@
  * @param icon Configure the icon of the route
  * @doc https://umijs.org/docs/guides/routes
  */
+
+import ROUTES_PATH from '../src/constants/routesPath';
+
 export default [
   {
     path: '/user',
     layout: false,
+    component: '@/layouts/public',
     routes: [
       {
         name: 'login',
-        path: '/user/login',
+        path: ROUTES_PATH.LOGIN,
         component: './User/Login',
       },
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
+    path: ROUTES_PATH.DASHBOARD,
+    name: 'dashboard',
+    icon: 'dashboard',
+    component: './Dashboard',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
-      },
-    ],
+    path: ROUTES_PATH.NFT,
+    name: 'nft',
+    icon: 'appstore',
+    component: './nft/management',
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: `${ROUTES_PATH.NFT_DETAIL}/:id`,
+    component: './nft/detail',
   },
+  {
+    path: `${ROUTES_PATH.NFT_EDITION}/:id`,
+    component: './nft/creation',
+  },
+  {
+    path: ROUTES_PATH.NFT_CREATION,
+    component: './nft/creation',
+  },
+  {
+    path: ROUTES_PATH.SALE,
+    name: 'sale',
+    icon: 'fund',
+    component: './SaleOrder/management',
+  },
+  {
+    path: `${ROUTES_PATH.SALE_DETAIL}/:id`,
+    component: './SaleOrder/detail',
+  },
+  {
+    path: `${ROUTES_PATH.SALE_EDITION}/:id`,
+    component: './SaleOrder/creation',
+  },
+  {
+    path: ROUTES_PATH.SALE_CREATION,
+    component: './SaleOrder/creation',
+  },
+  {
+    path: ROUTES_PATH.TAG,
+    name: 'tag',
+    icon: 'tag',
+    component: './Tag/management',
+  },
+  {
+    path: ROUTES_PATH.COLLECTION,
+    name: 'collection',
+    icon: 'profile',
+    component: './Collection/management',
+  },
+  {
+    path: ROUTES_PATH.REVENUE,
+    name: 'revenue',
+    icon: 'wallet',
+    component: './Revenue/management',
+  },
+  // {
+  //   path: '/admin',
+  //   name: 'admin',
+  //   icon: 'crown',
+  //   access: 'canAdmin',
+  //   routes: [
+  //     {
+  //       path: '/admin',
+  //       redirect: '/admin/sub-page',
+  //     },
+  //     {
+  //       path: '/admin/sub-page',
+  //       name: 'sub-page',
+  //       component: './Admin',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: ROUTES_PATH.DASHBOARD,
   },
   {
     path: '*',

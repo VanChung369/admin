@@ -1,0 +1,46 @@
+@import '@/styles/variables.less';
+
+.action {
+  :global {
+    .ant-dropdown-menu {
+      background: @background-button-gray;
+
+      .ant-dropdown-menu-title-content {
+        letter-spacing: 0.5px;
+        color: @text-color-white;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__button {
+    min-width: 180px;
+    height: 40px;
+    &:focus,
+    &:active,
+    &:hover {
+      background-color: @color-violet !important;
+      opacity: 0.7;
+    }
+  }
+
+  &_menu {
+    &__item {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.015em;
+      color: @text-color-white;
+      border-bottom: 1px solid @color-sliver;
+      padding: 14px 0px;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &__border_none {
+      border-bottom: none;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '@/styles/variables.less';
+
+.properties_from {
+  &__title {
+    letter-spacing: 0.015em;
+    padding-bottom: 8px;
+    padding-top: 20px;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 600;
+  }
+
+  &__error {
+    color: @error-color;
+    font-weight: 350;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.015em;
+    margin-top: 4px;
+    text-align: left;
+    white-space: pre-line;
+    .multi-line {
+      white-space: pre !important;
+    }
+  }
+}

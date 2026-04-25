@@ -1,0 +1,27 @@
+@import '@/styles/variables.less';
+
+.nft_name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  :global {
+    .ant-image .ant-image-img {
+      width: 50px;
+      height: unset;
+      border-radius: 3px;
+    }
+  }
+}
+
+.nft_detail {
+  letter-spacing: 0.015em;
+  text-decoration-line: underline;
+  color: @border-color-base;
+
+  &:hover {
+    text-decoration-line: underline;
+    color: @border-color-base;
+    opacity: 0.7;
+  }
+}

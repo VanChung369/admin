@@ -1,0 +1,38 @@
+@import '@/styles/variables.less';
+
+.transaction {
+  min-height: 364px;
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.005em;
+    margin-bottom: 15px;
+  }
+  &__nft {
+    &_name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      :global {
+        .ant-image .ant-image-img {
+          width: 50px;
+          height: unset;
+          border-radius: 3px;
+        }
+      }
+    }
+    &_detail {
+      letter-spacing: 0.015em;
+      text-decoration-line: underline;
+      color: @border-color-base;
+
+      &:hover {
+        text-decoration-line: underline;
+        color: @border-color-base;
+        opacity: 0.7;
+      }
+    }
+  }
+}

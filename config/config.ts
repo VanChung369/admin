@@ -1,5 +1,4 @@
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -13,15 +12,22 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+  codeSplitting: {
+    jsStrategy: 'granularChunks',
+  },
+  jsMinifierOptions: {
+    target: ['chrome80', 'es2020'],
+  },
+  esbuildMinifyIIFE: true,
 
   /**
    * @name Enable reactQuery
    * @description using reactQuery.
    */
-  reactQuery: {
-    devtool: true,
-    queryClient: true,
-  },
+  // reactQuery: {
+  //   devtool: true,
+  //   queryClient: true,
+  // },
 
   /**
    * @name Enable dva
@@ -100,7 +106,7 @@ export default defineConfig({
    * @name layout plugin
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design',
+  title: 'NFT Treasure',
   layout: {
     locale: true,
     siderWidth: 208,
@@ -162,18 +168,18 @@ export default defineConfig({
    * @description Generate serve and mock based on the openapi specification, which can reduce a lot of boilerplate code
    * @doc https://pro.ant.design/zh-cn/docs/openapi/
    */
-  openAPI: [
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: join(__dirname, 'oneapi.json'),
-      mock: false,
-    },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
-  ],
+  // openAPI: [
+  //   {
+  //     requestLibPath: "import { request } from '@umijs/max'",
+  //     schemaPath: join(__dirname, 'oneapi.json'),
+  //     mock: false,
+  //   },
+  //   {
+  //     requestLibPath: "import { request } from '@umijs/max'",
+  //     schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
+  //     projectName: 'swagger',
+  //   },
+  // ],
   mfsu: {
     strategy: 'normal',
   },
