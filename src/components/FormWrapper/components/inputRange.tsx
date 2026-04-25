@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { FieldInputProps, FormikProps } from 'formik';
-import _ from 'lodash';
 import { Slider } from 'antd';
 
 const InputRange: FC<{

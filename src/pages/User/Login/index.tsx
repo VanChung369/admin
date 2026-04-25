@@ -1,20 +1,19 @@
 import { Footer } from '@/layouts';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Helmet, SelectLang, useIntl } from '@umijs/max';
-import { Col, Flex, Image, Row } from 'antd';
-import React, { Fragment } from 'react';
+import { Col, Flex, Image, Row, Typography } from 'antd';
+import React, { memo, useCallback } from 'react';
 import Settings from '../../../../config/defaultSettings';
 import { useAppDispatch } from '@/hooks';
 import { handleSetLoadingMetamask } from '@/redux/connection/slice';
 import style from './index.less';
 import BackgroundLogin from '../../../resources/images/background_login.png';
-import { Typography } from 'antd';
 import AddToWallet from '@/components/AddToWallet';
 import { WALLET_TYPE } from '@/constants/wallet';
 
 const { Text } = Typography;
 
-const Lang = () => {
+const Lang = memo(() => {
   const langClassName = useEmotionCss(({ token }) => {
     return {
       color: token.colorBgContainer,
@@ -36,14 +35,15 @@ const Lang = () => {
       {SelectLang && <SelectLang />}
     </div>
   );
-};
+});
+Lang.displayName = 'Lang';
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const handleConnectMetamask = () => dispatch(handleSetLoadingMetamask(true));
-
   const intl = useIntl();
+  const handleConnectMetamask = useCallback(() => {
+    dispatch(handleSetLoadingMetamask(true));
+  }, [dispatch]);
 
   return (
     <div className={style.container}>
@@ -90,42 +90,24 @@ const Login: React.FC = () => {
             <Flex gap={20} vertical>
               <AddToWallet
                 walletType={WALLET_TYPE.METAMASK}
-                text={
-                  <Fragment>
-                    <span>
-                      {intl.formatMessage({
-                        id: 'login.metamask',
-                      })}
-                    </span>
-                  </Fragment>
-                }
+                text={intl.formatMessage({
+                  id: 'login.metamask',
+                })}
                 onClick={handleConnectMetamask}
               />
               <AddToWallet
                 walletType={WALLET_TYPE.WALLET_CONNECT}
                 disabled={true}
-                text={
-                  <Fragment>
-                    <span>
-                      {intl.formatMessage({
-                        id: 'login.walletconnect',
-                      })}
-                    </span>
-                  </Fragment>
-                }
+                text={intl.formatMessage({
+                  id: 'login.walletconnect',
+                })}
               />
               <AddToWallet
                 walletType={WALLET_TYPE.COIN_BASE}
                 disabled={true}
-                text={
-                  <Fragment>
-                    <span>
-                      {intl.formatMessage({
-                        id: 'login.coinbase',
-                      })}
-                    </span>
-                  </Fragment>
-                }
+                text={intl.formatMessage({
+                  id: 'login.coinbase',
+                })}
               />
             </Flex>
             <Footer />

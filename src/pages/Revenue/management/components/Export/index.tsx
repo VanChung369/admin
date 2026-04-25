@@ -14,7 +14,8 @@ import EllipsisText from '@/components/EllipsisText';
 import styleLess from './index.less';
 import { useGetExportRevenues } from '@/pages/Revenue/hooks';
 import { disabledFromDate, disabledUntilDate } from '@/utils/utils';
-import { isString, trim } from 'lodash';
+import isString from 'lodash/isString';
+import trim from 'lodash/trim';
 import { TYPE_INPUT } from '@/constants/input';
 import FormWrapper from '@/components/FormWrapper';
 import ButtonWrapper from '@/components/ButtonWrapper';
@@ -35,11 +36,7 @@ const ExportModal = ({ visible, onClose }: ExportModalProps) => {
   const intl = useIntl();
   const [params, setParams] = useState(initialValues);
   const [exportData, setExportData] = useState(false);
-  const { loadingExport, successExport, dataExport } = useGetExportRevenues(
-    params,
-    visible,
-    exportData,
-  );
+  const { successExport, dataExport } = useGetExportRevenues(params, visible, exportData);
 
   const optionSelect = NFT_MARKET_CHANNEL.map((type) => ({
     ...type,

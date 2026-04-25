@@ -1,5 +1,4 @@
-import { boolean, number, object, string } from 'yup';
-import { MEDIA } from '@/constants/file';
+import { boolean, object, string } from 'yup';
 import { COLLECTION_CREATE_FIELD } from '../constants';
 
 const { NAME, STATUS, STANDARD, PROPERTIES, DESCRIPTION } = COLLECTION_CREATE_FIELD;

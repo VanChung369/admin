@@ -8,7 +8,7 @@ import formatMessage from '@/components/FormatMessage';
 import { Form, Formik } from 'formik';
 import { useEffect, useRef, useState } from 'react';
 import { TAG_STATUS } from '@/pages/Tag/constants';
-import { trim } from 'lodash';
+import trim from 'lodash/trim';
 import FormWrapper from '@/components/FormWrapper';
 import { MAX_LENGTH_DESCRIPTION, TYPE_INPUT } from '@/constants/input';
 import ButtonWrapper from '@/components/ButtonWrapper';

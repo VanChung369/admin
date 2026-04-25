@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { EMPTY_DEFAULT_TEXT, TYPE_INPUT } from '@/constants/input';
 import NumberWrapper from '@/components/NumberWrapper';
 import ItemWithLabel from '@/components/ItemWithLabel';
-import { isNil } from 'lodash';
+import isNil from 'lodash/isNil';
 import styleLess from './index.less';
 import { NFT_STANDARD } from '@/pages/nft/constants';
 

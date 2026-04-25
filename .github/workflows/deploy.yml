@@ -1,0 +1,59 @@
+name: Deploy NFT Admin
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-admin-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Ensure deploy folder exists
+        run: |
+          mkdir -p /home/vanchung/deploy/nft-admin
+
+      - name: Sync admin source
+        run: |
+          rsync -av --delete \
+            --exclude ".git" \
+            --exclude "node_modules" \
+            --exclude "dist" \
+            ./ /home/vanchung/deploy/nft-admin/
+
+      - name: Write admin env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > /home/vanchung/deploy/nft-admin/.env
+
+      - name: Remove old admin container
+        run: |
+          docker rm -f nft-admin || true
+
+      - name: Build admin image
+        run: |
+          docker build -t nft-admin:latest /home/vanchung/deploy/nft-admin
+
+      - name: Run admin container
+        run: |
+          docker run -d \
+            --name nft-admin \
+            --restart unless-stopped \
+            -p 3002:80 \
+            nft-admin:latest
+
+      - name: Health check admin
+        run: |
+          sleep 5
+          curl -I http://localhost:3002 || curl http://localhost:3002
+
+      - name: Cleanup dangling images
+        run: |
+          docker image prune -f

@@ -1,15 +1,13 @@
 import EllipsisText from '@/components/EllipsisText';
 import ItemWithLabel from '@/components/ItemWithLabel';
-import { NFT_DETAIL_ATTRIBUTE } from '@/pages/nft/constants';
 import { getValueAttribute } from '@/utils/utils';
 import { useQueryClient } from '@tanstack/react-query';
-import { useIntl, useParams } from '@umijs/max';
+import { useParams } from '@umijs/max';
 import { Col, Row } from 'antd';
 import React from 'react';
 import styleLess from './index.less';
 
 const Attribute = () => {
-  const intl = useIntl();
   const queryClient = useQueryClient();
   const { id } = useParams();
   const query: any = queryClient.getQueryData(['getNFT', id]);

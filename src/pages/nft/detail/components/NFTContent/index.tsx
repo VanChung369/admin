@@ -1,7 +1,7 @@
 import { NFT_PROFILE_TABS, TABLE_CONTENT_TABS } from '@/pages/nft/constants';
 import { useQueryClient } from '@tanstack/react-query';
 import { useIntl, useParams } from '@umijs/max';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PreviewImage from './PreviewImage';
 import PreviewContent from './PreviewContent';
 import { Card, Col, Row } from 'antd';

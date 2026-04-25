@@ -31,8 +31,8 @@ const MintNFTButton = ({ visiblity }: { visiblity?: boolean }) => {
   const [transactionHash, setTransactionHash] = useState('');
   const [isCompletedMint, setIsCompletedMint] = useState(false);
 
-  const { loading: loadingCreateTransaction, onCreateTransaction } = useCreateTransaction();
-  const { loading: loadingUpdateTransaction, onUpdateTransaction } = useUpdateTransaction();
+  const { onCreateTransaction } = useCreateTransaction();
+  const { onUpdateTransaction } = useUpdateTransaction();
 
   const failed = FAILED === stepMint;
   const successful = SUCCESSFUL === stepMint;

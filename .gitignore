@@ -33,7 +33,6 @@ functions/*
 .umi
 .umi-production
 .umi-test
-.github
 .env
 
 # screenshot

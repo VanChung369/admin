@@ -2,7 +2,7 @@ import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
 import { TAG_MANAGEMENT_FIELD, TAG_MANAGEMENT_FIELD_SORTER } from '../constants';
 import { ORDERS } from '@/constants';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createTag, editTag, getTag, getTags } from '@/services/api/tag';
 

@@ -1,9 +1,7 @@
 import EllipsisText from '@/components/EllipsisText';
 import NumberWrapper from '@/components/NumberWrapper';
-import { formatDate, formatText } from '@/utils/utils';
+import { formatDate } from '@/utils/utils';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import ROUTES_PATH from '@/constants/routesPath';
 import type { ProColumns } from '@ant-design/pro-components';
 import TagWrapper from '@/components/TagWrapper';
 import ShortenAddress from '@/components/ShortenAddress';

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import { useNavigate } from 'react-router-dom';
 import { REVENUE_MANAGEMENT_COLUMN, REVENUE_MANAGEMENT_FIELD, REVENUE_TABS } from '../constants';
 import { LENGTH_CONSTANTS } from '@/constants';
 import styleLess from './index.less';
@@ -43,7 +42,6 @@ const initParams = {
 
 const RevenueManagement: React.FC = () => {
   const intl = useIntl();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [primaryColumn, setPrimaryColumn] = useState(defaultValue);
   const [visible, setVisible] = useState(false);

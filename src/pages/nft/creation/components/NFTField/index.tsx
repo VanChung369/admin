@@ -14,7 +14,7 @@ import {
   NFT_POSITIVE_SCALE,
   TYPE_INPUT,
 } from '@/constants/input';
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 import { LENGTH_CONSTANTS } from '@/constants';
 import { PercentageOutlined } from '@ant-design/icons';
 import { fetchDataColleciton, fetchDataTag } from '@/pages/nft/hooks';

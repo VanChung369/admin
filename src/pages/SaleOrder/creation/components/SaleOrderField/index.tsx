@@ -3,7 +3,6 @@ import {
   disabledSaleOrderStartDate,
   getNumber,
   limitMaxlengNumber,
-  limitPercentage,
 } from '@/utils/utils';
 import { useIntl } from '@umijs/max';
 import { Card, Col, Row, Select, Tooltip } from 'antd';
@@ -29,7 +28,7 @@ import EllipsisText from '@/components/EllipsisText';
 import ResponsiveImage from '@/components/ResponsiveImage';
 import { NFT_STANDARD, NFT_STATUS } from '@/pages/nft/constants';
 import { useQueryClient } from '@tanstack/react-query';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import { useGetConfig } from '@/hooks/hook-customs/useGetConfig';
 import { useEffect, useMemo } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';

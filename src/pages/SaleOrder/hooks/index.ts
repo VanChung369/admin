@@ -3,7 +3,7 @@ import { useAppSelector } from '@/hooks';
 import selectedAddress from '@/redux/address/selector';
 import { createSaleOrders, getSaleOrder, getSaleOrders } from '@/services/api/sale-order';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { SALE_ORDER_MANAGEMENT_FIELD, SALE_ORDER_MANAGEMENT_FIELD_SORTER } from '../constants';
 import { createTransactions, updateTransactions } from '@/services/api/transaction';
 

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useIntl, useNavigate, useRequest } from 'umi';
+import { useIntl, useNavigate } from 'umi';
 import stylesLess from './index.less';
 import { LENGTH_CONSTANTS, NOTIFICATION_EVENT, SOCKET_EVENT } from '@/constants';
-import { useAppSelector } from '@/hooks';
-import selectedAddress from '@/redux/address/selector';
 import { FORMAT_DATE_PICKER, FORMAT_TIME_PICKER, ZERO_VALUE } from '@/constants/input';
 import { useSocket } from '@/hooks/hook-customs/useSocket';
 import { useGetListNotification, useSetMarkAsRead } from './hooks';
@@ -29,12 +27,11 @@ const {
 
 const Notice: React.FC = () => {
   const intl = useIntl();
-  const { address } = useAppSelector(selectedAddress.getAddress);
   const navigate = useNavigate();
   const [totalUnread, setTotalUnread] = useState(ZERO_VALUE);
   const [totalNotification, setTotalNotification] = useState(ZERO_VALUE);
   const [notices, setNotices] = useState([]) as Array<any>;
-  const { listNotificationtHasNextPage, listFetchNextPage, isSuccess, data, refetch } =
+  const { listNotificationtHasNextPage, listFetchNextPage, isSuccess, data } =
     useGetListNotification({
       page: DEFAULT_PAGE,
       limit: DEFAULT_PAGE_SIZE,

@@ -1,6 +1,6 @@
 import { WALLET_STATUS } from '@/constants/wallet';
 import { NFT_TRANSACTION_STATUS } from '@/pages/nft/constants';
-import { ThirdwebSDK, TransactionError } from '@thirdweb-dev/sdk';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { ethers } from 'ethers';
 
 const sdk = new ThirdwebSDK(Number(process.env.UMI_APP_CHAIN_ID));

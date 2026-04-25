@@ -3,8 +3,6 @@ import type { RequestOptions } from '@@/plugin-request/request';
 import { type RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
 import { checkSusscessRequest, isUndefined } from './utils';
-import LocalStore from './store';
-import _ from 'lodash';
 
 type CodeMessage = {
   [key: number]: string;
@@ -50,11 +48,6 @@ interface ResponseStructure {
  * The error handling of pro comes with it can make your own changes here
  * @doc https://umijs.org/docs/max/request#配置
  */
-const localStoreAuth: any = LocalStore.getValue('persist:root');
-const authenticationTokenRefesh = localStoreAuth?.AuthenticationSlice
-  ? JSON.parse(localStoreAuth.AuthenticationSlice)?.authenticationTokenRefesh
-  : '';
-
 export const errorConfig: RequestConfig = {
   errorConfig: {
     errorThrower: (res) => {
@@ -134,7 +127,6 @@ export const errorConfig: RequestConfig = {
 
   responseInterceptors: [
     (response) => {
-      const { data = {} as any, config } = response;
       if (!checkSusscessRequest(response)) {
         message.error('Request failed!');
       }

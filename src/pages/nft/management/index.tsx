@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { NFT_MANAGEMENT_COLUMN, NFT_MANAGEMENT_FIELD, NFT_TABS } from '../constants';
 import { LENGTH_CONSTANTS } from '@/constants';
 import styleLess from './index.less';

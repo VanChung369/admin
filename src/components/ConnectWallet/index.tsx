@@ -27,7 +27,6 @@ import ModalConnectWallet from '../ModalConnectWallet';
 import { useModel, history } from '@umijs/max';
 import { flushSync } from 'react-dom';
 import ROUTES_PATH from '@/constants/routesPath';
-import selectedConnection from '@/redux/connection/selector';
 import MetamaskService from '@/services/blockchain';
 
 const ConnectWalletWrapper: FC<{
@@ -45,7 +44,6 @@ const ConnectWalletWrapper: FC<{
 
   const { address, listAddress } = useAppSelector(selectedAddress.getAddress);
   const { authenticationToken } = useAppSelector(selectAuthentication.getAuthenticationToken);
-  const { isConnectingWallet } = useAppSelector(selectedConnection.getConnection);
 
   useGetAppConfig();
 

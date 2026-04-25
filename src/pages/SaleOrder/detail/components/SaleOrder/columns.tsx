@@ -4,7 +4,7 @@ import TagWrapper from '@/components/TagWrapper';
 import { TYPE_INPUT } from '@/constants/input';
 import ROUTES_PATH from '@/constants/routesPath';
 import { NFT_STATUS } from '@/pages/nft/constants';
-import { formatCurrency, formatDate, formatText, getNumber } from '@/utils/utils';
+import { formatCurrency, formatDate, getNumber } from '@/utils/utils';
 import { Link } from '@umijs/max';
 import React from 'react';
 import styleLess from './index.less';

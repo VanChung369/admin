@@ -1,11 +1,9 @@
-import React, { useState, FC, useEffect, useMemo } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import { FieldInputProps, FormikProps } from 'formik';
 import { Select } from 'antd';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { uniqBy } from 'lodash';
-import HTTP_STATUS_CONTSTANTS from '@/constants/status';
+import uniqBy from 'lodash/uniqBy';
 import { LENGTH_CONSTANTS } from '@/constants';
-import { useIntl } from '@umijs/max';
 
 const { Option } = Select;
 
@@ -38,7 +36,6 @@ const InfinityScrollSelect: FC<{
   queryKey = ['infinityScrollSelect'],
   ...props
 }) => {
-  const intl = useIntl();
   const [searchValue, setSearchValue] = useState('');
   const [value, setValue] = useState(valueProps);
 
@@ -46,19 +43,7 @@ const InfinityScrollSelect: FC<{
     setValue(field?.value || null);
   }, [field?.value]);
 
-  const {
-    status,
-    data,
-    error,
-    isFetching,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-    refetch,
-  } = useInfiniteQuery({
+  const { data, isFetchingNextPage, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: [...queryKey, searchValue],
     queryFn: async ({ pageParam = 1 }) => {
       const res = await fetchData({

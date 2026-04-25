@@ -1,9 +1,6 @@
 import { useIntl } from '@umijs/max';
 import React, { Fragment } from 'react';
 import ListTable from '../ListTable';
-import TypographyWrapper from '@/components/TypographyWrapper';
-import NumberWrapper from '@/components/NumberWrapper';
-import { TYPE_TYPOGRAPHY } from '@/constants/type';
 import SearchNfts from '../Search';
 import { Col, Row } from 'antd';
 import SettingColums from '../SettingColumns';
