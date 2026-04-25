@@ -1,5 +1,21 @@
 import { ProLayoutProps } from '@ant-design/pro-components';
 
+const getPublicDomain = () => {
+  const publicDomain = process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN || '';
+
+  if (!publicDomain) {
+    return '';
+  }
+
+  const normalizedPublicDomain = publicDomain.replace(/\/+$/, '');
+
+  if (/^https?:\/\//i.test(normalizedPublicDomain)) {
+    return normalizedPublicDomain;
+  }
+
+  return `https://${normalizedPublicDomain}`;
+};
+
 const Settings: ProLayoutProps & {
   pwa?: boolean;
 } = {
@@ -12,7 +28,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: 'NFT Treasure',
   pwa: true,
-  logo: `${process.env.UMI_APP_PUBLIC_DOMAIN_ADMIN}/logo.png`,
+  logo: `${getPublicDomain()}/logo.png`,
   iconfontUrl: '',
 };
 
